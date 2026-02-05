@@ -329,6 +329,33 @@
     App
   </a>
 </nav>
+
+<!-- ===========================
+     FULLSCREEN TIMELINE MODAL
+=========================== -->
+<div class="timeline-modal" id="timelineModal" aria-hidden="true">
+  <div class="timeline-modal-backdrop"></div>
+
+  <div class="timeline-modal-panel" role="dialog" aria-modal="true">
+    <button class="timeline-modal-close" aria-label="Close timeline detail">
+      ×
+    </button>
+
+    <div class="timeline-modal-content">
+      <span class="timeline-modal-type" id="modalType">Design System</span>
+      <h2 id="modalTitle">Timeline Event Title</h2>
+      <p class="timeline-modal-date" id="modalDate">YYYY‑MM‑DD</p>
+
+      <div class="timeline-modal-body" id="modalBody">
+        <p>Detailed explanation of the brand evolution event.</p>
+      </div>
+
+      <div class="timeline-modal-links" id="modalLinks">
+        <!-- Injected dynamically -->
+      </div>
+    </div>
+  </div>
+</div>
         
   <!-- ======================================================
   FOOTER
