@@ -60,6 +60,72 @@
   --lh-body: 1.55;
 }
 
+/* ===========================
+   MOBILE & TABLET RESPONSIVE
+   =========================== */
+
+/* Base typography scaling */
+@media (max-width: 1200px) {
+  :root {
+    --font-display-xxl: 60px;
+    --font-display-xl: 46px;
+    --font-display-lg: 36px;
+  }
+}
+
+@media (max-width: 992px) {
+  :root {
+    --font-display-xxl: 48px;
+    --font-display-xl: 38px;
+    --font-display-lg: 30px;
+  }
+  .section {
+    padding: var(--space-6) var(--space-3);
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --font-display-xxl: 38px;
+    --font-display-xl: 32px;
+    --font-display-lg: 26px;
+    --font-heading: 20px;
+    --font-body-lg: 16px;
+    --font-body: 15px;
+  }
+
+  .section {
+    padding: var(--space-5) var(--space-3);
+  }
+
+  .three-grid,
+  .tool-grid {
+    grid-template-columns: 1fr !important;
+    gap: var(--space-3);
+  }
+
+  .accent-line::before {
+    bottom: -10px;
+    width: 48px;
+  }
+
+  /* Utility: stack buttons nicely */
+  .stack-on-mobile {
+    display: grid;
+    gap: var(--space-2);
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --font-display-xxl: 32px;
+    --font-display-xl: 28px;
+    --font-display-lg: 24px;
+  }
+  .section {
+    padding: var(--space-4) var(--space-2);
+  }
+}
 /* ============================================================
    BASE RESETS
    ============================================================ */
