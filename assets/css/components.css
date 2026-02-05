@@ -281,3 +281,59 @@
     margin-bottom: var(--space-3);
   }
 }
+
+/* ===========================
+   MOBILE STICKY BOTTOM BAR
+   =========================== */
+
+.mobile-bottom-bar {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .mobile-bottom-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1200;
+
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    align-items: center;
+
+    background: linear-gradient(
+      180deg,
+      rgba(10,10,10,0.6),
+      rgba(0,0,0,0.95)
+    );
+    backdrop-filter: blur(12px);
+
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding: 10px 6px calc(10px + env(safe-area-inset-bottom));
+  }
+
+  .mobile-bottom-bar a {
+    text-align: center;
+    font-size: 11px;
+    color: var(--text-muted);
+    transition: color .25s ease, transform .25s ease;
+  }
+
+  .mobile-bottom-bar a span {
+    display: block;
+    font-size: 18px;
+    margin-bottom: 4px;
+  }
+
+  .mobile-bottom-bar a.active,
+  .mobile-bottom-bar a:hover {
+    color: var(--gold-base);
+    transform: translateY(-2px);
+  }
+
+  /* Prevent content being hidden behind bar */
+  body {
+    padding-bottom: 80px;
+  }
+}
