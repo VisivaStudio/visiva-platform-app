@@ -1,1 +1,92 @@
+/* ============================================================
+   VISIVA® PLATFORM — Cinematic Layouts & Sections
+   ============================================================ */
 
+/* ------------------------------------------------------------
+   HERO SECTIONS
+------------------------------------------------------------ */
+.hero-section {
+  position: relative;
+  padding: var(--space-8) var(--space-4);
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(212,175,55,0.18), rgba(0,0,0,1)),
+              url('../images/cinematic-noir-bg.jpg') center/cover no-repeat;
+  opacity: 0.5;
+}
+
+.hero-content {
+  position: relative;
+  max-width: 900px;
+  z-index: 5;
+}
+
+.hero-title {
+  font-size: var(--font-display-xxl);
+  margin-bottom: var(--space-3);
+}
+
+.hero-subtitle {
+  font-size: var(--font-body-lg);
+  color: var(--text-soft);
+  max-width: 700px;
+  margin: auto;
+  line-height: 1.6;
+  margin-bottom: var(--space-4);
+}
+
+.hero-buttons {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-3);
+}
+
+/* ------------------------------------------------------------
+   DARK SECTION
+------------------------------------------------------------ */
+.dark-section {
+  background: var(--noir-800);
+  padding: var(--space-7) var(--space-4);
+}
+
+/* ------------------------------------------------------------
+   EXPERIENCE APP SECTION
+------------------------------------------------------------ */
+.experience-section {
+  padding: var(--space-8) var(--space-4);
+  text-align: center;
+  background: linear-gradient(180deg, var(--noir-800), var(--noir-900));
+}
+
+/* ------------------------------------------------------------
+   FOOTER
+------------------------------------------------------------ */
+.footer {
+  padding: var(--space-5);
+  background: var(--noir-1000);
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+.footer-grid {
+  text-align: center;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-3);
+  margin: var(--space-3) 0;
+}
+
+.footer-copy {
+  color: var(--text-muted);
+  font-size: var(--font-body-sm);
+}
