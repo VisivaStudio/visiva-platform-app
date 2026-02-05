@@ -383,3 +383,110 @@
     padding-bottom: 80px;
   }
 }
+
+/* ===========================
+   FULLSCREEN TIMELINE MODAL
+   =========================== */
+
+.timeline-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: none;
+}
+
+.timeline-modal.active {
+  display: block;
+}
+
+/* Backdrop */
+.timeline-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  backdrop-filter: blur(10px);
+}
+
+/* Modal panel */
+.timeline-modal-panel {
+  position: absolute;
+  inset: 0;
+  background: var(--noir-900);
+  color: var(--text-light);
+
+  display: flex;
+  flex-direction: column;
+
+  transform: translateY(100%);
+  animation: modalSlideUp .45s ease forwards;
+}
+
+/* Content */
+.timeline-modal-content {
+  padding: var(--space-5) var(--space-3);
+  overflow-y: auto;
+}
+
+/* Close button */
+.timeline-modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+
+  background: transparent;
+  border: none;
+  color: var(--text-light);
+  font-size: 28px;
+  cursor: pointer;
+}
+
+/* Meta */
+.timeline-modal-type {
+  display: inline-block;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: var(--gold-base);
+  margin-bottom: 8px;
+}
+
+.timeline-modal-date {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: var(--space-3);
+}
+
+/* Links */
+.timeline-modal-links {
+  margin-top: var(--space-4);
+  display: grid;
+  gap: 10px;
+}
+
+.timeline-modal-links a {
+  padding: 12px;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius-sm);
+  text-align: center;
+}
+
+/* Desktop refinement */
+@media (min-width: 769px) {
+  .timeline-modal-panel {
+    inset: 5%;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-soft);
+  }
+}
+
+/* Animations */
+@keyframes modalSlideUp {
+  to { transform: translateY(0); }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .timeline-modal-panel {
+    animation: none;
+    transform: translateY(0);
+  }
+}
