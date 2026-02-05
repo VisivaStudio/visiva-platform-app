@@ -40,19 +40,14 @@
       margin-bottom: var(--space-3);
       flex-wrap: wrap;
     }
-    .xr-btn {
-      padding: 10px 14px;
-      font-size: 14px;
-      border-radius: var(--radius-sm);
-      border: 1px solid rgba(255,255,255,0.12);
-      color: var(--text-light);
-      background: #111;
-      cursor: pointer;
-      transition: .25s ease;
-    }
-    .xr-btn[disabled] {
-      opacity: .5; cursor: not-allowed;
-    }
+  
+  <div class="xr-controls" role="group" aria-label="WebXR controls">
+  <button class="xr-btn" id="xr-vr-enter" disabled>Enter VR</button>
+  <button class="xr-btn" id="xr-ar-enter" disabled>Enter AR</button>
+  <button class="xr-btn" id="xr-exit" disabled>Exit XR</button>
+  <span id="xr-support" class="body" style="opacity:.8;"></span>
+</div>
+    
     .xr-stage {
       position: relative;
       height: 420px;
