@@ -10,8 +10,120 @@
 
 <!-- Three.js (module build) -->
 <script type="module">
-  import * as THREE from 'https://unpkg.com/three@0.160.0/build/three.module.js';
-  window.THREE = THREE;
+import * as THREE from 'https://unpkg.com/three@0.160.0/build/three.module.js';
+
+const canvas = document.getElementById('xr-canvas');
+const supportEl = document.getElementById('xr-support');
+
+const btnVREnter = document.getElementById('xr-vr-enter');
+const btnAREnter = document.getElementById('xr-ar-enter');
+const btnExit    = document.getElementById('xr-exit');
+
+let xrSession = null;
+
+// ------------------------------
+// THREE.JS SETUP
+// ------------------------------
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x0a0a0a);
+
+const camera = new THREE.PerspectiveCamera(60, canvas.clientWidth / canvas.clientHeight, 0.01, 50);
+
+const renderer = new THREE.WebGLRenderer({
+  canvas,
+  antialias: true,
+  alpha: true
+});
+renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+renderer.setPixelRatio(window.devicePixelRatio);
+renderer.xr.enabled = true;
+
+// Lighting
+const hemi = new THREE.HemisphereLight(0xffffff, 0x111111, 1.2);
+scene.add(hemi);
+
+const dir = new THREE.DirectionalLight(0xd4af37, 1);
+dir.position.set(2, 4, 2);
+scene.add(dir);
+
+// Cinematic object (placeholder for brand assets)
+const geometry = new THREE.TorusGeometry(0.35, 0.08, 32, 100);
+const material = new THREE.MeshStandardMaterial({
+  color: 0xd4af37,
+  metalness: 0.8,
+  roughness: 0.2
+});
+const ring = new THREE.Mesh(geometry, material);
+ring.position.set(0, 1.5, -1.5);
+scene.add(ring);
+
+// Animation
+renderer.setAnimationLoop(() => {
+  ring.rotation.x += 0.004;
+  ring.rotation.y += 0.006;
+  renderer.render(scene, camera);
+});
+
+// ------------------------------
+// WEBXR SUPPORT CHECKS
+// ------------------------------
+async function checkXR() {
+  if (!navigator.xr) {
+    supportEl.textContent = 'WebXR not supported in this browser.';
+    return;
+  }
+
+  const vrSupported = await navigator.xr.isSessionSupported('immersive-vr');
+  const arSupported = await navigator.xr.isSessionSupported('immersive-ar');
+
+  if (vrSupported) btnVREnter.disabled = false;
+  if (arSupported) btnAREnter.disabled = false;
+
+  supportEl.textContent =
+    vrSupported || arSupported
+      ? 'XR supported — choose VR or AR.'
+      : 'XR not supported on this device.';
+}
+
+checkXR();
+
+// ------------------------------
+// SESSION HANDLERS
+// ------------------------------
+async function startXR(mode) {
+  const session = await navigator.xr.requestSession(mode, {
+    requiredFeatures: mode === 'immersive-ar'
+      ? ['local-floor']
+      : ['local-floor']
+  });
+
+  renderer.xr.setSession(session);
+  xrSession = session;
+
+  btnExit.disabled = false;
+  btnVREnter.disabled = true;
+  btnAREnter.disabled = true;
+
+  session.addEventListener('end', () => {
+    xrSession = null;
+    btnExit.disabled = true;
+    btnVREnter.disabled = false;
+    btnAREnter.disabled = false;
+  });
+}
+
+btnVREnter.addEventListener('click', () => startXR('immersive-vr'));
+btnAREnter.addEventListener('click', () => startXR('immersive-ar'));
+btnExit.addEventListener('click', () => xrSession && xrSession.end());
+
+// ------------------------------
+// RESIZE
+// ------------------------------
+window.addEventListener('resize', () => {
+  camera.aspect = canvas.clientWidth / canvas.clientHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+});
 </script>
   
   <!-- Styles -->
