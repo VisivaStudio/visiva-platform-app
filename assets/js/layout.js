@@ -34,6 +34,13 @@
     host.outerHTML = html;
   }
 
+  /* components.css */
+.visiva-header .nav-links a.active,
+.mobile-bottom-bar a.active {
+  color: var(--gold-base);
+  text-shadow: var(--glow-gold);
+}
+
   function pathIsActive(href, current) {
     // Normalize both
     try {
