@@ -77,6 +77,54 @@ document.querySelectorAll("[data-tabs]").forEach(tabContainer => {
     });
 });
 
+/* ===========================
+   TIMELINE MODAL LOGIC
+   =========================== */
+
+const modal = document.getElementById('timelineModal');
+const modalTitle = document.getElementById('modalTitle');
+const modalDate = document.getElementById('modalDate');
+const modalBody = document.getElementById('modalBody');
+const modalType = document.getElementById('modalType');
+const modalLinks = document.getElementById('modalLinks');
+const closeBtn = document.querySelector('.timeline-modal-close');
+const backdrop = document.querySelector('.timeline-modal-backdrop');
+
+/* Open modal from any timeline card */
+document.querySelectorAll('.timeline-card').forEach(card => {
+  card.addEventListener('click', () => {
+    modalTitle.textContent = card.dataset.title;
+    modalDate.textContent = card.dataset.date;
+    modalType.textContent = card.dataset.type;
+    modalBody.innerHTML = `<p>${card.dataset.description}</p>`;
+
+    modalLinks.innerHTML = '';
+    if (card.dataset.links) {
+      JSON.parse(card.dataset.links).forEach(link => {
+        const a = document.createElement('a');
+        a.href = link.url;
+        a.textContent = link.label;
+        modalLinks.appendChild(a);
+      });
+    }
+
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  });
+});
+
+/* Close handlers */
+function closeModal() {
+  modal.classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+closeBtn.addEventListener('click', closeModal);
+backdrop.addEventListener('click', closeModal);
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeModal();
+});
 
 /* ===============================
    ACCORDION COMPONENT
