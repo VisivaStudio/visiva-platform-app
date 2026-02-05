@@ -222,8 +222,49 @@ window.addEventListener('resize', () => {
     }
   </style>
 </head>
+
+  <script>
+  // Client-side partial include (pure HTML/JS)
+  async function injectPartial(selector, url) {
+    const el = document.querySelector(selector);
+    if (!el) return;
+    const res = await fetch(url);
+    el.outerHTML = await res.text();
+  }
+  // placeholders in page:
+  // <div id="partial-header"></div>
+  // <div id="partial-footer"></div>
+  (async () => {
+    const root = location.pathname.includes('/visiva-v2/') ? '/visiva-v2' : '';
+    await injectPartial('#partial-header', `${root}/partials/header.html`);
+    await injectPartial('#partial-footer', `${root}/partials/footer.html`);
+  })();
+</script>
+  
 <body>
 
+  <script>
+  // Client-side partial include (pure HTML/JS)
+  async function injectPartial(selector, url) {
+    const el = document.querySelector(selector);
+    if (!el) return;
+    const res = await fetch(url);
+    el.outerHTML = await res.text();
+  }
+  // placeholders in page:
+  // <div id="partial-header"></div>
+  // <div id="partial-footer"></div>
+  (async () => {
+    const root = location.pathname.includes('/visiva-v2/') ? '/visiva-v2' : '';
+    await injectPartial('#partial-header', `${root}/partials/header.html`);
+    await injectPartial('#partial-footer', `${root}/partials/footer.html`);
+  })();
+</script>
+
+  <div id="partial-header"></div>
+<!-- page content -->
+<div id="partial-footer"></div>
+  
 <!-- ======================================================
 GLOBAL NAVIGATION
 ====================================================== -->
