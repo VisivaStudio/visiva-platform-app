@@ -490,3 +490,10 @@
     transform: translateY(0);
   }
 }
+
+.xr-device-hints {
+  margin-top: 10px;
+  font-size: 13px;
+  color: var(--text-soft);
+  opacity: .85;
+}
