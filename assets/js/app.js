@@ -45,6 +45,20 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
+/* ===========================
+   MOBILE PAGE TRANSITION HINT
+   =========================== */
+
+document.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    document.body.classList.add('page-transition');
+  });
+});
+
+.page-transition {
+  opacity: 0.6;
+  transition: opacity .15s ease;
+}
 
 /* Gold Hover Glow for Cinematic Buttons */
 document.querySelectorAll(".btn-gold, .btn-gold-large").forEach(btn => {
