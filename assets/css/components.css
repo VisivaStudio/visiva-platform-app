@@ -227,3 +227,57 @@
   border-radius: var(--radius-md);
   margin-bottom: var(--space-2);
 }
+
+/* VERTICAL TIMELINE COMPONENT */
+.timeline {
+  position: relative;
+  margin: var(--space-6) auto;
+  max-width: 900px;
+  padding-left: 24px;
+}
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 10px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg, rgba(212,175,55,0.5), rgba(255,255,255,0.1));
+  box-shadow: var(--glow-gold);
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: var(--space-4);
+  padding-left: var(--space-3);
+}
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  left: -1px;
+  top: 6px;
+  width: 12px;
+  height: 12px;
+  background: linear-gradient(135deg, var(--gold-base), var(--gold-bright));
+  border-radius: 50%;
+  box-shadow: 0 0 0 3px rgba(212,175,55,0.15);
+}
+
+.timeline-item h3 {
+  margin-bottom: 6px;
+}
+.timeline-meta {
+  font-size: var(--font-body-sm);
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+/* compact on mobile */
+@media (max-width: 768px) {
+  .timeline {
+    padding-left: 18px;
+  }
+  .timeline-item {
+    margin-bottom: var(--space-3);
+  }
+}
