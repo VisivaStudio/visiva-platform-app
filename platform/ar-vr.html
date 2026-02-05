@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AR / VR Experience — VISIVA® Platform</title>
+
+  <!-- Styles -->
+  ../assets/css/style.css
+  ../assets/css/components.css
+  ../assets/css/platform.css
+
+  <style>
+    /* ------- Page-local styles for the Immersive Preview (safe & lightweight) ------- */
+    .immersive-wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .immersive-controls {
+      display: flex;
+      gap: var(--space-2);
+      margin-bottom: var(--space-3);
+      flex-wrap: wrap;
+    }
+    .immersive-controls .mode-btn {
+      padding: 10px 14px;
+      font-size: 14px;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: var(--text-light);
+      background: #111;
+      cursor: pointer;
+      transition: 0.25s ease;
+    }
+    .immersive-controls .mode-btn.active {
+      border-color: var(--gold-base);
+      box-shadow: var(--glow-gold);
+      color: var(--gold-base);
+    }
+
+    .immersive-stage {
+      position: relative;
+      height: 420px;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      background:
+        radial-gradient(60% 60% at 50% 50%, rgba(212,175,55,0.14), rgba(0,0,0,0) 60%),
+        radial-gradient(120% 100% at 50% 110%, rgba(212,175,55,0.06), rgba(0,0,0,0) 30%),
+        linear-gradient(180deg, #0A0A0A, #000);
+    }
+
+    /* “3D object” placeholder — animated gold ring + grid floor for cinematic look */
+    .immersive-object {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      pointer-events: none;
+    }
+    .ring {
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      border: 3px solid rgba(212,175,55,0.75);
+      box-shadow: 0 0 28px rgba(212,175,55,0.55);
+      animation: orbit 12s linear infinite;
+    }
+    @keyframes orbit {
+      from { transform: rotate(0deg) perspective(700px) rotateX(18deg) rotateY(0deg); }
+      to   { transform: rotate(360deg) perspective(700px) rotateX(18deg) rotateY(360deg); }
+    }
+
+    .grid-floor {
+      position: absolute;
+      left: -10%;
+      right: -10%;
+      bottom: -20px;
+      height: 55%;
+      background:
+        linear-gradient(rgba(212,175,55,0.18), rgba(212,175,55,0.04) 40%, rgba(0,0,0,0)),
+        repeating-linear-gradient(
+          to right,
+          rgba(255,255,255,0.08) 0 1px,
+          rgba(0,0,0,0) 1px 40px
+        ),
+        repeating-linear-gradient(
+          to top,
+          rgba(255,255,255,0.08) 0 1px,
+          rgba(0,0,0,0) 1px 40px
+        );
+      transform: perspective(600px) rotateX(72deg);
+      filter: drop-shadow(0 0 12px rgba(212,175,55,0.25));
+    }
+
+    /* Mode badges */
+    .mode-badge {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      background: rgba(0,0,0,0.55);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: var(--radius-sm);
+      padding: 6px 10px;
+      font-size: 12px;
+      color: var(--text-light);
+      letter-spacing: .06em;
+    }
+
+    /* AR / VR state overlays (purely cosmetic placeholders) */
+    .immersive-stage.ar::after,
+    .immersive-stage.vr::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+    .immersive-stage.ar::after {
+      background:
+        radial-gradient(45% 35% at 50% 55%, rgba(212,175,55,0.12), rgba(0,0,0,0)),
+        linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0));
+    }
+    .immersive-stage.vr::after {
+      background:
+        radial-gradient(35% 35% at 50% 50%, rgba(212,175,55,0.08), rgba(0,0,0,0)),
+        linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0));
+      box-shadow: inset 0 0 0 2px rgba(212,175,55,0.08);
+    }
+
+    .immersive-hint {
+      position: absolute;
+      bottom: 14px;
+      right: 14px;
+      background: rgba(0,0,0,0.55);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: var(--radius-sm);
+      padding: 6px 10px;
+      font-size: 12px;
+      color: var(--text-soft);
+    }
+
+    /* Mobile refine */
+    @media (max-width: 768px) {
+      .immersive-stage { height: 340px; }
+      .ring { width: 180px; height: 180px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ======================================================
+GLOBAL NAVIGATION
+====================================================== -->
+<header class="visiva-header">
+  <div class="nav-wrapper">
+    ../index.htmlVISIVA®</a>
+
+    <nav class="nav-links">
+      <div class="nav-item">
+        overview.htmlPlatform</a>
+        <div class="mega-menu">
+          overview.htmlOverview</a>
+          philosophy.htmlPhilosophy</a>
+          process.htmlDesign Process</a>
+          bie.htmlIntelligence Engine</a>
+          dna.htmlBrand DNA Generator</a>
+          guardian-ai.htmlBrand Guardian AI</a>
+          ar-vr.htmlAR / VR Experience</a>
+          universe.htmlBrand Universe</a>
+          health-check.htmlBrand Health Check</a>
+          licensing.htmlLicensing Dashboard</a>
+          sustainability.htmlSustainability & Accessibility</a>
+          vault.htmlBrand Vault</a>
+          timeline.htmlEvolution Timeline</a>
+        </div>
+      </div>
+
+      ../tools/Tools</a>
+      ../brand-kits/Brand Kits</a>
+      universe.htmlBrand Universe</a>
+      ../academy/Academy</a>
+      ../marketplace/Marketplace</a>
+      https://visiva.co.za/experience-appExperience App</a>
+      ../portal/login.htmlLogin</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ======================================================
+HERO — AR / VR EXPERIENCE
+====================================================== -->
+<section class="hero-section">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <h1 class="hero-title fade-up">AR / VR Experience</h1>
+    <p class="hero-subtitle fade-up delay-1">
+      Immersive brand worlds for spatial presentation, product context,
+      and cinematic storytelling — built on your structured brand system.
+    </p>
+  </div>
+</section>
+
+<!-- ======================================================
+SECTION 1 — WHAT IT IS
+====================================================== -->
+<section class="section">
+  <h2 class="section-title accent-line fade-up">What the AR / VR Experience Is</h2>
+  <p class="section-desc fade-up delay-1">
+    VISIVA® translates structured brand systems into immersive environments — enabling
+    clients, investors, and teams to explore identity, products, signage, packaging,
+    and environments in true scale and context.
+  </p>
+  <div class="three-grid fade-up delay-2">
+    <div class="cin-card">
+      <h3>AR Preview</h3>
+      <p>Place brand assets in real environments: signage, packaging, retail fixtures, and product surfaces.</p>
+    </div>
+    <div class="cin-card">
+      <h3>VR Showrooms</h3>
+      <p>Walk through cinematic brand spaces for pitches, exhibitions, and executive reviews.</p>
+    </div>
+    <div class="cin-card">
+      <h3>MR / Spatial</h3>
+      <p>Mixed‑reality overlays for live events and collaborative working sessions.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================
+SECTION 2 — WHY IMMERSIVE MATTERS
+====================================================== -->
+<section class="section dark-section">
+  <h2 class="section-title accent-line fade-up">Why Immersive Brand Experiences Matter</h2>
+  <div class="three-grid fade-up delay-1">
+    <div class="cin-card">
+      <h3>Real‑World Confidence</h3>
+      <p>See scale, legibility, contrast, and materials before production — reduce risk and rework.</p>
+    </div>
+    <div class="cin-card">
+      <h3>Executive & Investor Impact</h3>
+      <p>Spatial storytelling communicates ambition and coherence instantly.</p>
+    </div>
+    <div class="cin-card">
+      <h3>Faster Decisions</h3>
+      <p>Align stakeholders with shared context and evidence, not static mockups.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================
+SECTION 3 — IMMERSIVE PREVIEW (LIGHT INTERACTION)
+====================================================== -->
+<section class="section">
+  <h2 class="section-title accent-line fade-up">Immersive Preview</h2>
+  <p class="section-desc fade-up delay-1">
+    A lightweight preview that simulates mode states. (Full AR/VR is enabled in the Experience App.)
+  </p>
+
+  <div class="immersive-wrap fade-up delay-2">
+    <div class="immersive-controls" role="group" aria-label="Immersive modes">
+      <button class="mode-btn active" id="modeOrbit" aria-pressed="true">Orbit</button>
+      <button class="mode-btn" id="modeAR" aria-pressed="false">AR</button>
+      <button class="mode-btn" id="modeVR" aria-pressed="false">VR</button>
+    </div>
+
+    <div class="immersive-stage orbit" id="immersiveStage" aria-live="polite">
+      <div class="mode-badge" id="modeBadge">Orbit Preview</div>
+      <div class="immersive-object">
+        <div class="ring" aria-hidden="true"></div>
+        <div class="grid-floor" aria-hidden="true"></div>
+      </div>
+      <div class="immersive-hint">Tip: Use the buttons above to switch modes</div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================
+SECTION 4 — HOW IT WORKS (PIPELINE)
+====================================================== -->
+<section class="section dark-section">
+  <h2 class="section-title accent-line fade-up">How the AR / VR Pipeline Works</h2>
+  <div class="three-grid fade-up delay-1">
+    <div class="cin-card">
+      <h3>Inputs</h3>
+      <p>Brand tokens, logos, colours, typography, 3D assets, environment maps, motion rules, and copy.</p>
+    </div>
+    <div class="cin-card">
+      <h3>Rendering</h3>
+      <p>Real‑time scenes prepared for device capability (mobile AR, desktop VR, headsets) with fidelity steps.</p>
+    </div>
+    <div class="cin-card">
+      <h3>Outputs</h3>
+      <p>Live previews, interactive walk‑throughs, exports for review, and links inside the Experience App.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================
+SECTION 5 — WITHIN THE VISIVA ECOSYSTEM
+====================================================== -->
+<section class="section">
+  <h2 class="section-title accent-line fade-up">AR / VR Within VISIVA®</h2>
+  <p class="section-desc fade-up delay-1">
+    Immersive experiences are grounded by your structured brand system and governance layers.
+  </p>
+  <div class="three-grid fade-up delay-2">
+    universe.html
+      <h3>Brand Universe</h3>
+      <p>Provides the content structure and relationships visualised in space.</p>
+    </a>
+    dna.html
+      <h3>Brand DNA</h3>
+      <p>Defines tone, behaviour, and narrative rules expressed in immersion.</p>
+    </a>
+    <a class
+      <h3>Brand Intelligence Engine</h3>
+      <p>Measures engagement, clarity, and consistency inside immersive flows.</p>
+    </a>
+    guardian-ai.html
+      <h3>Brand Guardian AI</h3>
+      <p>Validates contrast, legibility, and usage even inside AR/VR scenes.</p>
+    </a>
+    vault.html
+      <h3>Brand Vault</h3>
+      <p>Links immersive assets to authenticity and ownership records.</p>
+    </a>
+    ../tools/
+      <h3>Tools Suite</h3>
+      <p>Feeds assets, tokens, and templates into immersive environments.</p>
+    </a>
+  </div>
+</section>
+
+<!-- ======================================================
+SECTION 6 — STATUS & ROADMAP
+====================================================== -->
+<section class="section dark-section">
+  <h2 class="section-title accent-line fade-up">Status & Roadmap</h2>
+  <div class="three-grid fade-up delay-1">
+    <div class="cin-card">
+      <h3>Live</h3>
+      <p>Orbit previews, cinematic scenes, and Experience App deep‑links.</p>
+    </div>
+    <div class="cin-card">
+      <h3>Beta</h3>
+      <p>Device‑aware AR placement and guided VR walkthrough scripts.</p>
+    </div>
+    <div class="cin-card">
+      <h3>Roadmap</h3>
+      <p>Collab sessions, headset‑native UX, scene capture, and analytics overlays.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================
+SECTION 7 — CALLS TO ACTION
+====================================================== -->
+<section class="section">
+  <h2 class="section-title accent-line fade-up">Experience VISIVA® in Space</h2>
+  <p class="section-desc fade-up delay-1">
+    Explore immersive brand worlds via the Experience App and bring your system to life.
+  </p>
+  <div class="three-grid fade-up delay-2">
+    universe.html
+      <h3>Explore the Brand Universe</h3>
+      <p>See the structure that powers AR/VR content.</p>
+    </a>
+    https://visiva.co.za/experience-app
+      <h3>Launch Experience App</h3>
+      <p>AR/VR features are enabled in the app environment.</p>
+    </a>
+    ../tools/viewer-3d.html
+      <h3>Open 3D Viewer</h3>
+      <p>Preview models and scenes before immersive export.</p>
+    </a>
+  </div>
+</section>
+
+<!-- ======================================================
+FOOTER
+====================================================== -->
+<footer class="footer">
+  <div class="footer-grid">
+    <p>VISIVA® Brand Design Platform</p>
+    <div class="footer-links">
+      https://instagram.com/visivaInstagram</a>
+      https://linkedin.com/company/visivaLinkedIn</a>
+      https://visiva.siteWebsite</a>
+    </div>
+    <p class="footer-copy">© 2026 VISIVA®. All Rights Reserved.</p>
+  </div>
+</footer>
+
+<!-- ===========================
+     MOBILE BOTTOM BAR
+=========================== -->
+<nav class="mobile-bottom-bar">
+  overview.html
+    <span>◉</span>
+    Platform
+  </a>
+  timeline.html
+    <span>⟡</span>
+    Timeline
+  </a>
+  ../tools/
+    <span>◼</span>
+    Tools
+  </a>
+  <a href="https://visiva.co.zace-app
+    <span>▶</span>
+    App
+  </a>
+</nav>
+
+<!-- Scripts -->
+../assets/js/app.js</script>
+<scriptts/js/ui.js</script>
+../assets/js/cinematic.js</script>
+
+<script>
+  // ------- Lightweight AR/VR mode toggles (placeholder logic, no external libs) -------
+  (function() {
+    const stage = document.getElementById('immersiveStage');
+    const badge = document.getElementById('modeBadge');
+
+    const orbitBtn = document.getElementById('modeOrbit');
+    const arBtn = document.getElementById('modeAR');
+    const vrBtn = document.getElementById('modeVR');
+
+    const setActive = (btn) => {
+      [orbitBtn, arBtn, vrBtn].forEach(b => {
+        const active = b === btn;
+        b.classList.toggle('active', active);
+        b.setAttribute('aria-pressed', String(active));
+      });
+    };
+
+    orbitBtn.addEventListener('click', () => {
+      stage.classList.remove('ar', 'vr');
+      stage.classList.add('orbit');
+      badge.textContent = 'Orbit Preview';
+      setActive(orbitBtn);
+    });
+
+    arBtn.addEventListener('click', () => {
+      stage.classList.remove('orbit', 'vr');
+      stage.classList.add('ar');
+      badge.textContent = 'AR Preview';
+      setActive(arBtn);
+    });
+
+    vrBtn.addEventListener('click', () => {
+      stage.classList.remove('orbit', 'ar');
+      stage.classList.add('vr');
+      badge.textContent = 'VR Preview';
+      setActive(vrBtn);
+    });
+  })();
+</script>
+
+</body>
+</html>
