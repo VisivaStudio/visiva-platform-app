@@ -6,258 +6,98 @@
     <title>VISIVA® — The Cinematic Brand Operating System</title>
 
     <!-- Global Styles -->
-    assets/css/style.css
-    assets/css/components.css
-    assets/css/platform.css
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <link rel="stylesheet" href="assets/css/platform.css">
 
-    assets/images/icon-192.png
+    <link rel="icon" href="assets/images/logo.png">
 </head>
 
-    <script>
-  // Client-side partial include (pure HTML/JS)
-  async function injectPartial(selector, url) {
-    const el = document.querySelector(selector);
-    if (!el) return;
-    const res = await fetch(url);
-    el.outerHTML = await res.text();
-  }
-  // placeholders in page:
-  // <div id="partial-header"></div>
-  // <div id="partial-footer"></div>
-  (async () => {
-    const root = location.pathname.includes('/visiva-v2/') ? '/visiva-v2' : '';
-    await injectPartial('#partial-header', `${root}/partials/header.html`);
-    await injectPartial('#partial-footer', `${root}/partials/footer.html`);
-  })();
-</script>
-    
 <body>
 
-<script>
-  // Client-side partial include (pure HTML/JS)
-  async function injectPartial(selector, url) {
-    const el = document.querySelector(selector);
-    if (!el) return;
-    const res = await fetch(url);
-    el.outerHTML = await res.text();
-  }
-  // placeholders in page:
-  // <div id="partial-header"></div>
-  // <div id="partial-footer"></div>
-  (async () => {
-    const root = location.pathname.includes('/visiva-v2/') ? '/visiva-v2' : '';
-    await injectPartial('#partial-header', `${root}/partials/header.html`);
-    await injectPartial('#partial-footer', `${root}/partials/footer.html`);
-  })();
-</script>
-
-<div id="partial-header"></div>
-<!-- page content -->
-<div id="partial-footer"></div>
-    
-<!-- ======================================================
-     GLOBAL NAVIGATION (Cinematic Noir)
-====================================================== -->
-<header class="visiva-header">
+    <header class="visiva-header">
     <div class="nav-wrapper">
-
-        index.htmlVISIVA®</a>
+        <a href="index.html"><img src="assets/images/logo.png" alt="VISIVA" style="height: 40px;"></a>
 
         <nav class="nav-links">
             <div class="nav-item">
-                platform/overview.htmlPlatform</a>
+                <a href="platform/overview.html">Platform</a>
                 <div class="mega-menu">
-                    platform/overview.htmlOverview</a>
-                    platform/philosophy.htmlPhilosophy</a>
-                    platform/process.htmlDesign Process</a>
-                    platform/bie.htmlIntelligence Engine</a>
-                    platform/dna.htmlBrand DNA Generator</a>
-                    platform/guardian-ai.htmlBrand Guardian AI</a>
-                    platform/ar-vr.htmlAR / VR Experience</a>
-                    platform/universe.htmlBrand Universe</a>
-                    platform/health-check.htmlBrand Health Check</a>
-                    platform/licensing.htmlLicensing Dashboard</a>
-                    platform/sustainability.htmlSustainability</a>
-                    platform/vault.htmlBrand Vault</a>
-                    platform/timeline.htmlEvolution Timeline</a>
+                    <a href="platform/overview.html">Overview</a>
+                    <a href="platform/philosophy.html">Philosophy</a>
+                    <a href="platform/process.html">Design Process</a>
+                    <a href="platform/bie.html">Intelligence Engine</a>
+                    <a href="platform/dna.html">Brand DNA Generator</a>
+                    <a href="platform/guardian-ai.html">Brand Guardian AI</a>
+                    <a href="platform/ar-vr.html">AR / VR Experience</a>
+                    <a href="platform/universe.html">Brand Universe</a>
+                    <a href="platform/health-check.html">Brand Health Check</a>
+                    <a href="platform/licensing.html">Licensing Dashboard</a>
+                    <a href="platform/vault.html">Brand Vault</a>
+                    <a href="platform/timeline.html">Evolution Timeline</a>
                 </div>
             </div>
 
-            tools/Tools</a>
-            brand-kits/Brand Kits</a>
-            platform/universe.htmlBrand Universe</a>
-            academy/Academy</a>
-            marketplace/Marketplace</a>
-            https://visiva.co.za/experience-appExperience App</a>
-            portal/login.htmlLogin</a>
+            <a href="tools/index.html">Tools</a>
+            <a href="platform/universe.html">Brand Universe</a>
+            <a href="https://visiva.co.za/experience-app">Experience App</a>
         </nav>
-
     </div>
 </header>
 
-<!-- ======================================================
-     HERO SECTION (Cinematic Gold Light)
-====================================================== -->
 <section class="hero-section">
-
-    <div class="hero-bg"></div>
-
+    <div class="hero-bg" style="background-image: url('assets/images/hero-bg.jpg');"></div>
     <div class="hero-content">
         <h1 class="hero-title fade-up">The Cinematic Brand Operating System</h1>
         <p class="hero-subtitle fade-up delay-1">
             VISIVA® unifies identity, intelligence, tools, and immersive storytelling into a
             single next‑generation brand ecosystem.
         </p>
-
         <div class="hero-buttons fade-up delay-2">
-            platform/overview.htmlExplore Platform</a>
-            tools/Explore Tools</a>
+            <a href="platform/overview.html" class="btn-gold">Explore Platform</a>
+            <a href="tools/index.html" class="btn-outline">Explore Tools</a>
         </div>
     </div>
-
 </section>
 
-
-<!-- ======================================================
-     SECTION: 01 — THE PLATFORM
-====================================================== -->
 <section class="section cin-grid">
     <h2 class="section-title accent-line">A New Era of Brand Systems</h2>
-
     <p class="section-desc">
         VISIVA® is an intelligent, cinematic brand ecosystem designed to build, scale,
         and evolve world-class brands through design systems, AI, analytics, and immersive
         experiences — all delivered as a Progressive Web App.
     </p>
-
     <div class="three-grid">
-
-        platform/bie.html
+        <a href="platform/bie.html" class="cin-card">
             <h3>Brand Intelligence Engine (BIE)</h3>
             <p>AI-driven brand performance insights, consistency scoring, and predictive analysis.</p>
         </a>
-
-        platform/dna.html
+        <a href="platform/dna.html" class="cin-card">
             <h3>Brand DNA Generator</h3>
             <p>Define mission, archetype, tone, values, and personality through guided intelligence.</p>
         </a>
-
-        platform/universe.html
+        <a href="platform/universe.html" class="cin-card">
             <h3>Brand Universe</h3>
             <p>A visual ecosystem mapping every element of your brand into a unified structure.</p>
         </a>
-
     </div>
 </section>
 
-
-<!-- ======================================================
-     SECTION: 02 — TOOLS OVERVIEW
-====================================================== -->
-<section class="section dark-section">
-    <h2 class="section-title accent-line">Intelligent Tools</h2>
-
-    <p class="section-desc">
-        VISIVA® offers a suite of cinematic, intelligent tools that elevate brand performance,
-        clarity, and visual consistency across every touchpoint.
-    </p>
-
-    <div class="tool-grid">
-
-        tools/logo-optimiser.html
-            assets/images/tools/logo-optimiser-1x1-clean.jpg
-            <h3>AI Logo Optimiser</h3>
-        </a>
-
-        tools/colour-generator.html
-            assets/images/tools/colour-generator-1x1-clean.jpg
-            <h3>Colour Generator</h3>
-        </a>
-
-        tools/harmoniser.html
-            assets/images/tools/harmoniser-1x1-clean.jpg
-            <h3>Colour Harmoniser</h3>
-        </a>
-
-        tools/bie-dashboard.html
-            assets/images/tools/bie-dashboard-1x1-clean.jpg
-            <h3>BIE Dashboard</h3>
-        </a>
-
-    </div>
-</section>
-
-
-<!-- ======================================================
-     SECTION: 03 — BRAND KITS
-====================================================== -->
-<section class="section cin-grid">
-
-    <h2 class="section-title accent-line">Cinematic Brand Kits</h2>
-
-    <p class="section-desc">
-        Fully‑crafted brand identity systems powered by cinematic storytelling, scalable design
-        components, and strategic clarity.
-    </p>
-
-    <div class="three-grid">
-
-        brand-kits/tech-startup.html
-            <h3>Tech Startup Kit</h3>
-            <p>Modern, scalable systems for high‑growth innovators.</p>
-        </a>
-
-        brand-kits/luxury.html
-            <h3>Luxury Brand Kit</h3>
-            <p>Timeless, cinematic elegance with premium expression.</p>
-        </a>
-
-        brand-kits/creative-agency.html
-            <h3>Creative Agency Kit</h3>
-            <p>Bold, expressive systems for modern storytellers.</p>
-        </a>
-
-    </div>
-
-</section>
-
-
-<!-- ======================================================
-     SECTION: 04 — EXPERIENCE APP
-====================================================== -->
-<section class="experience-section">
-    <h2 class="section-title accent-line">VISIVA® Experience App</h2>
-
-    <p class="section-desc">
-        Access your entire brand ecosystem — tools, kits, assets, analytics, and immersive
-        experiences — directly from your phone or desktop.
-    </p>
-
-    https://visiva.co.za/experience-appLaunch Experience App</a>
-</section>
-
-
-<!-- ======================================================
-     FOOTER
-====================================================== -->
 <footer class="footer">
     <div class="footer-grid">
         <p>VISIVA® Brand Design Platform</p>
-
         <div class="footer-links">
-            https://instagram.com/visivaInstagram</a>
-            https://linkedin.com/company/visivaLinkedIn</a>
-            https://visiva.siteWebsite</a>
+            <a href="https://instagram.com/visiva">Instagram</a>
+            <a href="https://linkedin.com/company/visiva">LinkedIn</a>
+            <a href="https://visiva.site">Website</a>
         </div>
-
         <p class="footer-copy">© 2025 VISIVA®. All Rights Reserved.</p>
     </div>
 </footer>
 
-
 <!-- JS -->
-assets/js/app.js</script>
-assets/js/ui.js</script>
+<script src="assets/js/app.js"></script>
+<script src="assets/js/ui.js"></script>
 assets/js/cinematic.js</script>
 
 </body>
