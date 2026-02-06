@@ -3,35 +3,40 @@
    Mega menu, mobile nav, toggles, dropdowns, UI components
    ========================================================================== */
 
+/* Safely execute a function only if all required elements exist */
+function safe(elements, callback) {
+    if (elements.every(el => el !== null)) {
+        callback(...elements);
+    }
+}
 
 /* ===============================
    MOBILE MENU SYSTEM
 =============================== */
-const mobileMenuButton = document.createElement("button");
-mobileMenuButton.classList.add("mobile-menu-btn");
-mobileMenuButton.innerHTML = "☰";
-
 const header = document.querySelector(".visiva-header");
-header.appendChild(mobileMenuButton);
-
 const navLinks = document.querySelector(".nav-links");
 
-mobileMenuButton.addEventListener("click", () => {
-    navLinks.classList.toggle("open");
-    mobileMenuButton.classList.toggle("active");
-});
+if (header && navLinks) {
+    const mobileMenuButton = document.createElement("button");
+    mobileMenuButton.classList.add("mobile-menu-btn");
+    mobileMenuButton.innerHTML = "☰";
+    header.appendChild(mobileMenuButton);
 
-
-/* Close menu when clicking a link (mobile) */
-document.querySelectorAll(".nav-links a").forEach(link => {
-    link.addEventListener("click", () => {
-        if (navLinks.classList.contains("open")) {
-            navLinks.classList.remove("open");
-            mobileMenuButton.classList.remove("active");
-        }
+    mobileMenuButton.addEventListener("click", () => {
+        navLinks.classList.toggle("open");
+        mobileMenuButton.classList.toggle("active");
     });
-});
 
+    /* Close menu when clicking a link (mobile) */
+    document.querySelectorAll(".nav-links a").forEach(link => {
+        link.addEventListener("click", () => {
+            if (navLinks.classList.contains("open")) {
+                navLinks.classList.remove("open");
+                mobileMenuButton.classList.remove("active");
+            }
+        });
+    });
+}
 
 /* ===============================
    MEGA MENU FADE-IN ON HOVER
@@ -50,7 +55,6 @@ document.querySelectorAll(".nav-item").forEach(item => {
         });
     }
 });
-
 
 /* ===============================
    TABS (Reusable Component)
@@ -80,7 +84,6 @@ document.querySelectorAll("[data-tabs]").forEach(tabContainer => {
 /* ===========================
    TIMELINE MODAL LOGIC
    =========================== */
-
 const modal = document.getElementById('timelineModal');
 const modalTitle = document.getElementById('modalTitle');
 const modalDate = document.getElementById('modalDate');
@@ -90,41 +93,47 @@ const modalLinks = document.getElementById('modalLinks');
 const closeBtn = document.querySelector('.timeline-modal-close');
 const backdrop = document.querySelector('.timeline-modal-backdrop');
 
-/* Open modal from any timeline card */
-document.querySelectorAll('.timeline-card').forEach(card => {
-  card.addEventListener('click', () => {
-    modalTitle.textContent = card.dataset.title;
-    modalDate.textContent = card.dataset.date;
-    modalType.textContent = card.dataset.type;
-    modalBody.innerHTML = `<p>${card.dataset.description}</p>`;
+if (modal && closeBtn && backdrop) {
+    /* Open modal from any timeline card */
+    document.querySelectorAll('.timeline-card').forEach(card => {
+        card.addEventListener('click', () => {
+            if (modalTitle) modalTitle.textContent = card.dataset.title || '';
+            if (modalDate) modalDate.textContent = card.dataset.date || '';
+            if (modalType) modalType.textContent = card.dataset.type || '';
+            if (modalBody) modalBody.innerHTML = `<p>${card.dataset.description || ''}</p>`;
 
-    modalLinks.innerHTML = '';
-    if (card.dataset.links) {
-      JSON.parse(card.dataset.links).forEach(link => {
-        const a = document.createElement('a');
-        a.href = link.url;
-        a.textContent = link.label;
-        modalLinks.appendChild(a);
-      });
-    }
+            if (modalLinks) {
+                modalLinks.innerHTML = '';
+                if (card.dataset.links) {
+                    try {
+                        JSON.parse(card.dataset.links).forEach(link => {
+                            const a = document.createElement('a');
+                            a.href = link.url;
+                            a.textContent = link.label;
+                            modalLinks.appendChild(a);
+                        });
+                    } catch (e) { console.error("Error parsing timeline links", e); }
+                }
+            }
 
-    modal.classList.add('active');
-    document.body.style.overflow = 'hidden';
-  });
-});
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+    });
 
-/* Close handlers */
-function closeModal() {
-  modal.classList.remove('active');
-  document.body.style.overflow = '';
+    /* Close handlers */
+    const closeModal = () => {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+    };
+
+    closeBtn.addEventListener('click', closeModal);
+    backdrop.addEventListener('click', closeModal);
+
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') closeModal();
+    });
 }
-
-closeBtn.addEventListener('click', closeModal);
-backdrop.addEventListener('click', closeModal);
-
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') closeModal();
-});
 
 /* ===============================
    ACCORDION COMPONENT
@@ -133,11 +142,12 @@ document.querySelectorAll(".accordion").forEach(acc => {
     acc.addEventListener("click", () => {
         acc.classList.toggle("open");
         const panel = acc.nextElementSibling;
-
-        if (panel.style.maxHeight) {
-            panel.style.maxHeight = null;
-        } else {
-            panel.style.maxHeight = panel.scrollHeight + "px";
+        if (panel) {
+            if (panel.style.maxHeight) {
+                panel.style.maxHeight = null;
+            } else {
+                panel.style.maxHeight = panel.scrollHeight + "px";
+            }
         }
     });
 });
