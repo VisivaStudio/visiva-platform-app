@@ -3,65 +3,55 @@
    Global scripts, animations, reveal effects, header behavior
    ========================================================================== */
 
-/* Smooth Fade Reveal on Scroll
-   Uses IntersectionObserver for performance */
+/* Smooth Fade Reveal on Scroll */
 const revealElements = document.querySelectorAll(".fade-up");
 
-const revealObserver = new IntersectionObserver((entries) => {
+if (revealElements.length) {
+  const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.animationPlayState = "running";
-            revealObserver.unobserve(entry.target);
-        }
+      if (entry.isIntersecting) {
+        entry.target.style.animationPlayState = "running";
+        revealObserver.unobserve(entry.target);
+      }
     });
-}, { threshold: 0.2 });
+  }, { threshold: 0.2 });
 
-revealElements.forEach(el => revealObserver.observe(el));
-
+  revealElements.forEach(el => revealObserver.observe(el));
+}
 
 /* Sticky Header Shadow on Scroll */
 const header = document.querySelector(".visiva-header");
 
-window.addEventListener("scroll", () => {
-    if (window.scrollY > 20) {
-        header.classList.add("scrolled");
-    } else {
-        header.classList.remove("scrolled");
-    }
-});
-
+if (header) {
+  window.addEventListener("scroll", () => {
+    header.classList.toggle("scrolled", window.scrollY > 20);
+  });
+}
 
 /* Smooth Scroll for Anchor Links */
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener("click", function (e) {
-        const target = document.querySelector(this.getAttribute("href"));
-        if (target) {
-            e.preventDefault();
-            window.scrollTo({
-                top: target.offsetTop - 80,
-                behavior: "smooth"
-            });
-        }
-    });
-});
-
-/* ===========================
-   MOBILE PAGE TRANSITION HINT
-   =========================== */
-
-document.querySelectorAll('a').forEach(link => {
-  link.addEventListener('click', () => {
-    document.body.classList.add('page-transition');
+  anchor.addEventListener("click", (e) => {
+    const target = document.querySelector(anchor.getAttribute("href"));
+    if (target) {
+      e.preventDefault();
+      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      window.scrollTo({
+        top: target.offsetTop - 80,
+        behavior: prefersReducedMotion ? "auto" : "smooth"
+      });
+    }
   });
 });
 
-.page-transition {
-  opacity: 0.6;
-  transition: opacity .15s ease;
-}
+/* Mobile Page Transition Hint */
+document.querySelectorAll("a").forEach(link => {
+  link.addEventListener("click", () => {
+    document.body.classList.add("page-transition");
+  });
+});
 
 /* Gold Hover Glow for Cinematic Buttons */
 document.querySelectorAll(".btn-gold, .btn-gold-large").forEach(btn => {
-    btn.addEventListener("mouseenter", () => btn.classList.add("btn-glow"));
-    btn.addEventListener("mouseleave", () => btn.classList.remove("btn-glow"));
+  btn.addEventListener("mouseenter", () => btn.classList.add("btn-glow"));
+  btn.addEventListener("mouseleave", () => btn.classList.remove("btn-glow"));
 });
