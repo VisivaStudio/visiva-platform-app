@@ -1,129 +1,36 @@
-/* ============================================================
-   VISIVA® PLATFORM — Cinematic Layouts & Sections
-   ============================================================ */
+/* =========================
+   Dropdown Navigation — Robust binding
+   .../* Ensure dropdowns can layer above header */
+.visiva-header, .site-header { position: relative; z-index: 10; }
 
-/* ------------------------------------------------------------
-   HERO SECTIONS
------------------------------------------------------------- */
-.hero-section {
-  position: relative;
-  padding: var(--space-8) var(--space-4);
-  min-height: 70vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-}
+/* Hide submenu by default */
+.nav-item.has-dropdown .dropdown-menu,
+.menu-item-has-children > .sub-menu { display: none; position: absolute; z-index: 1000; }
 
-.hero-bg {
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at center, rgba(212,175,55,0.18), rgba(0,0,0,1)),
-              url('../images/cinematic-noir-bg.jpg') center/cover no-repeat;
-  opacity: 0.5;
-}
+/* Show when item is opened */
+.nav-item.has-dropdown.open .dropdown-menu,
+.nav-item.has-dropdown.active .dropdown-menu,
+.nav-item.has-dropdown.is-open .dropdown-menu,
+.menu-item-has-children.open > .sub-menu,
+.menu-item-has-children.active > .sub-menu,
+.menu-item-has-children.is-open > .sub-menu { display: block; }
+/* Ensure dropdowns can layer above header */
+.visiva-header, .site-header { position: relative; z-index: 10; }
 
-.hero-content {
-  position: relative;
-  max-width: 900px;
-  z-index: 5;
+/* Hidden by default */
+.nav-item.has-dropdown .dropdown-menu,
+.menu-item-has-children > .sub-menu {
+  display: none;
+  position: absolute; /* or your preferred layout */
+  z-index: 1000;
 }
 
-.hero-title {
-  font-size: var(--font-display-xxl);
-  margin-bottom: var(--space-3);
-}
-
-.hero-subtitle {
-  font-size: var(--font-body-lg);
-  color: var(--text-soft);
-  max-width: 700px;
-  margin: auto;
-  line-height: 1.6;
-  margin-bottom: var(--space-4);
-}
-
-.hero-buttons {
-  display: flex;
-  justify-content: center;
-  gap: var(--space-3);
-}
-/* HERO responsive refinements */
-@media (max-width: 992px) {
-  .hero-section {
-    min-height: 58vh;
-    padding: var(--space-7) var(--space-3);
-  }
-  .hero-subtitle {
-    padding: 0 8px;
-  }
-}
-
-@media (max-width: 768px) {
-  .hero-section {
-    min-height: 48vh;
-    padding: var(--space-6) var(--space-3);
-    text-align: left; /* improves readability on small screens */
-  }
-  .hero-content {
-    max-width: 620px;
-    margin: 0 auto;
-  }
-  .hero-buttons {
-    flex-direction: column;
-    gap: var(--space-2);
-    align-items: flex-start;
-  }
-}
-
-/* Footer spacing on mobile */
-@media (max-width: 768px) {
-  .footer {
-    padding: var(--space-4) var(--space-3);
-  }
-  .footer-links {
-    flex-wrap: wrap;
-    gap: var(--space-2);
-  }
-}
-/* ------------------------------------------------------------
-   DARK SECTION
------------------------------------------------------------- */
-.dark-section {
-  background: var(--noir-800);
-  padding: var(--space-7) var(--space-4);
-}
-
-/* ------------------------------------------------------------
-   EXPERIENCE APP SECTION
------------------------------------------------------------- */
-.experience-section {
-  padding: var(--space-8) var(--space-4);
-  text-align: center;
-  background: linear-gradient(180deg, var(--noir-800), var(--noir-900));
-}
-
-/* ------------------------------------------------------------
-   FOOTER
------------------------------------------------------------- */
-.footer {
-  padding: var(--space-5);
-  background: var(--noir-1000);
-  border-top: 1px solid rgba(255,255,255,0.08);
-}
-
-.footer-grid {
-  text-align: center;
-}
-
-.footer-links {
-  display: flex;
-  justify-content: center;
-  gap: var(--space-3);
-  margin: var(--space-3) 0;
-}
-
-.footer-copy {
-  color: var(--text-muted);
-  font-size: var(--font-body-sm);
+/* Shown when open */
+.nav-item.has-dropdown.open .dropdown-menu,
+.nav-item.has-dropdown.active .dropdown-menu,
+.nav-item.has-dropdown.is-open .dropdown-menu,
+.menu-item-has-children.open > .sub-menu,
+.menu-item-has-children.active > .sub-menu,
+.menu-item-has-children.is-open > .sub-menu {
+  display: block;
 }

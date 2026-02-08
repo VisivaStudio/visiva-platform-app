@@ -1,67 +1,117 @@
-/* ==========================================================================
-   VISIVA® — APP CORE
-   Global scripts, animations, reveal effects, header behavior
-   ========================================================================== */
+/* =========================
+   Dropdown Navigation — Robust binding
+   Supports common WordPress/custom patterns:
+   - Item: .nav-item.has-dropdown OR .menu-item-has-children
+   - Toggle: .dropdown-toggle OR direct <a> inside the item
+   - Menu: .dropdown-menu OR .sub-menu / .submenu
+========================= */
+(function initDropdownsUniversal() {
+  const items = document.querySelectorAll(
+    ".nav-item.has-dropdown, .menu-item-has-children"
+  );
+  if (!items.length) return;
 
-/* Smooth Fade Reveal on Scroll
-   Uses IntersectionObserver for performance */
-const revealElements = document.querySelectorAll(".fade-up");
+  const getToggle = (item) =>
+    item.querySelector(".dropdown-toggle") ||
+    item.querySelector(":scope > a, :scope > button");
 
-const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.animationPlayState = "running";
-            revealObserver.unobserve(entry.target);
-        }
+  const getMenu = (item) =>
+    item.querySelector(".dropdown-menu, .sub-menu, .submenu");
+
+  const closeAll = (except = null) => {
+    items.forEach((it) => {
+      if (it !== except) {
+        it.classList.remove("open", "active", "is-open");
+        const t = getToggle(it);
+        const m = getMenu(it);
+        if (t) t.setAttribute("aria-expanded", "false");
+        if (m) m.setAttribute("aria-hidden", "true");
+      }
     });
-}, { threshold: 0.2 });
+  };
 
-revealElements.forEach(el => revealObserver.observe(el));
+  items.forEach((item) => {
+    const toggle = getToggle(item);
+    const menu = getMenu(item);
+    if (!toggle || !menu) return;
 
+    // Mark so global handlers ignore this click
+    toggle.setAttribute("data-dropdown-toggle", "true");
+    if (!menu.style.zIndex) menu.style.zIndex = "1000"; // safety
 
-/* Sticky Header Shadow on Scroll */
-const header = document.querySelector(".visiva-header");
+    toggle.addEventListener("click", (e) => {
+      const href = toggle.getAttribute("href");
+      if (href && href.trim() === "#") e.preventDefault(); // prevent jump
+      e.stopPropagation();
 
-window.addEventListener("scroll", () => {
-    if (window.scrollY > 20) {
-        header.classList.add("scrolled");
-    } else {
-        header.classList.remove("scrolled");
+      const isOpen =
+        item.classList.contains("open") ||
+        item.classList.contains("active") ||
+        item.classList.contains("is-open");
+
+      closeAll(isOpen ? null : item);
+
+      // Apply all common open classes for compatibility
+      item.classList.toggle("open", !isOpen);
+      item.classList.toggle("active", !isOpen);
+      item.classList.toggle("is-open", !isOpen);
+
+      toggle.setAttribute("aria-expanded", String(!isOpen));
+      menu.setAttribute("aria-hidden", String(isOpen));
+    });
+
+    // Keyboard access
+    toggle.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        toggle.click();
+      }
+    });
+  });
+
+  // Click outside to close
+  document.addEventListener("click", (e) => {
+    const nav =
+      document.querySelector(".visiva-nav, .site-header, nav, .main-nav") || null;
+    if (nav ? !nav.contains(e.target) : true) closeAll();
+  });
+
+  // ESC to close
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeAll();
+  });
+})();
+
+/* Smooth Scroll for Anchor Links (ignore dropdown toggles and opt-outs) */
+document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+  anchor.addEventListener("click", (e) => {
+    if (
+      anchor.matches('[data-dropdown-toggle="true"]') ||
+      anchor.matches('[data-no-scroll="true"]')
+    ) {
+      return; // let dropdown handler run
     }
-});
-
-
-/* Smooth Scroll for Anchor Links */
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener("click", function (e) {
-        const target = document.querySelector(this.getAttribute("href"));
-        if (target) {
-            e.preventDefault();
-            window.scrollTo({
-                top: target.offsetTop - 80,
-                behavior: "smooth"
-            });
-        }
-    });
-});
-
-/* ===========================
-   MOBILE PAGE TRANSITION HINT
-   =========================== */
-
-document.querySelectorAll('a').forEach(link => {
-  link.addEventListener('click', () => {
-    document.body.classList.add('page-transition');
+    const href = anchor.getAttribute("href");
+    const target = href && href !== "#" ? document.querySelector(href) : null;
+    if (target) {
+      e.preventDefault();
+      const prefersReducedMotion = window
+        .matchMedia("(prefers-reduced-motion: reduce)")
+        .matches;
+      window.scrollTo({
+        top: target.offsetTop - 80,
+        behavior: prefersReducedMotion ? "auto" : "smooth",
+      });
+    }
   });
 });
 
-.page-transition {
-  opacity: 0.6;
-  transition: opacity .15s ease;
-}
-
-/* Gold Hover Glow for Cinematic Buttons */
-document.querySelectorAll(".btn-gold, .btn-gold-large").forEach(btn => {
-    btn.addEventListener("mouseenter", () => btn.classList.add("btn-glow"));
-    btn.addEventListener("mouseleave", () => btn.classList.remove("btn-glow"));
+/* Page Transition Hint (avoid dropdown toggles and in-page anchors) */
+document.querySelectorAll("a").forEach((link) => {
+  link.addEventListener("click", () => {
+    if (link.matches('[data-dropdown-toggle="true"]')) return;
+    const href = (link.getAttribute("href") || "").trim();
+    if (!href || href === "#" || href.startsWith("#")) return;
+    document.body.classList.add("page-transition");
+  });
 });
