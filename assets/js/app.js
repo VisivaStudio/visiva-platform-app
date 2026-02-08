@@ -82,3 +82,36 @@
   });
 })();
 ``
+/* Smooth Scroll for Anchor Links (ignore dropdown toggles and opt-outs) */
+document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+  anchor.addEventListener("click", (e) => {
+    if (
+      anchor.matches('[data-dropdown-toggle="true"]') ||
+      anchor.matches('[data-no-scroll="true"]')
+    ) {
+      return; // let dropdown handler run
+    }
+    const href = anchor.getAttribute("href");
+    const target = href && href !== "#" ? document.querySelector(href) : null;
+    if (target) {
+      e.preventDefault();
+      const prefersReducedMotion = window
+        .matchMedia("(prefers-reduced-motion: reduce)")
+        .matches;
+      window.scrollTo({
+        top: target.offsetTop - 80,
+        behavior: prefersReducedMotion ? "auto" : "smooth",
+      });
+    }
+  });
+});
+
+/* Page Transition Hint (avoid dropdown toggles and in-page anchors) */
+document.querySelectorAll("a").forEach((link) => {
+  link.addEventListener("click", () => {
+    if (link.matches('[data-dropdown-toggle="true"]')) return;
+    const href = (link.getAttribute("href") || "").trim();
+    if (!href || href === "#" || href.startsWith("#")) return;
+    document.body.classList.add("page-transition");
+  });
+});
