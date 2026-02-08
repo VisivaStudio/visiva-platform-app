@@ -14,3 +14,23 @@
 .menu-item-has-children.open > .sub-menu,
 .menu-item-has-children.active > .sub-menu,
 .menu-item-has-children.is-open > .sub-menu { display: block; }
+/* Ensure dropdowns can layer above header */
+.visiva-header, .site-header { position: relative; z-index: 10; }
+
+/* Hidden by default */
+.nav-item.has-dropdown .dropdown-menu,
+.menu-item-has-children > .sub-menu {
+  display: none;
+  position: absolute; /* or your preferred layout */
+  z-index: 1000;
+}
+
+/* Shown when open */
+.nav-item.has-dropdown.open .dropdown-menu,
+.nav-item.has-dropdown.active .dropdown-menu,
+.nav-item.has-dropdown.is-open .dropdown-menu,
+.menu-item-has-children.open > .sub-menu,
+.menu-item-has-children.active > .sub-menu,
+.menu-item-has-children.is-open > .sub-menu {
+  display: block;
+}
