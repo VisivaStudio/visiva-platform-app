@@ -1,62 +1,66 @@
-/* ==========================================================================
-   VISIVA® — APP CORE
-   Global scripts, animations, reveal effects, header behavior
-   ========================================================================== */
-
 /* =========================
-   Dropdown Navigation
-   =========================
-   Assumptions (adjust selectors to match your HTML):
-   - Each dropdown item has:    .nav-item.has-dropdown
-   - The clickable toggle has:  .dropdown-toggle  (often an <a> or <button>)
-   - The dropdown panel has:    .dropdown-menu
-   - The main nav wrapper:      .visiva-nav  (for click-outside close)
-*/
-(function initDropdowns() {
-  const nav = document.querySelector(".visiva-nav");
-  const items = document.querySelectorAll(".nav-item.has-dropdown");
-
+   Dropdown Navigation — Robust binding
+   Supports common WordPress/custom patterns:
+   - Item: .nav-item.has-dropdown OR .menu-item-has-children
+   - Toggle: .dropdown-toggle OR direct <a> inside the item
+   - Menu: .dropdown-menu OR .sub-menu / .submenu
+========================= */
+(function initDropdownsUniversal() {
+  const items = document.querySelectorAll(
+    ".nav-item.has-dropdown, .menu-item-has-children"
+  );
   if (!items.length) return;
 
-  // Close all helper
+  const getToggle = (item) =>
+    item.querySelector(".dropdown-toggle") ||
+    item.querySelector(":scope > a, :scope > button");
+
+  const getMenu = (item) =>
+    item.querySelector(".dropdown-menu, .sub-menu, .submenu");
+
   const closeAll = (except = null) => {
-    items.forEach(item => {
-      if (item !== except) {
-        item.classList.remove("open");
-        const toggle = item.querySelector(".dropdown-toggle");
-        const menu = item.querySelector(".dropdown-menu");
-        if (toggle) toggle.setAttribute("aria-expanded", "false");
-        if (menu) menu.setAttribute("aria-hidden", "true");
+    items.forEach((it) => {
+      if (it !== except) {
+        it.classList.remove("open", "active", "is-open");
+        const t = getToggle(it);
+        const m = getMenu(it);
+        if (t) t.setAttribute("aria-expanded", "false");
+        if (m) m.setAttribute("aria-hidden", "true");
       }
     });
   };
 
-  // Click to toggle (mobile + keyboard support)
-  items.forEach(item => {
-    const toggle = item.querySelector(".dropdown-toggle");
-    const menu = item.querySelector(".dropdown-menu");
+  items.forEach((item) => {
+    const toggle = getToggle(item);
+    const menu = getMenu(item);
     if (!toggle || !menu) return;
 
-    // Identify this element so other handlers can ignore it
+    // Mark so global handlers ignore this click
     toggle.setAttribute("data-dropdown-toggle", "true");
+    if (!menu.style.zIndex) menu.style.zIndex = "1000"; // safety
 
-    // Prevent default for common '#' toggles
     toggle.addEventListener("click", (e) => {
-      // If toggle is an <a> with href="#", prevent scroll-to-top
       const href = toggle.getAttribute("href");
-      if (href && href.trim() === "#") {
-        e.preventDefault();
-      }
+      if (href && href.trim() === "#") e.preventDefault(); // prevent jump
       e.stopPropagation();
 
-      const isOpen = item.classList.contains("open");
+      const isOpen =
+        item.classList.contains("open") ||
+        item.classList.contains("active") ||
+        item.classList.contains("is-open");
+
       closeAll(isOpen ? null : item);
+
+      // Apply all common open classes for compatibility
       item.classList.toggle("open", !isOpen);
+      item.classList.toggle("active", !isOpen);
+      item.classList.toggle("is-open", !isOpen);
+
       toggle.setAttribute("aria-expanded", String(!isOpen));
       menu.setAttribute("aria-hidden", String(isOpen));
     });
 
-    // Keyboard access: open on Enter/Space
+    // Keyboard access
     toggle.addEventListener("keydown", (e) => {
       if (e.key === "Enter" || e.key === " ") {
         e.preventDefault();
@@ -67,13 +71,12 @@
 
   // Click outside to close
   document.addEventListener("click", (e) => {
-    // If click is outside the nav, close all
-    if (!nav || !nav.contains(e.target)) {
-      closeAll();
-    }
+    const nav =
+      document.querySelector(".visiva-nav, .site-header, nav, .main-nav") || null;
+    if (nav ? !nav.contains(e.target) : true) closeAll();
   });
 
-  // ESC to close any open dropdowns
+  // ESC to close
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") closeAll();
   });
