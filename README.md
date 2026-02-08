@@ -1,5 +1,3 @@
----
-
 # VISIVA® Brand Design Platform  
 
 ## 1. Introduction & Brand Philosophy  
