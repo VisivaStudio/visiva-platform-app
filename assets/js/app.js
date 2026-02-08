@@ -81,7 +81,7 @@
     if (e.key === "Escape") closeAll();
   });
 })();
-``
+
 /* Smooth Scroll for Anchor Links (ignore dropdown toggles and opt-outs) */
 document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
   anchor.addEventListener("click", (e) => {
