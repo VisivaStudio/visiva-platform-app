@@ -2,14 +2,6 @@
 
 A cinematic operating system for brand intelligence, strategy, and design—built by VISIVA® Brand Design Studio.
 
-Made with Vanilla JS
-
-[Accessibility First]
-(https://img.shcus](https://imge 
-
-## Preview:
-https://visiva-v-2--visiva.replit.app/index.html
-
 ---
 
 ## ✨ Overview
