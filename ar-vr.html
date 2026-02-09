@@ -1,0 +1,309 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2685.4">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times; -webkit-text-stroke: #000000}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times; -webkit-text-stroke: #000000; min-height: 14.0px}
+    span.s1 {font-kerning: none}
+  </style>
+</head>
+<body>
+<p class="p1"><span class="s1">&lt;!DOCTYPE html&gt;</span></p>
+<p class="p1"><span class="s1">&lt;html lang="en"&gt;</span></p>
+<p class="p1"><span class="s1">&lt;head&gt;</span></p>
+<p class="p1"><span class="s1">  &lt;meta charset="UTF-8" /&gt;</span></p>
+<p class="p1"><span class="s1">  &lt;meta</span></p>
+<p class="p1"><span class="s1">    name="viewport"</span></p>
+<p class="p1"><span class="s1">    content="width=device-width, initial-scale=1.0"</span></p>
+<p class="p1"><span class="s1">  /&gt;</span></p>
+<p class="p1"><span class="s1">  &lt;title&gt;AR / VR Experience — VISIVA® Platform&lt;/title&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">  &lt;!-- Styles --&gt;</span></p>
+<p class="p1"><span class="s1">  ../assets/css/style.css</span></p>
+<p class="p1"><span class="s1">  ../assets/css/components.css</span></p>
+<p class="p1"><span class="s1">  &lt;link rel="stylesheet" href="../tyle&gt;</span></p>
+<p class="p1"><span class="s1">    /* --- Page-local styles for lightweight Immersive Preview --- */</span></p>
+<p class="p1"><span class="s1">    .immersive-wrap { max-width: 1100px; margin: 0 auto; }</span></p>
+<p class="p1"><span class="s1">    .immersive-controls { display:flex; gap:var(--space-2); margin-bottom:var(--space-3); flex-wrap:wrap; }</span></p>
+<p class="p1"><span class="s1">    .immersive-controls .mode-btn {</span></p>
+<p class="p1"><span class="s1">      padding:10px 14px; font-size:14px; border-radius:var(--radius-sm);</span></p>
+<p class="p1"><span class="s1">      border:1px solid rgba(255,255,255,0.12); color:var(--text-light);</span></p>
+<p class="p1"><span class="s1">      background:#111; cursor:pointer; transition:.25s ease;</span></p>
+<p class="p1"><span class="s1">    }</span></p>
+<p class="p1"><span class="s1">    .immersive-controls .mode-btn.active {</span></p>
+<p class="p1"><span class="s1">      border-color:var(--gold-base); box-shadow:var(--glow-gold); color:var(--gold-base);</span></p>
+<p class="p1"><span class="s1">    }</span></p>
+<p class="p1"><span class="s1">    .immersive-stage {</span></p>
+<p class="p1"><span class="s1">      position:relative; height:420px; border:1px solid rgba(255,255,255,0.08);</span></p>
+<p class="p1"><span class="s1">      border-radius:var(--radius-md); overflow:hidden;</span></p>
+<p class="p1"><span class="s1">      background:</span></p>
+<p class="p1"><span class="s1">        radial-gradient(60% 60% at 50% 50%, rgba(212,175,55,0.14), rgba(0,0,0,0) 60%),</span></p>
+<p class="p1"><span class="s1">        radial-gradient(120% 100% at 50% 110%, rgba(212,175,55,0.06), rgba(0,0,0,0) 30%),</span></p>
+<p class="p1"><span class="s1">        linear-gradient(180deg, #0A0A0A, #000);</span></p>
+<p class="p1"><span class="s1">    }</span></p>
+<p class="p1"><span class="s1">    .immersive-object { position:absolute; inset:0; display:grid; place-items:center; pointer-events:none; }</span></p>
+<p class="p1"><span class="s1">    .ring {</span></p>
+<p class="p1"><span class="s1">      width:220px; height:220px; border-radius:50%; border:3px solid rgba(212,175,55,0.75);</span></p>
+<p class="p1"><span class="s1">      box-shadow:0 0 28px rgba(212,175,55,0.55); animation:orbit 12s linear infinite;</span></p>
+<p class="p1"><span class="s1">    }</span></p>
+<p class="p1"><span class="s1">    @keyframes orbit {</span></p>
+<p class="p1"><span class="s1">      from { transform: rotate(0deg) perspective(700px) rotateX(18deg) rotateY(0deg); }</span></p>
+<p class="p1"><span class="s1">      to   { transform: rotate(360deg) perspective(700px) rotateX(18deg) rotateY(360deg); }</span></p>
+<p class="p1"><span class="s1">    }</span></p>
+<p class="p1"><span class="s1">    .grid-floor {</span></p>
+<p class="p1"><span class="s1">      position:absolute; left:-10%; right:-10%; bottom:-20px; height:55%;</span></p>
+<p class="p1"><span class="s1">      background:</span></p>
+<p class="p1"><span class="s1">        linear-gradient(rgba(212,175,55,0.18), rgba(212,175,55,0.04) 40%, rgba(0,0,0,0)),</span></p>
+<p class="p1"><span class="s1">        repeating-linear-gradient(to right, rgba(255,255,255,0.08) 0 1px, rgba(0,0,0,0) 1px 40px),</span></p>
+<p class="p1"><span class="s1">        repeating-linear-gradient(to top,   rgba(255,255,255,0.08) 0 1px, rgba(0,0,0,0) 1px 40px);</span></p>
+<p class="p1"><span class="s1">      transform: perspective(600px) rotateX(72deg);</span></p>
+<p class="p1"><span class="s1">      filter: drop-shadow(0 0 12px rgba(212,175,55,0.25));</span></p>
+<p class="p1"><span class="s1">    }</span></p>
+<p class="p1"><span class="s1">    .mode-badge {</span></p>
+<p class="p1"><span class="s1">      position:absolute; top:14px; left:14px; background:rgba(0,0,0,0.55);</span></p>
+<p class="p1"><span class="s1">      border:1px solid rgba(255,255,255,0.12); border-radius:var(--radius-sm);</span></p>
+<p class="p1"><span class="s1">      padding:6px 10px; font-size:12px; color:var(--text-light); letter-spacing:.06em;</span></p>
+<p class="p1"><span class="s1">    }</span></p>
+<p class="p1"><span class="s1">    .immersive-stage.ar::after,</span></p>
+<p class="p1"><span class="s1">    .immersive-stage.vr::after {</span></p>
+<p class="p1"><span class="s1">      content:""; position:absolute; inset:0; pointer-events:none;</span></p>
+<p class="p1"><span class="s1">    }</span></p>
+<p class="p1"><span class="s1">    .immersive-stage.ar::after {</span></p>
+<p class="p1"><span class="s1">      background:</span></p>
+<p class="p1"><span class="s1">        radial-gradient(45% 35% at 50% 55%, rgba(212,175,55,0.12), rgba(0,0,0,0)),</span></p>
+<p class="p1"><span class="s1">        linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0));</span></p>
+<p class="p1"><span class="s1">    }</span></p>
+<p class="p1"><span class="s1">    .immersive-stage.vr::after {</span></p>
+<p class="p1"><span class="s1">      background:</span></p>
+<p class="p1"><span class="s1">        radial-gradient(35% 35% at 50% 50%, rgba(212,175,55,0.08), rgba(0,0,0,0)),</span></p>
+<p class="p1"><span class="s1">        linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0));</span></p>
+<p class="p1"><span class="s1">      box-shadow: inset 0 0 0 2px rgba(212,175,55,0.08);</span></p>
+<p class="p1"><span class="s1">    }</span></p>
+<p class="p1"><span class="s1">    .immersive-hint {</span></p>
+<p class="p1"><span class="s1">      position:absolute; bottom:14px; right:14px; background:rgba(0,0,0,0.55);</span></p>
+<p class="p1"><span class="s1">      border:1px solid rgba(255,255,255,0.12); border-radius:var(--radius-sm);</span></p>
+<p class="p1"><span class="s1">      padding:6px 10px; font-size:12px; color:var(--text-soft);</span></p>
+<p class="p1"><span class="s1">    }</span></p>
+<p class="p1"><span class="s1">    @media (max-width: 768px) {</span></p>
+<p class="p1"><span class="s1">      .immersive-stage { height:340px; }</span></p>
+<p class="p1"><span class="s1">      .ring { width:180px; height:180px; }</span></p>
+<p class="p1"><span class="s1">    }</span></p>
+<p class="p1"><span class="s1">  &lt;/style&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/head&gt;</span></p>
+<p class="p1"><span class="s1">&lt;body&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">  &lt;!-- ======================================================</span></p>
+<p class="p1"><span class="s1">       GLOBAL NAVIGATION</span></p>
+<p class="p1"><span class="s1">       ====================================================== --&gt;</span></p>
+<p class="p1"><span class="s1">  &lt;header class="visiva-header"&gt;</span></p>
+<p class="p1"><span class="s1">    &lt;div class="nav-wrapper"&gt;</span></p>
+<p class="p1"><span class="s1">      ../index.htmlVISIVA®&lt;/a&gt;</span></p>
+<p class="p1"><span class="s1">      &lt;button class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="primary-nav"&gt;☰&lt;/button&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">      &lt;nav id="primary-nav" class="nav-links" aria-label="Primary"&gt;</span></p>
+<p class="p1"><span class="s1">        &lt;div class="nav-item has-dropdown"&gt;</span></p>
+<p class="p1"><span class="s1">          &lt;button class="dropdown-toggle" aria-haspopup="true" aria-expanded="false"&gt;Platform&lt;/button&gt;</span></p>
+<p class="p1"><span class="s1">          &lt;div class="mega-menu" role="menu"&gt;</span></p>
+<p class="p1"><span class="s1">            overview.htmlOverview&lt;/a&gt;</span></p>
+<p class="p1"><span class="s1">            philosophy.htmlPhilosophy&lt;/a&gt;</span></p>
+<p class="p1"><span class="s1">            process.htmlDesign Process&lt;/a&gt;</span></p>
+<p class="p1"><span class="s1">            bie.htmlIntelligence Engine&lt;/a&gt;</span></p>
+<p class="p1"><span class="s1">            dna.htmlBrand DNA&lt;/a&gt;</span></p>
+<p class="p1"><span class="s1">            guardian-ai.htmlBrand Guardian AI&lt;/a&gt;</span></p>
+<p class="p1"><span class="s1">            ar-vr.htmlAR / VR Experience&lt;/a&gt;</span></p>
+<p class="p1"><span class="s1">            universe.htmlBrand Universe&lt;/a&gt;</span></p>
+<p class="p1"><span class="s1">            health-check.htmlBrand Health Check&lt;/a&gt;</span></p>
+<p class="p1"><span class="s1">            licensing.htmlLicensing&lt;/a&gt;</span></p>
+<p class="p1"><span class="s1">            sustainability.htmlSustainability &amp; Accessibility&lt;/a&gt;</span></p>
+<p class="p1"><span class="s1">            vault.htmlBrand Vault&lt;/a&gt;</span></p>
+<p class="p1"><span class="s1">            timeline.htmlEvolution Timeline&lt;/a&gt;</span></p>
+<p class="p1"><span class="s1">          &lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">        &lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">        ../tools/Tools&lt;/a&gt;</span></p>
+<p class="p1"><span class="s1">        ../brand-kits/Brand Kits&lt;/a&gt;</span></p>
+<p class="p1"><span class="s1">        universe.htmlBrand Universe&lt;/a&gt;</span></p>
+<p class="p1"><span class="s1">        ../academy/Academy&lt;/a&gt;</span></p>
+<p class="p1"><span class="s1">        ../marketplace/Marketplace&lt;/a&gt;</span></p>
+<p class="p1"><span class="s1">        &lt;a href="https://visiva.ai/" class="nav-item" target="_blank" rel="noopener"&gt;Experience App&lt;/a&gt;</span></p>
+<p class="p1"><span class="s1">        ../portal/login.htmlLogin&lt;/a&gt;</span></p>
+<p class="p1"><span class="s1">      &lt;/nav&gt;</span></p>
+<p class="p1"><span class="s1">    &lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">  &lt;/header&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">  &lt;!-- ======================================================</span></p>
+<p class="p1"><span class="s1">       HERO — AR / VR EXPERIENCE</span></p>
+<p class="p1"><span class="s1">       ====================================================== --&gt;</span></p>
+<p class="p1"><span class="s1">  &lt;section class="hero-section"&gt;</span></p>
+<p class="p1"><span class="s1">    &lt;div class="hero-bg"&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">    &lt;div class="hero-content"&gt;</span></p>
+<p class="p1"><span class="s1">      &lt;h1 class="hero-title fade-up"&gt;AR / VR Experience&lt;/h1&gt;</span></p>
+<p class="p1"><span class="s1">      &lt;p class="hero-subtitle fade-up delay-1"&gt;</span></p>
+<p class="p1"><span class="s1">        Immersive brand worlds for spatial presentation, product context,</span></p>
+<p class="p1"><span class="s1">        and cinematic storytelling — built on your structured brand system.</span></p>
+<p class="p1"><span class="s1">      &lt;/p&gt;</span></p>
+<p class="p1"><span class="s1">    &lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">  &lt;/section&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">  &lt;!-- ======================================================</span></p>
+<p class="p1"><span class="s1">       WHAT IT IS / WHY IT MATTERS</span></p>
+<p class="p1"><span class="s1">       ====================================================== --&gt;</span></p>
+<p class="p1"><span class="s1">  &lt;section class="section"&gt;</span></p>
+<p class="p1"><span class="s1">    &lt;h2 class="section-title accent-line fade-up"&gt;What the AR / VR Experience Is&lt;/h2&gt;</span></p>
+<p class="p1"><span class="s1">    &lt;p class="section-desc fade-up delay-1"&gt;</span></p>
+<p class="p1"><span class="s1">      VISIVA® translates structured brand systems into immersive environments — enabling</span></p>
+<p class="p1"><span class="s1">      exploration of identity, products, signage, packaging, and environments in true scale.</span></p>
+<p class="p1"><span class="s1">    &lt;/p&gt;</span></p>
+<p class="p1"><span class="s1">    &lt;div class="three-grid fade-up delay-2"&gt;</span></p>
+<p class="p1"><span class="s1">      &lt;div class="cin-card"&gt;&lt;h3&gt;AR Preview&lt;/h3&gt;&lt;p&gt;Place assets in real environments — signage, packaging, retail fixtures.&lt;/p&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">      &lt;div class="cin-card"&gt;&lt;h3&gt;VR Showrooms&lt;/h3&gt;&lt;p&gt;Walk through cinematic brand spaces for pitches and reviews.&lt;/p&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">      &lt;div class="cin-card"&gt;&lt;h3&gt;MR / Spatial&lt;/h3&gt;&lt;p&gt;Mixed‑reality overlays for events and collaborative sessions.&lt;/p&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">    &lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">  &lt;/section&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">  &lt;section class="section dark-section"&gt;</span></p>
+<p class="p1"><span class="s1">    &lt;h2 class="section-title accent-line fade-up"&gt;Why Immersive Brand Experiences Matter&lt;/h2&gt;</span></p>
+<p class="p1"><span class="s1">    &lt;div class="three-grid fade-up delay-1"&gt;</span></p>
+<p class="p1"><span class="s1">      &lt;div class="cin-card"&gt;&lt;h3&gt;Real‑World Confidence&lt;/h3&gt;&lt;p&gt;See scale, legibility, and contrast before production.&lt;/p&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">      &lt;div class="cin-card"&gt;&lt;h3&gt;Executive &amp; Investor Impact&lt;/h3&gt;&lt;p&gt;Spatial storytelling communicates ambition instantly.&lt;/p&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">      &lt;div class="cin-card"&gt;&lt;h3&gt;Faster Decisions&lt;/h3&gt;&lt;p&gt;Align stakeholders with shared context, not static mockups.&lt;/p&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">    &lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">  &lt;/section&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">  &lt;!-- ======================================================</span></p>
+<p class="p1"><span class="s1">       IMMERSIVE PREVIEW (LIGHT INTERACTION)</span></p>
+<p class="p1"><span class="s1">       ====================================================== --&gt;</span></p>
+<p class="p1"><span class="s1">  &lt;section class="section"&gt;</span></p>
+<p class="p1"><span class="s1">    &lt;h2 class="section-title accent-line fade-up"&gt;Immersive Preview&lt;/h2&gt;</span></p>
+<p class="p1"><span class="s1">    &lt;p class="section-desc fade-up delay-1"&gt;Lightweight mode switcher (full AR/VR is in the Experience App).&lt;/p&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">    &lt;div class="immersive-wrap fade-up delay-2"&gt;</span></p>
+<p class="p1"><span class="s1">      &lt;div class="immersive-controls" role="group" aria-label="Immersive modes"&gt;</span></p>
+<p class="p1"><span class="s1">        &lt;button class="mode-btn active" id="modeOrbit" aria-pressed="true"&gt;Orbit&lt;/button&gt;</span></p>
+<p class="p1"><span class="s1">        &lt;button class="mode-btn" id="modeAR" aria-pressed="false"&gt;AR&lt;/button&gt;</span></p>
+<p class="p1"><span class="s1">        &lt;button class="mode-btn" id="modeVR" aria-pressed="false"&gt;VR&lt;/button&gt;</span></p>
+<p class="p1"><span class="s1">      &lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">      &lt;div class="immersive-stage orbit" id="immersiveStage" aria-live="polite"&gt;</span></p>
+<p class="p1"><span class="s1">        &lt;div class="mode-badge" id="modeBadge"&gt;Orbit Preview&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">        &lt;div class="immersive-object"&gt;</span></p>
+<p class="p1"><span class="s1">          &lt;div class="ring" aria-hidden="true"&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">          &lt;div class="grid-floor" aria-hidden="true"&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">        &lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">        &lt;div class="immersive-hint"&gt;Tip: Use the buttons above to switch modes&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">      &lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">    &lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">  &lt;/section&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">  &lt;!-- ======================================================</span></p>
+<p class="p1"><span class="s1">       PIPELINE / ECOSYSTEM / STATUS</span></p>
+<p class="p1"><span class="s1">       ====================================================== --&gt;</span></p>
+<p class="p1"><span class="s1">  &lt;section class="section dark-section"&gt;</span></p>
+<p class="p1"><span class="s1">    &lt;h2 class="section-title accent-line fade-up"&gt;How the AR / VR Pipeline Works&lt;/h2&gt;</span></p>
+<p class="p1"><span class="s1">    &lt;div class="three-grid fade-up delay-1"&gt;</span></p>
+<p class="p1"><span class="s1">      &lt;div class="cin-card"&gt;&lt;h3&gt;Inputs&lt;/h3&gt;&lt;p&gt;Tokens, logos, colours, type, 3D assets, environments, motion rules.&lt;/p&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">      &lt;div class="cin-card"&gt;&lt;h3&gt;Rendering&lt;/h3&gt;&lt;p&gt;Device‑aware scenes for mobile AR, desktop VR, and headsets.&lt;/p&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">      &lt;div class="cin-card"&gt;&lt;h3&gt;Outputs&lt;/h3&gt;&lt;p&gt;Live previews, walk‑throughs, exports, and links in the Experience App.&lt;/p&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">    &lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">  &lt;/section&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">  &lt;section class="section"&gt;</span></p>
+<p class="p1"><span class="s1">    &lt;h2 class="section-title accent-line fade-up"&gt;AR / VR Within VISIVA®&lt;/h2&gt;</span></p>
+<p class="p1"><span class="s1">    &lt;p class="section-desc fade-up delay-1"&gt;Immersive experiences grounded in your structured brand system.&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1">    &lt;div class="three-grid fade-up delay-2"&gt;</span></p>
+<p class="p1"><span class="s1">      universe.html&lt;h3&gt;Brand Universe&lt;/h3&gt;&lt;p&gt;Spatialises the content structure and relationships.&lt;/p&gt;&lt;/a&gt;</span></p>
+<p class="p1"><span class="s1">      dna.html&lt;h3&gt;Brand DNA&lt;/h3&gt;&lt;p&gt;Defines tone, behaviour, and narrative rules.&lt;/p&gt;&lt;/a&gt;</span></p>
+<p class="p1"><span class="s1">      bie.html&lt;h3&gt;Brand Intelligence Engine&lt;/h3&gt;&lt;p&gt;Measures engagement, clarity, and consistency.&lt;/p&gt;&lt;/a&gt;</span></p>
+<p class="p1"><span class="s1">      guardian-ai.html&lt;h3&gt;Brand Guardian AI&lt;/h3&gt;&lt;p&gt;Validates contrast, legibility, and usage in scenes.&lt;/p&gt;&lt;/a&gt;</span></p>
+<p class="p1"><span class="s1">      vault.html&lt;h3&gt;Brand Vault&lt;/h3&gt;&lt;p&gt;Links immersive assets to authenticity and ownership.&lt;/p&gt;&lt;/a&gt;</span></p>
+<p class="p1"><span class="s1">      ../tools/&lt;h3&gt;Tools Suite&lt;/h3&gt;&lt;p&gt;Feeds assets, tokens, and templates into immersion.&lt;/p&gt;&lt;/a&gt;</span></p>
+<p class="p1"><span class="s1">    &lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">  &lt;/section&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">  &lt;section class="section dark-section"&gt;</span></p>
+<p class="p1"><span class="s1">    &lt;h2 class="section-title accent-line fade-up"&gt;Status &amp; Roadmap&lt;/h2&gt;</span></p>
+<p class="p1"><span class="s1">    &lt;div class="three-grid fade-up delay-1"&gt;</span></p>
+<p class="p1"><span class="s1">      &lt;div class="cin-card"&gt;&lt;h3&gt;Live&lt;/h3&gt;&lt;p&gt;Orbit previews, cinematic scenes, Experience App deep‑links.&lt;/p&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">      &lt;div class="cin-card"&gt;&lt;h3&gt;Beta&lt;/h3&gt;&lt;p&gt;Device‑aware AR placement and guided VR walk‑throughs.&lt;/p&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">      &lt;div class="cin-card"&gt;&lt;h3&gt;Roadmap&lt;/h3&gt;&lt;p&gt;Collab sessions, headset‑native UX, scene capture, analytics overlays.&lt;/p&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">    &lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">  &lt;/section&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">  &lt;section class="section"&gt;</span></p>
+<p class="p1"><span class="s1">    &lt;h2 class="section-title accent-line fade-up"&gt;Experience VISIVA® in Space&lt;/h2&gt;</span></p>
+<p class="p1"><span class="s1">    &lt;p class="section-desc fade-up delay-1"&gt;Explore immersive brand worlds via the Experience App.&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1">    &lt;div class="three-grid fade-up delay-2"&gt;</span></p>
+<p class="p1"><span class="s1">      universe.html&lt;h3&gt;Explore the Brand Universe&lt;/h3&gt;&lt;p&gt;See the structure that powers AR/VR content.&lt;/p&gt;&lt;/a&gt;</span></p>
+<p class="p1"><span class="s1">      &lt;a class="tool-card" href="https://visiva.ai/" target="_blank" rel="noopener"&gt;&lt;h3&gt;Launch Experience App&lt;/h3&gt;&lt;p&gt;AR/VR features are enabled in the app&lt;/p&gt;&lt;/a&gt;</span></p>
+<p class="p1"><span class="s1">      ../tools/viewer-3d.html&lt;h3&gt;Open 3D Viewer&lt;/h3&gt;&lt;p&gt;Preview models and scenes pre‑export.&lt;/p&gt;&lt;/a&gt;</span></p>
+<p class="p1"><span class="s1">    &lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">  &lt;/section&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">  &lt;!-- ======================================================</span></p>
+<p class="p1"><span class="s1">       MOBILE BOTTOM BAR (optional)</span></p>
+<p class="p1"><span class="s1">       ====================================================== --&gt;</span></p>
+<p class="p1"><span class="s1">  &lt;nav class="mobile-bottom-bar"&gt;</span></p>
+<p class="p1"><span class="s1">    overview.html&lt;span&gt;◉&lt;/span&gt;Platform&lt;/a&gt;</span></p>
+<p class="p1"><span class="s1">    timeline.html&lt;span&gt;⟡&lt;/span&gt;Timeline&lt;/a&gt;</span></p>
+<p class="p1"><span class="s1">    ../tools/&lt;span&gt;◼&lt;/span&gt;Tools&lt;/a&gt;</span></p>
+<p class="p1"><span class="s1">    &lt;a href="https://visiva.ai/" target="_blank" rel="noopener"&gt;&lt;span&gt;▶&lt;/span&gt;App&lt;/a&gt;</span></p>
+<p class="p1"><span class="s1">  &lt;/nav&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">  &lt;!-- ======================================================</span></p>
+<p class="p1"><span class="s1">       FOOTER</span></p>
+<p class="p1"><span class="s1">       ====================================================== --&gt;</span></p>
+<p class="p1"><span class="s1">  &lt;footer class="footer"&gt;</span></p>
+<p class="p1"><span class="s1">    &lt;div class="footer-grid"&gt;</span></p>
+<p class="p1"><span class="s1">      &lt;p&gt;VISIVA® Brand Design Platform&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1">      &lt;div class="footer-links"&gt;</span></p>
+<p class="p1"><span class="s1">        https://instagram.com/visivaInstagram&lt;/a&gt;</span></p>
+<p class="p1"><span class="s1">        &lt;a href="https://linkedin.com/company/visiva"a&gt;</span></p>
+<p class="p1"><span class="s1">        &lt;a href="https://visiva.ai/" target="_blank" rel="noopener"&gt;Website&lt;/a&gt;</span></p>
+<p class="p1"><span class="s1">      &lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">      &lt;p class="footer-copy"&gt;© 2026 VISIVA®. All Rights Reserved.&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1">    &lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">  &lt;/footer&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">  &lt;!-- Scripts --&gt;</span></p>
+<p class="p1"><span class="s1">  ../assets/js/app.js&lt;/script&gt;</span></p>
+<p class="p1"><span class="s1">  ../assets/js/ui.js&lt;/script&gt;</span></p>
+<p class="p1"><span class="s1">  &lt;script&gt;</span></p>
+<p class="p1"><span class="s1">    // Lightweight AR/VR mode toggles (no external libs)</span></p>
+<p class="p1"><span class="s1">    (function() {</span></p>
+<p class="p1"><span class="s1">      const stage = document.getElementById('immersiveStage');</span></p>
+<p class="p1"><span class="s1">      const badge = document.getElementById('modeBadge');</span></p>
+<p class="p1"><span class="s1">      const orbitBtn = document.getElementById('modeOrbit');</span></p>
+<p class="p1"><span class="s1">      const arBtn = document.getElementById('modeAR');</span></p>
+<p class="p1"><span class="s1">      const vrBtn = document.getElementById('modeVR');</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">      function setActive(btn) {</span></p>
+<p class="p1"><span class="s1">        [orbitBtn, arBtn, vrBtn].forEach(b =&gt; {</span></p>
+<p class="p1"><span class="s1">          const active = b === btn;</span></p>
+<p class="p1"><span class="s1">          b.classList.toggle('active', active);</span></p>
+<p class="p1"><span class="s1">          b.setAttribute('aria-pressed', String(active));</span></p>
+<p class="p1"><span class="s1">        });</span></p>
+<p class="p1"><span class="s1">      }</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">      orbitBtn.addEventListener('click', () =&gt; {</span></p>
+<p class="p1"><span class="s1">        stage.classList.remove('ar','vr'); stage.classList.add('orbit');</span></p>
+<p class="p1"><span class="s1">        badge.textContent = 'Orbit Preview'; setActive(orbitBtn);</span></p>
+<p class="p1"><span class="s1">      });</span></p>
+<p class="p1"><span class="s1">      arBtn.addEventListener('click', () =&gt; {</span></p>
+<p class="p1"><span class="s1">        stage.classList.remove('orbit','vr'); stage.classList.add('ar');</span></p>
+<p class="p1"><span class="s1">        badge.textContent = 'AR Preview'; setActive(arBtn);</span></p>
+<p class="p1"><span class="s1">      });</span></p>
+<p class="p1"><span class="s1">      vrBtn.addEventListener('click', () =&gt; {</span></p>
+<p class="p1"><span class="s1">        stage.classList.remove('orbit','ar'); stage.classList.add('vr');</span></p>
+<p class="p1"><span class="s1">        badge.textContent = 'VR Preview'; setActive(vrBtn);</span></p>
+<p class="p1"><span class="s1">      });</span></p>
+<p class="p1"><span class="s1">    })();</span></p>
+<p class="p1"><span class="s1">  &lt;/script&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/body&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/html&gt;</span></p>
+</body>
+</html>
