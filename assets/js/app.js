@@ -1,117 +1,93 @@
-/* =========================
-   Dropdown Navigation — Robust binding
-   Supports common WordPress/custom patterns:
-   - Item: .nav-item.has-dropdown OR .menu-item-has-children
-   - Toggle: .dropdown-toggle OR direct <a> inside the item
-   - Menu: .dropdown-menu OR .sub-menu / .submenu
-========================= */
-(function initDropdownsUniversal() {
-  const items = document.querySelectorAll(
-    ".nav-item.has-dropdown, .menu-item-has-children"
-  );
-  if (!items.length) return;
+/* ==========================================================================
+   VISIVA® — APP CORE
+   Animations, navigation, UX polish
+   ========================================================================== */
 
-  const getToggle = (item) =>
-    item.querySelector(".dropdown-toggle") ||
-    item.querySelector(":scope > a, :scope > button");
+/* ------------------------------------------
+   Fade-up reveal on scroll (safe)
+------------------------------------------ */
+document.querySelectorAll(".fade-up").forEach(el => {
+  el.style.animationPlayState = "paused";
+});
 
-  const getMenu = (item) =>
-    item.querySelector(".dropdown-menu, .sub-menu, .submenu");
-
-  const closeAll = (except = null) => {
-    items.forEach((it) => {
-      if (it !== except) {
-        it.classList.remove("open", "active", "is-open");
-        const t = getToggle(it);
-        const m = getMenu(it);
-        if (t) t.setAttribute("aria-expanded", "false");
-        if (m) m.setAttribute("aria-hidden", "true");
+const revealObserver = new IntersectionObserver(
+  entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.animationPlayState = "running";
+        revealObserver.unobserve(entry.target);
       }
     });
-  };
+  },
+  { threshold: 0.2 }
+);
 
-  items.forEach((item) => {
-    const toggle = getToggle(item);
-    const menu = getMenu(item);
-    if (!toggle || !menu) return;
+document.querySelectorAll(".fade-up").forEach(el => revealObserver.observe(el));
 
-    // Mark so global handlers ignore this click
-    toggle.setAttribute("data-dropdown-toggle", "true");
-    if (!menu.style.zIndex) menu.style.zIndex = "1000"; // safety
+/* ------------------------------------------
+   Sticky header shadow
+------------------------------------------ */
+const header = document.querySelector(".visiva-header");
+if (header) {
+  window.addEventListener("scroll", () => {
+    header.classList.toggle("scrolled", window.scrollY > 20);
+  });
+}
 
-    toggle.addEventListener("click", (e) => {
-      const href = toggle.getAttribute("href");
-      if (href && href.trim() === "#") e.preventDefault(); // prevent jump
-      e.stopPropagation();
+/* ------------------------------------------
+   Smooth anchor scroll (dynamic header height)
+------------------------------------------ */
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener("click", e => {
+    const target = document.querySelector(anchor.getAttribute("href"));
+    if (!target) return;
 
-      const isOpen =
-        item.classList.contains("open") ||
-        item.classList.contains("active") ||
-        item.classList.contains("is-open");
+    e.preventDefault();
 
-      closeAll(isOpen ? null : item);
+    const headerOffset =
+      document.querySelector(".visiva-header")?.offsetHeight || 80;
 
-      // Apply all common open classes for compatibility
-      item.classList.toggle("open", !isOpen);
-      item.classList.toggle("active", !isOpen);
-      item.classList.toggle("is-open", !isOpen);
+    const prefersReducedMotion =
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-      toggle.setAttribute("aria-expanded", String(!isOpen));
-      menu.setAttribute("aria-hidden", String(isOpen));
-    });
-
-    // Keyboard access
-    toggle.addEventListener("keydown", (e) => {
-      if (e.key === "Enter" || e.key === " ") {
-        e.preventDefault();
-        toggle.click();
-      }
+    window.scrollTo({
+      top: target.offsetTop - headerOffset,
+      behavior: prefersReducedMotion ? "auto" : "smooth"
     });
   });
+});
 
-  // Click outside to close
-  document.addEventListener("click", (e) => {
-    const nav =
-      document.querySelector(".visiva-nav, .site-header, nav, .main-nav") || null;
-    if (nav ? !nav.contains(e.target) : true) closeAll();
-  });
+/* ------------------------------------------
+   Mobile menu toggle
+------------------------------------------ */
+const menuBtn = document.querySelector(".mobile-menu-btn");
+const navLinks = document.querySelector(".nav-links");
 
-  // ESC to close
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") closeAll();
-  });
-})();
+menuBtn?.addEventListener("click", () => {
+  navLinks?.classList.toggle("open");
+});
 
-/* Smooth Scroll for Anchor Links (ignore dropdown toggles and opt-outs) */
-document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-  anchor.addEventListener("click", (e) => {
-    if (
-      anchor.matches('[data-dropdown-toggle="true"]') ||
-      anchor.matches('[data-no-scroll="true"]')
-    ) {
-      return; // let dropdown handler run
-    }
-    const href = anchor.getAttribute("href");
-    const target = href && href !== "#" ? document.querySelector(href) : null;
-    if (target) {
+/* ------------------------------------------
+   Dropdown toggles (mobile-friendly)
+------------------------------------------ */
+document.querySelectorAll(".nav-item.has-dropdown > .dropdown-toggle")
+  .forEach(btn => {
+    btn.addEventListener("click", e => {
       e.preventDefault();
-      const prefersReducedMotion = window
-        .matchMedia("(prefers-reduced-motion: reduce)")
-        .matches;
-      window.scrollTo({
-        top: target.offsetTop - 80,
-        behavior: prefersReducedMotion ? "auto" : "smooth",
-      });
-    }
+      btn.closest(".nav-item")?.classList.toggle("open");
+    });
   });
-});
 
-/* Page Transition Hint (avoid dropdown toggles and in-page anchors) */
-document.querySelectorAll("a").forEach((link) => {
-  link.addEventListener("click", () => {
-    if (link.matches('[data-dropdown-toggle="true"]')) return;
-    const href = (link.getAttribute("href") || "").trim();
-    if (!href || href === "#" || href.startsWith("#")) return;
-    document.body.classList.add("page-transition");
+/* ------------------------------------------
+   Button gold glow
+------------------------------------------ */
+document
+  .querySelectorAll(".btn-gold, .btn-gold-large")
+  .forEach(btn => {
+    btn.addEventListener("mouseenter", () =>
+      btn.classList.add("btn-glow")
+    );
+    btn.addEventListener("mouseleave", () =>
+      btn.classList.remove("btn-glow")
+    );
   });
-});

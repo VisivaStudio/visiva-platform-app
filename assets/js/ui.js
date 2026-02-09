@@ -1,153 +1,167 @@
 /* ==========================================================================
    VISIVA® UI INTERACTIONS
-   Mega menu, mobile nav, toggles, dropdowns, UI components
+   Mega menu, mobile nav, tabs, timeline modal, accordion
    ========================================================================== */
-
-/* Safely execute a function only if all required elements exist */
-function safe(elements, callback) {
-    if (elements.every(el => el !== null)) {
-        callback(...elements);
-    }
-}
 
 /* ===============================
    MOBILE MENU SYSTEM
 =============================== */
-const header = document.querySelector(".visiva-header");
-const navLinks = document.querySelector(".nav-links");
+(function initMobileMenu() {
+  const header = document.querySelector(".visiva-header");
+  const navLinks = document.querySelector(".nav-links");
+  if (!header || !navLinks) return;
 
-if (header && navLinks) {
-    const mobileMenuButton = document.createElement("button");
+  // If a mobile button is not present in HTML, create one
+  let mobileMenuButton = header.querySelector(".mobile-menu-btn");
+  if (!mobileMenuButton) {
+    mobileMenuButton = document.createElement("button");
     mobileMenuButton.classList.add("mobile-menu-btn");
-    mobileMenuButton.innerHTML = "☰";
+    mobileMenuButton.setAttribute("aria-label", "Open menu");
+    mobileMenuButton.setAttribute("aria-expanded", "false");
+    mobileMenuButton.setAttribute("aria-controls", "primary-nav");
+    mobileMenuButton.textContent = "☰";
     header.appendChild(mobileMenuButton);
+  }
 
+  if (!mobileMenuButton.dataset.bound) {
     mobileMenuButton.addEventListener("click", () => {
-        navLinks.classList.toggle("open");
-        mobileMenuButton.classList.toggle("active");
+      const isOpen = navLinks.classList.toggle("open");
+      mobileMenuButton.classList.toggle("active", isOpen);
+      mobileMenuButton.setAttribute("aria-expanded", String(isOpen));
     });
+    mobileMenuButton.dataset.bound = "1";
+  }
 
-    /* Close menu when clicking a link (mobile) */
-    document.querySelectorAll(".nav-links a").forEach(link => {
-        link.addEventListener("click", () => {
-            if (navLinks.classList.contains("open")) {
-                navLinks.classList.remove("open");
-                mobileMenuButton.classList.remove("active");
-            }
-        });
-    });
-}
+  // Close mobile menu when a nav link is clicked
+  navLinks.querySelectorAll("a").forEach(link => {
+    if (!link.dataset.bound) {
+      link.addEventListener("click", () => {
+        if (navLinks.classList.contains("open")) {
+          navLinks.classList.remove("open");
+          mobileMenuButton.classList.remove("active");
+          mobileMenuButton.setAttribute("aria-expanded", "false");
+        }
+      });
+      link.dataset.bound = "1";
+    }
+  });
+})();
 
 /* ===============================
-   MEGA MENU FADE-IN ON HOVER
+   MEGA MENU FADE-IN ON HOVER (desktop)
 =============================== */
-document.querySelectorAll(".nav-item").forEach(item => {
+(function initMegaMenuHover() {
+  document.querySelectorAll(".nav-item").forEach(item => {
     const menu = item.querySelector(".mega-menu");
-    if (menu) {
-        item.addEventListener("mouseenter", () => {
-            menu.style.opacity = "1";
-            menu.style.pointerEvents = "auto";
-        });
-
-        item.addEventListener("mouseleave", () => {
-            menu.style.opacity = "0";
-            menu.style.pointerEvents = "none";
-        });
-    }
-});
+    if (!menu) return;
+    item.addEventListener("mouseenter", () => {
+      menu.style.opacity = "1";
+      menu.style.pointerEvents = "auto";
+    });
+    item.addEventListener("mouseleave", () => {
+      menu.style.opacity = "0";
+      menu.style.pointerEvents = "none";
+    });
+  });
+})();
 
 /* ===============================
    TABS (Reusable Component)
 =============================== */
-document.querySelectorAll("[data-tabs]").forEach(tabContainer => {
+(function initTabs() {
+  document.querySelectorAll("[data-tabs]").forEach(tabContainer => {
     const tabs = tabContainer.querySelectorAll("[data-tab]");
     const contents = tabContainer.querySelectorAll("[data-content]");
 
     tabs.forEach(tab => {
-        tab.addEventListener("click", () => {
-            const target = tab.dataset.tab;
-
-            tabs.forEach(t => t.classList.remove("active"));
-            tab.classList.add("active");
-
-            contents.forEach(c => {
-                if (c.dataset.content === target) {
-                    c.classList.add("active");
-                } else {
-                    c.classList.remove("active");
-                }
-            });
+      if (tab.dataset.bound) return;
+      tab.addEventListener("click", () => {
+        const target = tab.dataset.tab;
+        tabs.forEach(t => t.classList.remove("active"));
+        tab.classList.add("active");
+        contents.forEach(c => {
+          c.classList.toggle("active", c.dataset.content === target);
         });
+      });
+      tab.dataset.bound = "1";
     });
-});
+  });
+})();
 
 /* ===========================
    TIMELINE MODAL LOGIC
-   =========================== */
-const modal = document.getElementById('timelineModal');
-const modalTitle = document.getElementById('modalTitle');
-const modalDate = document.getElementById('modalDate');
-const modalBody = document.getElementById('modalBody');
-const modalType = document.getElementById('modalType');
-const modalLinks = document.getElementById('modalLinks');
-const closeBtn = document.querySelector('.timeline-modal-close');
-const backdrop = document.querySelector('.timeline-modal-backdrop');
+=========================== */
+(function initTimelineModal() {
+  const modal      = document.getElementById('timelineModal');
+  if (!modal) return; // Not on every page
 
-if (modal && closeBtn && backdrop) {
-    /* Open modal from any timeline card */
-    document.querySelectorAll('.timeline-card').forEach(card => {
-        card.addEventListener('click', () => {
-            if (modalTitle) modalTitle.textContent = card.dataset.title || '';
-            if (modalDate) modalDate.textContent = card.dataset.date || '';
-            if (modalType) modalType.textContent = card.dataset.type || '';
-            if (modalBody) modalBody.innerHTML = `<p>${card.dataset.description || ''}</p>`;
+  const modalTitle = document.getElementById('modalTitle');
+  const modalDate  = document.getElementById('modalDate');
+  const modalBody  = document.getElementById('modalBody');
+  const modalType  = document.getElementById('modalType');
+  const modalLinks = document.getElementById('modalLinks');
+  const closeBtn   = document.querySelector('.timeline-modal-close');
+  const backdrop   = document.querySelector('.timeline-modal-backdrop');
 
-            if (modalLinks) {
-                modalLinks.innerHTML = '';
-                if (card.dataset.links) {
-                    try {
-                        JSON.parse(card.dataset.links).forEach(link => {
-                            const a = document.createElement('a');
-                            a.href = link.url;
-                            a.textContent = link.label;
-                            modalLinks.appendChild(a);
-                        });
-                    } catch (e) { console.error("Error parsing timeline links", e); }
-                }
-            }
+  function openModalFromCard(card) {
+    modalTitle.textContent = card.dataset.title || '';
+    modalDate.textContent  = card.dataset.date || '';
+    modalType.textContent  = card.dataset.type || '';
+    modalBody.innerHTML    = `<p>${card.dataset.description || ''}</p>`;
 
-            modal.classList.add('active');
-            document.body.style.overflow = 'hidden';
+    modalLinks.innerHTML = '';
+    if (card.dataset.links) {
+      try {
+        JSON.parse(card.dataset.links).forEach(link => {
+          const a = document.createElement('a');
+          a.href = link.url;
+          a.textContent = link.label;
+          a.target = "_blank";
+          a.rel = "noopener";
+          modalLinks.appendChild(a);
         });
-    });
+      } catch (e) {
+        console.warn('Invalid timeline links JSON', e);
+      }
+    }
 
-    /* Close handlers */
-    const closeModal = () => {
-        modal.classList.remove('active');
-        document.body.style.overflow = '';
-    };
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
 
-    closeBtn.addEventListener('click', closeModal);
-    backdrop.addEventListener('click', closeModal);
+  // Open modal from any timeline card
+  document.querySelectorAll('.timeline-card').forEach(card => {
+    if (card.dataset.bound) return;
+    card.addEventListener('click', () => openModalFromCard(card));
+    card.dataset.bound = "1";
+  });
 
-    document.addEventListener('keydown', e => {
-        if (e.key === 'Escape') closeModal();
-    });
-}
+  function closeModal() {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  closeBtn?.addEventListener('click', closeModal);
+  backdrop?.addEventListener('click', closeModal);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+})();
 
 /* ===============================
    ACCORDION COMPONENT
 =============================== */
-document.querySelectorAll(".accordion").forEach(acc => {
+(function initAccordion() {
+  document.querySelectorAll(".accordion").forEach(acc => {
+    if (acc.dataset.bound) return;
     acc.addEventListener("click", () => {
-        acc.classList.toggle("open");
-        const panel = acc.nextElementSibling;
-        if (panel) {
-            if (panel.style.maxHeight) {
-                panel.style.maxHeight = null;
-            } else {
-                panel.style.maxHeight = panel.scrollHeight + "px";
-            }
-        }
+      acc.classList.toggle("open");
+      const panel = acc.nextElementSibling;
+      if (!panel) return;
+      if (panel.style.maxHeight) {
+        panel.style.maxHeight = null;
+      } else {
+        panel.style.maxHeight = panel.scrollHeight + "px";
+      }
     });
-});
+    acc.dataset.bound = "1";
+  });
+})();
