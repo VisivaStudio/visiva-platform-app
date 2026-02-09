@@ -127,3 +127,4 @@ btnEnter?.addEventListener('click', enterXR);
 btnExit?.addEventListener('click', () => xrSession && xrSession.end());
 
 checkXR();
+import * as THREE from '/vendor/three.module.js';
