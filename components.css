@@ -1,0 +1,265 @@
+/* ============================================================
+   VISIVA® UI COMPONENTS — Buttons, Cards, Navbars, etc.
+   ============================================================ */
+
+/* ============================
+   BUTTONS
+   ============================ */
+.btn-gold {
+  display: inline-block;
+  padding: 14px 32px;
+  background: linear-gradient(135deg, var(--gold-base), var(--gold-bright));
+  color: #000;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  box-shadow: var(--glow-gold);
+  transition: transform var(--dur-2) var(--bezier), box-shadow var(--dur-2) var(--bezier);
+}
+.btn-gold:hover { transform: translateY(-4px); box-shadow: 0 0 30px var(--gold-glow); }
+
+.btn-outline {
+  display: inline-block;
+  padding: 14px 32px;
+  border: 1px solid var(--gold-base);
+  color: var(--gold-base);
+  border-radius: var(--radius-sm);
+  transition: background var(--dur-2) var(--bezier), box-shadow var(--dur-2) var(--bezier);
+}
+.btn-outline:hover { background: rgba(212,175,55,0.1); box-shadow: var(--glow-gold); }
+
+.btn-gold-large {
+  padding: 18px 46px;
+  font-size: var(--font-body-lg);
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, var(--gold-base), var(--gold-bright));
+  color: #000;
+  box-shadow: var(--glow-gold);
+  transition: transform var(--dur-2) var(--bezier);
+}
+.btn-gold-large:hover { transform: translateY(-4px); }
+
+/* optional cinematic hover glow toggle */
+.btn-glow {
+  box-shadow: 0 10px 28px rgba(212,175,55,.55), inset 0 0 0 1px rgba(26,18,4,0.12);
+  transform: translateY(-1px);
+}
+
+/* ============================
+   NAVIGATION / HEADER
+   ============================ */
+.visiva-header {
+  width: 100%;
+  background: var(--noir-1000);
+  padding: var(--space-3) var(--space-4);
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.nav-wrapper {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: var(--header-h);
+  overflow: visible; /* critical so dropdowns aren't clipped */
+}
+
+/* Base list */
+.nav-links { display: flex; gap: var(--space-3); align-items: center; }
+.nav-links .nav { list-style: none; display: flex; gap: var(--space-3); align-items: center; }
+
+/* Trigger + item */
+.nav-item { position: relative; }
+.nav-item .dropdown-toggle,
+.dropdown-toggle {
+  display: inline-flex; align-items: center; gap: .5rem;
+  background: transparent; border: 0; color: var(--text-light);
+  font: inherit; cursor: pointer;
+}
+
+/* ============================
+   DROPDOWNS (supports both `.mega-menu` and `.dropdown-menu`)
+   ============================ */
+.mega-menu,
+.dropdown-menu,
+.sub-menu,
+.submenu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  min-width: 220px;
+  background: rgba(17,17,17,0.98);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--radius-md);
+  padding: 8px 0;
+  box-shadow: var(--shadow-soft);
+  display: none;          /* hidden by default */
+  z-index: 1200;          /* above header */
+  overflow: hidden;
+}
+.mega-menu a,
+.dropdown-menu a,
+.sub-menu a {
+  display: block;
+  padding: 10px 14px;
+  color: var(--text-soft);
+  transition: background var(--dur-1), color var(--dur-1);
+}
+.mega-menu a:hover,
+.dropdown-menu a:hover,
+.sub-menu a:hover { background: rgba(255,255,255,0.06); color: var(--text-light); }
+
+/* Show when JS toggles state (supports multiple class names) */
+.nav-item.has-dropdown.open   > .dropdown-menu,
+.nav-item.has-dropdown.active > .dropdown-menu,
+.nav-item.has-dropdown.is-open> .dropdown-menu,
+.menu-item-has-children.open  > .sub-menu,
+.menu-item-has-children.active> .sub-menu,
+.menu-item-has-children.is-open> .sub-menu,
+.nav-item:hover > .mega-menu { /* hover fallback for desktop */
+  display: block;
+}
+
+/* ============================
+   MOBILE MENU (slide-in drawer)
+   ============================ */
+.mobile-menu-btn {
+  display: none;
+  position: absolute; right: 16px; top: 18px;
+  background: transparent; color: var(--text-light);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: var(--radius-sm);
+  padding: 8px 12px; font-size: 18px;
+}
+
+@media (max-width: 992px) {
+  .mobile-menu-btn { display: inline-block; z-index: 1500; }
+
+  .nav-links {
+    position: fixed;
+    right: 0; top: var(--header-h);
+    height: calc(100vh - var(--header-h));
+    width: 82%; max-width: 360px;
+    background: var(--noir-900);
+    border-left: 1px solid rgba(255,255,255,0.08);
+    box-shadow: var(--shadow-soft);
+    flex-direction: column; align-items: flex-start;
+    padding: var(--space-4);
+    gap: var(--space-2);
+    transform: translateX(100%);
+    transition: transform .3s ease;
+    z-index: 1400;
+  }
+  .nav-links.open { transform: translateX(0); }
+
+  /* On mobile, render dropdown/mega inline */
+  .nav-item > .mega-menu,
+  .nav-item > .dropdown-menu,
+  .menu-item-has-children > .sub-menu {
+    position: static; display: grid; gap: 6px;
+    padding: 8px 0 0 8px; border: none; box-shadow: none; background: transparent;
+  }
+  .nav-item > a, .dropdown-toggle { font-weight: 600; margin-top: 8px; }
+}
+
+/* ============================
+   CARDS
+   ============================ */
+.cin-card {
+  padding: var(--space-3);
+  background: var(--noir-800);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--radius-md);
+  transition: transform var(--dur-2) var(--bezier), box-shadow var(--dur-2) var(--bezier);
+}
+.cin-card:hover { transform: translateY(-6px); box-shadow: var(--glow-gold); }
+
+.tool-card {
+  display: block;
+  background: var(--noir-800);
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255,255,255,0.08);
+  transition: transform var(--dur-2) var(--bezier), box-shadow var(--dur-2) var(--bezier);
+}
+.tool-card:hover { transform: translateY(-6px); box-shadow: var(--glow-gold); }
+.tool-card img { border-radius: var(--radius-md); margin-bottom: var(--space-2); }
+
+/* ============================
+   TIMELINE (unchanged except tokenized transitions)
+   ============================ */
+.timeline {
+  position: relative;
+  margin: var(--space-6) auto;
+  max-width: 900px;
+  padding-left: 24px;
+}
+.timeline::before {
+  content: "";
+  position: absolute; left: 10px; top: 0; bottom: 0; width: 2px;
+  background: linear-gradient(180deg, rgba(212,175,55,0.5), rgba(255,255,255,0.1));
+  box-shadow: var(--glow-gold);
+}
+.timeline-item { position: relative; margin-bottom: var(--space-4); padding-left: var(--space-3); }
+.timeline-item::before {
+  content: ""; position: absolute; left: -1px; top: 6px; width: 12px; height: 12px;
+  background: linear-gradient(135deg, var(--gold-base), var(--gold-bright));
+  border-radius: 50%; box-shadow: 0 0 0 3px rgba(212,175,55,0.15);
+}
+.timeline-item h3 { margin-bottom: 6px; }
+.timeline-meta { font-size: var(--font-body-sm); color: var(--text-muted); margin-bottom: 6px; }
+
+@media (max-width: 768px) {
+  .timeline { padding-left: 18px; }
+  .timeline-item { margin-bottom: var(--space-3); }
+}
+
+/* Swipeable timeline (mobile) */
+.timeline-swipe { display: none; }
+@media (max-width: 768px) {
+  .timeline-swipe {
+    display: flex; gap: var(--space-3); overflow-x: auto; scroll-snap-type: x mandatory;
+    padding: var(--space-3) var(--space-2); -webkit-overflow-scrolling: touch;
+  }
+  .timeline-swipe::-webkit-scrollbar { display: none; }
+  .timeline-card {
+    min-width: 82%; scroll-snap-align: start;
+    background: var(--noir-800); border: 1px solid rgba(255,255,255,0.08);
+    border-radius: var(--radius-md); padding: var(--space-3);
+    box-shadow: var(--shadow-soft);
+    animation: slideUp .6s ease both;
+  }
+  .timeline-card h3 { margin-bottom: 6px; }
+  .timeline-meta { font-size: var(--font-body-sm); color: var(--text-muted); margin-bottom: 10px; }
+}
+
+/* Fullscreen timeline modal (kept as-is with tokens) */
+.timeline-modal { position: fixed; inset: 0; z-index: 2000; display: none; }
+.timeline-modal.active { display: block; }
+.timeline-modal-backdrop { position: absolute; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(10px); }
+.timeline-modal-panel {
+  position: absolute; inset: 0; background: var(--noir-900); color: var(--text-light);
+  display: flex; flex-direction: column; transform: translateY(100%);
+  animation: modalSlideUp .45s ease forwards;
+}
+.timeline-modal-content { padding: var(--space-5) var(--space-3); overflow-y: auto; }
+.timeline-modal-close { position: absolute; top: 16px; right: 16px; background: transparent; border: none; color: var(--text-light); font-size: 28px; cursor: pointer; }
+.timeline-modal-type { display: inline-block; font-size: 12px; letter-spacing: .08em; color: var(--gold-base); margin-bottom: 8px; }
+.timeline-modal-date { font-size: 13px; color: var(--text-muted); margin-bottom: var(--space-3); }
+.timeline-modal-links { margin-top: var(--space-4); display: grid; gap: 10px; }
+.timeline-modal-links a { padding: 12px; border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius-sm); text-align: center; }
+
+@media (min-width: 769px) {
+  .timeline-modal-panel { inset: 5%; border-radius: var(--radius-lg); box-shadow: var(--shadow-soft); }
+}
+@keyframes modalSlideUp { to { transform: translateY(0); } }
+@media (prefers-reduced-motion: reduce) {
+  .timeline-modal-panel { animation: none; transform: translateY(0); }
+}
+
+/* XR device hints */
+.xr-device-hints { margin-top: 10px; font-size: 13px; color: var(--text-soft); opacity: .85; }

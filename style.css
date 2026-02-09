@@ -1,0 +1,205 @@
+/* ============================================================
+   VISIVA® DESIGN SYSTEM — CINEMATIC NOIR + HYBRID GOLD
+   Global tokens, base reset, typography, grids, utilities
+   ============================================================ */
+:root {
+  /* Cinematic Noir Base */
+  --noir-1000: #000000;
+  --noir-900:  #0A0A0A;
+  --noir-800:  #111111;
+  --noir-700:  #1A1A1A;
+
+  /* Hybrid Gold */
+  --gold-base:  #D4AF37;
+  --gold-bright:#E2BD4A;
+  --gold-deep:  #B8942E;
+  --gold-glow:  rgba(212, 175, 55, 0.35);
+
+  /* Text */
+  --text-light: #ffffff;
+  --text-soft:  rgba(255, 255, 255, 0.75);
+  --text-muted: rgba(255, 255, 255, 0.55);
+
+  /* Greys */
+  --grey-600: #7A7A7A;
+  --grey-500: #5A5A5A;
+  --grey-300: #D0D0D0;
+
+  /* Shadows / Glow */
+  --shadow-soft: 0 0 40px rgba(0, 0, 0, 0.50);
+  --glow-gold:   0 0 25px rgba(212, 175, 55, 0.35);
+
+  /* Layout */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --space-1: 8px;
+  --space-2: 12px;
+  --space-3: 20px;
+  --space-4: 32px;
+  --space-5: 48px;
+  --space-6: 72px;
+  --space-7: 120px;
+  --space-8: 160px;
+  --maxw: 1280px;
+
+  /* Typography Scale */
+  --font-display-xxl: 72px;
+  --font-display-xl:  58px;
+  --font-display-lg:  42px;
+  --font-heading:     22px;
+  --font-body-lg:     18px;
+  --font-body:        16px;
+  --font-body-sm:     14px;
+
+  /* Line Heights */
+  --lh-display: 1.15;
+  --lh-heading: 1.3;
+  --lh-body:    1.55;
+
+  /* Motion */
+  --dur-1: 150ms;
+  --dur-2: 240ms;
+  --dur-3: 400ms;
+  --bezier: cubic-bezier(.2,.7,.25,1);
+
+  /* Header height for layout calcs */
+  --header-h: 72px;
+}
+
+/* ===========================
+   BASE RESETS
+   =========================== */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  width: 100%; height: 100%;
+  background: var(--noir-900);
+  color: var(--text-light);
+  font-family: "Inter Tight", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  overflow-x: hidden;
+}
+
+a { text-decoration: none; color: var(--text-light); transition: color .25s ease; }
+img { max-width: 100%; display: block; }
+
+body:not(.user-is-tabbing) :focus { outline: none; }
+
+/* ===========================
+   TYPOGRAPHY UTILITIES
+   =========================== */
+.display-xxl { font-size: var(--font-display-xxl); line-height: var(--lh-display); }
+.display-xl  { font-size: var(--font-display-xl);  line-height: var(--lh-display); }
+.heading     { font-size: var(--font-heading);     line-height: var(--lh-heading); }
+.body-lg     { font-size: var(--font-body-lg);     line-height: var(--lh-body); }
+.body        { font-size: var(--font-body);        line-height: var(--lh-body); }
+
+/* ===========================
+   LAYOUT UTILITIES
+   =========================== */
+.section {
+  padding: var(--space-7) var(--space-4);
+  max-width: var(--maxw);
+  margin: auto;
+}
+.section.centered { text-align: center; }
+
+.container {
+  width: min(100% - 2*var(--space-4), var(--maxw));
+  margin-inline: auto;
+}
+
+.accent-line { position: relative; }
+.accent-line::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -12px;
+  width: 60px; height: 3px;
+  background: var(--gold-base);
+  box-shadow: var(--glow-gold);
+}
+
+/* Grid Utilities */
+.three-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-4);
+}
+.tool-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--space-4);
+}
+
+/* Fade Animations */
+.fade-up {
+  opacity: 0;
+  transform: translateY(40px);
+  animation: fadeUp 1.2s ease forwards;
+}
+.fade-up.delay-1 { animation-delay: .3s; }
+.fade-up.delay-2 { animation-delay: .5s; }
+@keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+
+/* Accessibility helpers */
+.visually-hidden {
+  position: absolute !important;
+  height: 1px; width: 1px;
+  overflow: hidden; clip: rect(1px,1px,1px,1px);
+  white-space: nowrap;
+}
+
+/* ===========================
+   RESPONSIVE TYPE & SPACING
+   =========================== */
+@media (max-width: 1200px) {
+  :root {
+    --font-display-xxl: 60px;
+    --font-display-xl:  46px;
+    --font-display-lg:  36px;
+  }
+}
+@media (max-width: 992px) {
+  :root {
+    --font-display-xxl: 48px;
+    --font-display-xl:  38px;
+    --font-display-lg:  30px;
+  }
+  .section { padding: var(--space-6) var(--space-3); }
+}
+@media (max-width: 768px) {
+  :root {
+    --font-display-xxl: 38px;
+    --font-display-xl:  32px;
+    --font-display-lg:  26px;
+    --font-heading:     20px;
+    --font-body-lg:     16px;
+    --font-body:        15px;
+  }
+  .section { padding: var(--space-5) var(--space-3); }
+  .three-grid, .tool-grid { grid-template-columns: 1fr !important; gap: var(--space-3); }
+  .accent-line::before { bottom: -10px; width: 48px; }
+  .stack-on-mobile { display: grid; gap: var(--space-2); }
+}
+@media (max-width: 480px) {
+  :root {
+    --font-display-xxl: 32px;
+    --font-display-xl:  28px;
+    --font-display-lg:  24px;
+  }
+  .section { padding: var(--space-4) var(--space-2); }
+}
+
+/* ===========================
+   MOBILE ANIMATIONS
+   =========================== */
+@keyframes slideUp { from { opacity:0; transform: translateY(24px); } to { opacity:1; transform:none; } }
+@media (max-width: 768px) {
+  .hero-section, .section { animation: slideUp .6s ease both; }
+}
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
