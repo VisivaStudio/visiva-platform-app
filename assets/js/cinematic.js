@@ -3,6 +3,10 @@
    Parallax, reveal animations, scroll effects
    ========================================================================== */
 
+let xrSession = null;
+let xrRefSpace = null;
+let gl = null;
+
 const getSecureContext = () =>
   location.protocol === "https:" ||
   location.hostname === "localhost" ||
@@ -104,4 +108,5 @@ const onSessionEnded = () => {
   overlay.style.display = "";
 };
 
-document.addEventListener("DOMContentLoaded", setupXR);});
+document.addEventListener("DOMContentLoaded", setupXR);
+
