@@ -91,3 +91,15 @@ document
       btn.classList.remove("btn-glow")
     );
   });
+  
+  document.addEventListener("DOMContentLoaded", () => {
+  const form = document.querySelector(".login-form");
+
+  if (form) {
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      console.log("VISIVA® Portal: authentication attempt registered.");
+    });
+  }
+
+  console.log("VISIVA® Platform initialized.");
