@@ -1,81 +1,139 @@
-/* ============================================================
-   VISIVA® PLATFORM — Cinematic Layouts & Sections
-   ============================================================ */
+A clean, scalable, foundation stylesheet designed for the HTML files you generated.
+/* VISIVA® Platform — Core Styles */
 
-/* --------------------------
-   HERO SECTIONS
-   -------------------------- */
-.hero-section {
-  position: relative;
-  padding: var(--space-8) var(--space-4);
-  min-height: 70vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+:root {
+  --visiva-black: #0f0f0f;
+  --visiva-white: #ffffff;
+  --visiva-accent: #6e4dff;
+  --visiva-accent-light: #b7a4ff;
+  --visiva-gray: #dcdcdc;
+  --visiva-bg: #fafafa;
+
+  --radius: 12px;
+  --transition: 0.25s ease;
+  --font-main: "Inter", Arial, sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-main);
+  background: var(--visiva-bg);
+  color: var(--visiva-black);
+  line-height: 1.6;
+  padding-bottom: 3rem;
+}
+
+header.visiva-header {
   text-align: center;
-}
-.hero-bg {
-  position: absolute; inset: 0;
-  background:
-    radial-gradient(circle at center, rgba(212,175,55,0.18), rgba(0,0,0,1)),
-    url('../images/cinematic-noir-bg.jpg') center/cover no-repeat;
-  opacity: 0.5;
-}
-.hero-content { position: relative; max-width: 900px; z-index: 5; }
-.hero-title   { font-size: var(--font-display-xxl); margin-bottom: var(--space-3); }
-.hero-subtitle{
-  font-size: var(--font-body-lg);
-  color: var(--text-soft);
-  max-width: 700px; margin: auto;
-  line-height: 1.6; margin-bottom: var(--space-4);
-}
-.hero-buttons { display: flex; justify-content: center; gap: var(--space-3); }
-
-/* HERO responsive refinements */
-@media (max-width: 992px) {
-  .hero-section { min-height: 58vh; padding: var(--space-7) var(--space-3); }
-  .hero-subtitle { padding: 0 8px; }
-}
-@media (max-width: 768px) {
-  .hero-section { min-height: 48vh; padding: var(--space-6) var(--space-3); text-align: left; }
-  .hero-content { max-width: 620px; margin: 0 auto; }
-  .hero-buttons { flex-direction: column; gap: var(--space-2); align-items: flex-start; }
+  padding: 3rem 1.5rem;
+  background: var(--visiva-white);
+  border-bottom: 1px solid var(--visiva-gray);
 }
 
-/* --------------------------
-   DARK SECTION
-   -------------------------- */
-.dark-section {
-  background: var(--noir-800);
-  padding: var(--space-7) var(--space-4);
+header.visiva-header .logo {
+  width: 72px;
+  height: auto;
+  margin-bottom: 1rem;
 }
 
-/* --------------------------
-   EXPERIENCE APP SECTION
-   -------------------------- */
-.experience-section {
-  padding: var(--space-8) var(--space-4);
+h1, h2, h3 {
+  font-weight: 600;
+}
+
+main {
+  padding: 2rem 1.5rem;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.intro, 
+.academy-intro,
+.marketplace-intro,
+.portal-overview,
+.system-status,
+.asset-categories,
+.academy-modules,
+.academy-certification,
+.login-section,
+.portal-notes {
+  margin-bottom: 3rem;
+}
+
+.navigation-grid,
+.module-grid,
+.category-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.nav-card,
+.module-card,
+.category-card {
+  padding: 1.5rem;
+  background: var(--visiva-white);
+  border-radius: var(--radius);
+  border: 1px solid var(--visiva-gray);
+  text-decoration: none;
+  color: var(--visiva-black);
+  transition: var(--transition);
+}
+
+.nav-card:hover,
+.module-card:hover,
+.category-card:hover {
+  border-color: var(--visiva-accent);
+  transform: translateY(-4px);
+}
+
+.cta-button {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background: var(--visiva-accent);
+  color: var(--visiva-white);
+  border-radius: var(--radius);
+  text-decoration: none;
+  font-weight: 600;
+  transition: var(--transition);
+}
+
+.cta-button:hover {
+  background: var(--visiva-accent-light);
+}
+
+form.login-form {
+  display: grid;
+  gap: 1.5rem;
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+.form-field label {
+  display: block;
+  margin-bottom: 0.35rem;
+}
+
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--visiva-gray);
+  outline: none;
+  transition: var(--transition);
+}
+
+input:focus {
+  border-color: var(--visiva-accent);
+}
+
+footer {
   text-align: center;
-  background: linear-gradient(180deg, var(--noir-800), var(--noir-900));
-}
-
-/* --------------------------
-   FOOTER
-   -------------------------- */
-.footer {
-  padding: var(--space-5);
-  background: var(--noir-1000);
-  border-top: 1px solid rgba(255,255,255,0.08);
-}
-.footer-grid { text-align: center; }
-.footer-links {
-  display: flex; justify-content: center;
-  gap: var(--space-3); margin: var(--space-3) 0;
-}
-.footer-copy { color: var(--text-muted); font-size: var(--font-body-sm); }
-
-/* Footer spacing on mobile */
-@media (max-width: 768px) {
-  .footer { padding: var(--space-4) var(--space-3); }
-  .footer-links { flex-wrap: wrap; gap: var(--space-2); }
+  padding: 2rem 1rem;
+  color: var(--visiva-accent);
 }
