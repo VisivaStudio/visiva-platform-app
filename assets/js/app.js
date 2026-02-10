@@ -6,24 +6,18 @@
 /* ------------------------------------------
    Fade-up reveal on scroll (safe)
 ------------------------------------------ */
-document.querySelectorAll(".fade-up").forEach(el => {
-  el.style.animationPlayState = "paused";
-});
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.querySelector(".login-form");
 
-const revealObserver = new IntersectionObserver(
-  entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.style.animationPlayState = "running";
-        revealObserver.unobserve(entry.target);
-      }
+  if (form) {
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      console.log("VISIVA® Portal: authentication attempt registered.");
     });
-  },
-  { threshold: 0.2 }
-);
+  }
 
-document.querySelectorAll(".fade-up").forEach(el => revealObserver.observe(el));
-
+  console.log("VISIVA® Platform initialized.");
+});
 /* ------------------------------------------
    Sticky header shadow
 ------------------------------------------ */
