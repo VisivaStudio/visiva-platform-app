@@ -134,4 +134,120 @@ All additions must preserve:
 
 ---
 
+# © VISIVA® — Platform Architecture
+
+---
+
+Practical, professional guidance for teams maintaining or extending the platform.
+# VISIVA® Developer Guidelines
+
+This document outlines standards for extending the VISIVA® Platform across 
+UI, logic, governance, and immersive technologies.
+
+---
+
+## 1. Branding Consistency
+
+All additions must use:
+- VISIVA® tone and terminology
+- approved brand palette
+- consistent header/footer structure
+- accessible typography and spacing
+
+Do not introduce new metaphors, naming conventions, or narrative language 
+without approval.
+
+---
+
+## 2. HTML Standards
+
+- Use semantic tags (<main>, <section>, <article>).
+- Maintain mobile-first layouts.
+- Avoid inline styles.
+- Apply `platform.css` variables.
+- Use H1 only once per page.
+
+---
+
+## 3. CSS Guidelines
+
+- Use CSS variables from :root.
+- Keep components modular using BEM-like patterns if needed.
+- Minimize overrides; extend using utility classes.
+- Ensure hover/active states meet accessibility contrast standards.
+
+---
+
+## 4. JavaScript Standards (ES6+)
+
+- Always use const/let.
+- Prefer arrow functions.
+- Avoid global variables—use modules.
+- Use async/await for asynchronous flows.
+- Keep functions pure where possible.
+
+---
+
+## 5. WebXR (cinematic.js)
+
+When extending XR:
+- Only run XR in secure contexts (HTTPS).
+- Gracefully degrade when unsupported.
+- Keep animation loops lean.
+- Use reference spaces appropriate to content ("local-floor" recommended).
+- Encapsulate XR scenes within reusable classes.
+
+---
+
+## 6. Governance (guardian.js)
+
+VISIVA® requires strict language governance.
+
+Guidelines:
+- Validate copy before publishing.
+- Use the governance module to flag disallowed terms.
+- Extend rule sets via JSON for clarity.
+- Route violations into a central console or reporting system.
+
+---
+
+## 7. Portal Integration
+
+Authentication requirements:
+- Implement server-side credential validation.
+- Sanitize all inputs before processing.
+- Add lockout / rate limiting once backend is connected.
+- Keep user feedback minimal but clear (“invalid credentials”).
+
+---
+
+## 8. Build System (Node.js)
+
+- All generation scripts must use async/await.
+- Use fs/promises for IO.
+- Add new components by updating the `files{}` object.
+- Do not hardcode paths; always use `path.join`.
+
+---
+
+## 9. File Naming & Organization
+
+- Keep lowercase-dashed filenames (e.g., `brand-guidelines.html`).
+- Group related files into feature directories.
+- Avoid long nested structures where unnecessary.
+
+---
+
+## 10. Deployment Standards
+
+- Serve through HTTPS only.
+- Use lightweight servers or CDNs for static files.
+- Version all changes via Git commits with descriptive messages.
+- Maintain a staging environment for Academy and Marketplace content.
+
+---
+
+These guidelines ensure all VISIVA® modules remain aligned, scalable, consistent, 
+and true to the platform’s architectural intent.
+
 © VISIVA® — Platform Architecture
