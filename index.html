@@ -1,312 +1,54 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2685.4">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times; -webkit-text-stroke: #000000}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times; -webkit-text-stroke: #000000; min-height: 14.0px}
-    span.s1 {font-kerning: none}
-    span.s2 {font: 12.0px 'Apple Symbols'; font-kerning: none}
-    span.s3 {font: 12.0px 'Hiragino Mincho ProN'; font-kerning: none}
-    span.s4 {font: 12.0px 'Lucida Grande'; font-kerning: none}
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VISIVA&reg; Platform</title>
+  assets/css/platform.css
 </head>
+
 <body>
-<p class="p1"><span class="s1">&lt;!DOCTYPE html&gt;</span></p>
-<p class="p1"><span class="s1">&lt;html lang="en"&gt;</span></p>
-<p class="p1"><span class="s1">&lt;head&gt;</span></p>
-<p class="p1"><span class="s1">  &lt;meta charset="UTF-8" /&gt;</span></p>
-<p class="p1"><span class="s1">  &lt;meta</span></p>
-<p class="p1"><span class="s1">    name="viewport"</span></p>
-<p class="p1"><span class="s1">    content="width=device-width, initial-scale=1.0, viewport-fit=cover"</span></p>
-<p class="p1"><span class="s1">  /&gt;</span></p>
-<p class="p1"><span class="s1">  &lt;title&gt;Tools — VISIVA® Platform&lt;/title&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">  &lt;!-- Styles --&gt;</span></p>
-<p class="p1"><span class="s1">  ../assets/css/style.css</span></p>
-<p class="p1"><span class="s1">  ../assets/css/components.css</span></p>
-<p class="p1"><span class="s1">  ../assets/css/platform.css</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">  &lt;style&gt;</span></p>
-<p class="p1"><span class="s1">    /* ===== Page-local polish for Tools + WebXR preview ===== */</span></p>
-<p class="p1"><span class="s1">    .tools-hero-bg {</span></p>
-<p class="p1"><span class="s1">      position: absolute; inset: 0;</span></p>
-<p class="p1"><span class="s1">      background:</span></p>
-<p class="p1"><span class="s1">        radial-gradient(60% 50% at 50% 40%, rgba(212,175,55,0.16), rgba(0,0,0,0) 60%),</span></p>
-<p class="p1"><span class="s1">        linear-gradient(180deg, #0A0A0A, #000);</span></p>
-<p class="p1"><span class="s1">      opacity: .65;</span></p>
-<p class="p1"><span class="s1">    }</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">    /* XR section */</span></p>
-<p class="p1"><span class="s1">    .xr-wrap { max-width: 1100px; margin: 0 auto; }</span></p>
-<p class="p1"><span class="s1">    .xr-controls { display: flex; gap: var(--space-2); margin-bottom: var(--space-3); flex-wrap: wrap; }</span></p>
-<p class="p1"><span class="s1">    .xr-btn {</span></p>
-<p class="p1"><span class="s1">      padding: 10px 14px; font-size: 14px; border-radius: var(--radius-sm);</span></p>
-<p class="p1"><span class="s1">      border: 1px solid rgba(255,255,255,0.12); color: var(--text-light);</span></p>
-<p class="p1"><span class="s1">      background: #111; cursor: pointer; transition: .25s ease;</span></p>
-<p class="p1"><span class="s1">    }</span></p>
-<p class="p1"><span class="s1">    .xr-stage {</span></p>
-<p class="p1"><span class="s1">      position: relative; height: 420px; border: 1px solid rgba(255,255,255,0.08);</span></p>
-<p class="p1"><span class="s1">      border-radius: var(--radius-md); overflow: hidden;</span></p>
-<p class="p1"><span class="s1">      background:</span></p>
-<p class="p1"><span class="s1">        radial-gradient(60% 60% at 50% 50%, rgba(212,175,55,0.14), rgba(0,0,0,0) 60%),</span></p>
-<p class="p1"><span class="s1">        radial-gradient(120% 100% at 50% 110%, rgba(212,175,55,0.06), rgba(0,0,0,0) 30%),</span></p>
-<p class="p1"><span class="s1">        linear-gradient(180deg, #0A0A0A, #000);</span></p>
-<p class="p1"><span class="s1">    }</span></p>
-<p class="p1"><span class="s1">    canvas#xr-canvas { width: 100%; height: 100%; display: block; }</span></p>
-<p class="p1"><span class="s1">    .xr-badge {</span></p>
-<p class="p1"><span class="s1">      position: absolute; top: 14px; left: 14px;</span></p>
-<p class="p1"><span class="s1">      background: rgba(0,0,0,0.55); border: 1px solid rgba(255,255,255,0.12);</span></p>
-<p class="p1"><span class="s1">      border-radius: var(--radius-sm); padding: 6px 10px; font-size: 12px;</span></p>
-<p class="p1"><span class="s1">      color: var(--text-light); letter-spacing: .06em; z-index: 2;</span></p>
-<p class="p1"><span class="s1">    }</span></p>
-<p class="p1"><span class="s1">    .xr-hint {</span></p>
-<p class="p1"><span class="s1">      position: absolute; bottom: 14px; right: 14px;</span></p>
-<p class="p1"><span class="s1">      background: rgba(0,0,0,0.55); border: 1px solid rgba(255,255,255,0.12);</span></p>
-<p class="p1"><span class="s1">      border-radius: var(--radius-sm); padding: 6px 10px; font-size: 12px;</span></p>
-<p class="p1"><span class="s1">      color: var(--text-soft); z-index: 2;</span></p>
-<p class="p1"><span class="s1">    }</span></p>
-<p class="p1"><span class="s1">    /* Decorative inline scene (shown when not in XR) */</span></p>
-<p class="p1"><span class="s1">    .xr-deco { position: absolute; inset: 0; display: grid; place-items: center; pointer-events: none; }</span></p>
-<p class="p1"><span class="s1">    .xr-ring {</span></p>
-<p class="p1"><span class="s1">      width: 220px; height: 220px; border-radius: 50%;</span></p>
-<p class="p1"><span class="s1">      border: 3px solid rgba(212,175,55,0.75);</span></p>
-<p class="p1"><span class="s1">      box-shadow: 0 0 28px rgba(212,175,55,0.55); animation: orbit 12s linear infinite;</span></p>
-<p class="p1"><span class="s1">    }</span></p>
-<p class="p1"><span class="s1">    .xr-grid {</span></p>
-<p class="p1"><span class="s1">      position: absolute; left: -10%; right: -10%; bottom: -20px; height: 55%;</span></p>
-<p class="p1"><span class="s1">      background:</span></p>
-<p class="p1"><span class="s1">        linear-gradient(rgba(212,175,55,0.18), rgba(212,175,55,0.04) 40%, rgba(0,0,0,0)),</span></p>
-<p class="p1"><span class="s1">        repeating-linear-gradient(to right, rgba(255,255,255,0.08) 0 1px, rgba(0,0,0,0) 1px 40px),</span></p>
-<p class="p1"><span class="s1">        repeating-linear-gradient(to top,   rgba(255,255,255,0.08) 0 1px, rgba(0,0,0,0) 1px 40px);</span></p>
-<p class="p1"><span class="s1">      transform: perspective(600px) rotateX(72deg);</span></p>
-<p class="p1"><span class="s1">      filter: drop-shadow(0 0 12px rgba(212,175,55,0.25));</span></p>
-<p class="p1"><span class="s1">    }</span></p>
-<p class="p1"><span class="s1">    @keyframes orbit {</span></p>
-<p class="p1"><span class="s1">      from { transform: rotate(0deg) perspective(700px) rotateX(18deg) rotateY(0deg); }</span></p>
-<p class="p1"><span class="s1">      to   { transform: rotate(360deg) perspective(700px) rotateX(18deg) rotateY(360deg); }</span></p>
-<p class="p1"><span class="s1">    }</span></p>
-<p class="p1"><span class="s1">    @media (max-width: 768px) {</span></p>
-<p class="p1"><span class="s1">      .xr-stage { height: 340px; }</span></p>
-<p class="p1"><span class="s1">      .xr-ring  { width: 180px; height: 180px; }</span></p>
-<p class="p1"><span class="s1">    }</span></p>
-<p class="p1"><span class="s1">  &lt;/style&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/head&gt;</span></p>
-<p class="p1"><span class="s1">&lt;body&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">  &lt;!-- ======================================================</span></p>
-<p class="p1"><span class="s1">       GLOBAL NAVIGATION</span></p>
-<p class="p1"><span class="s1">       ====================================================== --&gt;</span></p>
-<p class="p1"><span class="s1">  &lt;header class="visiva-header"&gt;</span></p>
-<p class="p1"><span class="s1">    &lt;div class="nav-wrapper"&gt;</span></p>
-<p class="p1"><span class="s1">      ../index.htmlVISIVA®&lt;/a&gt;</span></p>
-<p class="p1"><span class="s1">      &lt;button class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="primary-nav"&gt;</span><span class="s2">☰</span><span class="s1">&lt;/button&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">      &lt;nav id="primary-nav" class="nav-links" aria-label="Primary"&gt;</span></p>
-<p class="p1"><span class="s1">        &lt;div class="nav-item has-dropdown"&gt;</span></p>
-<p class="p1"><span class="s1">          &lt;button class="dropdown-toggle" aria-haspopup="true" aria-expanded="false"&gt;Platform&lt;/button&gt;</span></p>
-<p class="p1"><span class="s1">          &lt;div class="mega-menu" role="menu"&gt;</span></p>
-<p class="p1"><span class="s1">            ../platform/overview.htmlOverview&lt;/a&gt;</span></p>
-<p class="p1"><span class="s1">            ../platform/philosophy.htmlPhilosophy&lt;/a&gt;</span></p>
-<p class="p1"><span class="s1">            &lt;a href="../platform/process.html" role="menuitem      ../platform/bie.htmlIntelligence Engine&lt;/a&gt;</span></p>
-<p class="p1"><span class="s1">            ../platform/dna.htmlBrand DNA&lt;/a&gt;</span></p>
-<p class="p1"><span class="s1">            ../platform/guardian-ai.htmlBrand Guardian AI&lt;/a&gt;</span></p>
-<p class="p1"><span class="s1">            ../platform/ar-vr.htmlAR / VR Experience&lt;/a&gt;</span></p>
-<p class="p1"><span class="s1">            ../platform/universe.htmlBrand Universe&lt;/a&gt;</span></p>
-<p class="p1"><span class="s1">            ../platform/health-check.htmlBrand Health Check&lt;/a&gt;</span></p>
-<p class="p1"><span class="s1">            ../platform/licensing.htmlLicensing&lt;/a&gt;</span></p>
-<p class="p1"><span class="s1">            ../platform/sustainability.htmlSustainability &amp; Accessibility&lt;/a&gt;</span></p>
-<p class="p1"><span class="s1">            ../platform/vault.htmlBrand Vault&lt;/a&gt;</span></p>
-<p class="p1"><span class="s1">            ../platform/timeline.htmlEvolution Timeline&lt;/a&gt;</span></p>
-<p class="p1"><span class="s1">          &lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">        &lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">        ../tools/Tools&lt;/a&gt;</span></p>
-<p class="p1"><span class="s1">        ../brand-kits/Brand Kits&lt;/a&gt;</span></p>
-<p class="p1"><span class="s1">        ../platform/universe.htmlBrand Universe&lt;/a&gt;</span></p>
-<p class="p1"><span class="s1">        ../academy/Academy&lt;/a&gt;</span></p>
-<p class="p1"><span class="s1">        ../marketplace/Marketplace&lt;/a&gt;</span></p>
-<p class="p1"><span class="s1">        &lt;a href="https://visiva.co.za/experience-app" target="_blank" rel="noopener"&gt;Experience App&lt;/a&gt;</span></p>
-<p class="p1"><span class="s1">        ../portal/login.htmlLogin&lt;/a&gt;</span></p>
-<p class="p1"><span class="s1">      &lt;/nav&gt;</span></p>
-<p class="p1"><span class="s1">    &lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">  &lt;/header&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">  &lt;!-- ======================================================</span></p>
-<p class="p1"><span class="s1">       HERO — TOOLS</span></p>
-<p class="p1"><span class="s1">       ====================================================== --&gt;</span></p>
-<p class="p1"><span class="s1">  &lt;section class="hero-section"&gt;</span></p>
-<p class="p1"><span class="s1">    &lt;div class="tools-hero-bg"&gt;&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">    &lt;div class="hero-content"&gt;</span></p>
-<p class="p1"><span class="s1">      &lt;h1 class="hero-title fade-up"&gt;VISIVA® Tools&lt;/h1&gt;</span></p>
-<p class="p1"><span class="s1">      &lt;p class="hero-subtitle fade-up delay-1"&gt;</span></p>
-<p class="p1"><span class="s1">        Intelligent, cinematic utilities that turn brand systems into daily practice — from design precision to</span></p>
-<p class="p1"><span class="s1">        governance and insight.</span></p>
-<p class="p1"><span class="s1">      &lt;/p&gt;</span></p>
-<p class="p1"><span class="s1">    &lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">  &lt;/section&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">  &lt;!-- ======================================================</span></p>
-<p class="p1"><span class="s1">       TOOLS GRID</span></p>
-<p class="p1"><span class="s1">       ====================================================== --&gt;</span></p>
-<p class="p1"><span class="s1">  &lt;section class="section"&gt;</span></p>
-<p class="p1"><span class="s1">    &lt;h2 class="section-title accent-line fade-up"&gt;Explore the Suite&lt;/h2&gt;</span></p>
-<p class="p1"><span class="s1">    &lt;p class="section-desc fade-up delay-1"&gt;</span></p>
-<p class="p1"><span class="s1">      Each tool is crafted to be visually elegant, operationally precise, and aligned to your Brand DNA.</span></p>
-<p class="p1"><span class="s1">    &lt;/p&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">    &lt;div class="tool-grid fade-up delay-2"&gt;</span></p>
-<p class="p1"><span class="s1">      logo-optimiser.html</span></p>
-<p class="p1"><span class="s1">        &lt;h3&gt;AI Logo Optimiser&lt;/h3&gt;</span></p>
-<p class="p1"><span class="s1">        &lt;p&gt;Clarity at size, contrast readiness, digital fit — with fast reports.&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1">      &lt;/a&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">      colour-generator.html</span></p>
-<p class="p1"><span class="s1">        ../assets/images/tools/colour-generator-1x1-clean.jpg</span></p>
-<p class="p1"><span class="s1">        &lt;h3&gt;Colour Generator&lt;/h3&gt;</span></p>
-<p class="p1"><span class="s1">        &lt;p&gt;Mood‑based palette creation using cinematic harmonics.&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1">      &lt;/a&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">      harmoniser.html</span></p>
-<p class="p1"><span class="s1">        ../assets/images/tools/harmoniser-1x1-clean.jpg</span></p>
-<p class="p1"><span class="s1">        &lt;h3&gt;Smart Colour Harmoniser&lt;/h3&gt;</span></p>
-<p class="p1"><span class="s1">        &lt;p&gt;Adaptive complements that preserve brand integrity.&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1">      &lt;/a&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">      &lt;a class="tool-card" href="../platform/dmages/tools/brand-dna-1x1-clean.jpg</span></p>
-<p class="p1"><span class="s1">        &lt;h3&gt;Brand DNA&lt;/h3&gt;</span></p>
-<p class="p1"><span class="s1">        &lt;p&gt;Define purpose, archetype, personality, tone — codified.&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1">      &lt;/a&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">      ../platform/universe.html</span></p>
-<p class="p1"><span class="s1">        ../assets/images/tools/universe-map-1x1-clean.jpg</span></p>
-<p class="p1"><span class="s1">        &lt;h3&gt;Brand Universe Map&lt;/h3&gt;</span></p>
-<p class="p1"><span class="s1">        &lt;p&gt;Visualise structure, relationships and dependencies.&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1">      &lt;/a&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">      viewer-3d.html</span></p>
-<p class="p1"><span class="s1">        ../assets/images/tools/viewer-3d-1x1-clean.jpg</span></p>
-<p class="p1"><span class="s1">        &lt;h3&gt;3D Logo Viewer&lt;/h3&gt;</span></p>
-<p class="p1"><span class="s1">        &lt;p&gt;Inspect lighting, materials and motion rules in real‑time.&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1">      &lt;/a&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">      ../platform/ar-vr.html</span></p>
-<p class="p1"><span class="s1">        ../assets/images/tools/ar-vr-1x1-clean.jpg</span></p>
-<p class="p1"><span class="s1">        &lt;h3&gt;AR / VR Experience&lt;/h3&gt;</span></p>
-<p class="p1"><span class="s1">        &lt;p&gt;Spatial brand worlds for context, scale and cinematic pitch.&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1">      &lt;/a&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">      ../tools/bie-dashboard.html</span></p>
-<p class="p1"><span class="s1">        ../assets/images/tools/bie-dashboard-1x1-clean.jpg</span></p>
-<p class="p1"><span class="s1">        &lt;h3&gt;BIE Dashboard&lt;/h3&gt;</span></p>
-<p class="p1"><span class="s1">        &lt;p&gt;Intelligence, scoring and brand health at a glance.&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1">      &lt;/a&gt;</span></p>
-<p class="p1"><span class="s1">    &lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">  &lt;/section&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">  &lt;!-- ======================================================</span></p>
-<p class="p1"><span class="s1">       WEBXR (VR) PREVIEW</span></p>
-<p class="p1"><span class="s1">       ====================================================== --&gt;</span></p>
-<p class="p1"><span class="s1"> <span class="Apple-converted-space"> </span></span></p>
-<p class="p1"><span class="s1">&lt;!-- XR Controls --&gt;</span></p>
-<p class="p1"><span class="s1">&lt;div class="xr-controls"&gt;</span></p>
-<p class="p1"><span class="s1">  &lt;button id="btn-enter-vr" class="btn xr-btn"&gt;Enter VR&lt;/button&gt;</span></p>
-<p class="p1"><span class="s1">  &lt;button id="btn-enter-ar" class="btn xr-btn"&gt;Enter AR&lt;/button&gt;</span></p>
-<p class="p1"><span class="s1">  &lt;small id="xr-support-msg" class="note"&gt;&lt;/small&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">&lt;!-- Ensure your XR script loads as an ES module --&gt;</span></p>
-<p class="p1"><span class="s1">&lt;script type="module" src="/assets/js/scene-tools-xr</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">&lt;section class="section dark-section"&gt;</span></p>
-<p class="p1"><span class="s1">    &lt;h2 class="section-title accent-line fade-up"&gt;Spatial Preview (WebXR)&lt;/h2&gt;</span></p>
-<p class="p1"><span class="s1">    &lt;p class="section-desc fade-up delay-1"&gt;</span></p>
-<p class="p1"><span class="s1">      Launch a lightweight &lt;strong&gt;VR session&lt;/strong&gt; to preview a cinematic stage. Full scenes and assets are available</span></p>
-<p class="p1"><span class="s1">      in the Experience App. WebXR requires &lt;strong&gt;HTTPS&lt;/strong&gt; and a compatible browser/headset.</span></p>
-<p class="p1"><span class="s1">    &lt;/p&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">    &lt;div class="xr-wrap fade-up delay-2"&gt;</span></p>
-<p class="p1"><span class="s1">      &lt;div class="xr-controls" role="group" aria-label="WebXR controls"&gt;</span></p>
-<p class="p1"><span class="s1">        &lt;button class="xr-btn" id="xr-enter" disabled&gt;Enter VR&lt;/button&gt;</span></p>
-<p class="p1"><span class="s1">        &lt;button class="xr-btn" id="xr-exit" disabled&gt;Exit VR&lt;/button&gt;</span></p>
-<p class="p1"><span class="s1">        &lt;span id="xr-support" class="body" style="opacity:.8;"&gt;&lt;/span&gt;</span></p>
-<p class="p1"><span class="s1">      &lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">      &lt;div class="xr-stage"&gt;</span></p>
-<p class="p1"><span class="s1">        &lt;div class="xr-badge" id="xr-badge"&gt;Inline Preview&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">        &lt;canvas id="xr-canvas" aria-label="WebXR preview canvas"&gt;&lt;/canvas&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">        &lt;!-- Decorative non‑XR inline scene (visible until XR session starts) --&gt;</span></p>
-<p class="p1"><span class="s1">        &lt;div class="xr-deco" id="xr-deco"&gt;</span></p>
-<p class="p1"><span class="s1">          &lt;div class="xr-ring" aria-hidden="true"&gt;&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">          &lt;div class="xr-grid" aria-hidden="true"&gt;&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">        &lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">        &lt;div class="xr-hint"&gt;Tip: Use a VR‑capable browser and headset to enter immersive mode.&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">      &lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">    &lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">  &lt;/section&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">  &lt;!-- ======================================================</span></p>
-<p class="p1"><span class="s1">       CTA</span></p>
-<p class="p1"><span class="s1">       ====================================================== --&gt;</span></p>
-<p class="p1"><span class="s1">  &lt;section class="section"&gt;</span></p>
-<p class="p1"><span class="s1">    &lt;h2 class="section-title accent-line fade-up"&gt;Work Inside the Experience&lt;/h2&gt;</span></p>
-<p class="p1"><span class="s1">    &lt;p class="section-desc fade-up delay-1"&gt;</span></p>
-<p class="p1"><span class="s1">      Access the full suite of tools, dashboards, and collaborative rooms in the VISIVA® Experience App.</span></p>
-<p class="p1"><span class="s1">    &lt;/p&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">    &lt;div class="three-grid fade-up delay-2"&gt;</span></p>
-<p class="p1"><span class="s1">      ../platform/bie.html</span></p>
-<p class="p1"><span class="s1">        &lt;h3&gt;Learn the Intelligence Model&lt;/h3&gt;</span></p>
-<p class="p1"><span class="s1">        &lt;p&gt;Understand how decisions are guided with BIE.&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1">      &lt;/a&gt;</span></p>
-<p class="p1"><span class="s1">      &lt;a class="tool-card" href="https://visiva.ai/" target="_blank" rel="noopener"&gt;</span></p>
-<p class="p1"><span class="s1">        &lt;h3&gt;Launch Experience App&lt;/h3&gt;</span></p>
-<p class="p1"><span class="s1">        &lt;p&gt;Use tools, manage assets, and explore immersive scenes.&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1">      &lt;/a&gt;</span></p>
-<p class="p1"><span class="s1">      &lt;a class="tool-card" href="../platform/universehe Brand Universe&lt;/h3&gt;</span></p>
-<p class="p1"><span class="s1">        &lt;p&gt;See how everything connects in one system.&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1">      &lt;/a&gt;</span></p>
-<p class="p1"><span class="s1">    &lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">  &lt;/section&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">  &lt;!-- ======================================================</span></p>
-<p class="p1"><span class="s1">       MOBILE BOTTOM BAR (optional)</span></p>
-<p class="p1"><span class="s1">       ====================================================== --&gt;</span></p>
-<p class="p1"><span class="s1">  &lt;nav class="mobile-bottom-bar"&gt;</span></p>
-<p class="p1"><span class="s1">    ../platform/overview.html&lt;span&gt;</span><span class="s3">◉</span><span class="s1">&lt;/span&gt;Platform&lt;/a&gt;</span></p>
-<p class="p1"><span class="s1">    ../platform/timeline.html&lt;span&gt;</span><span class="s2">⟡</span><span class="s1">&lt;/span&gt;Timeline&lt;/a&gt;</span></p>
-<p class="p1"><span class="s1">    ./&lt;span&gt;</span><span class="s3">◼</span><span class="s1">&lt;/span&gt;Tools&lt;/a&gt;</span></p>
-<p class="p1"><span class="s1">    &lt;a href="https://visiva.ai/" target="_blank" rel="noopener"&gt;&lt;span&gt;</span><span class="s4">▶</span><span class="s1">&lt;/span&gt;App&lt;/a&gt;</span></p>
-<p class="p1"><span class="s1">  &lt;/nav&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">  &lt;!-- ======================================================</span></p>
-<p class="p1"><span class="s1">       FOOTER</span></p>
-<p class="p1"><span class="s1">       ====================================================== --&gt;</span></p>
-<p class="p1"><span class="s1">  &lt;footer class="footer"&gt;</span></p>
-<p class="p1"><span class="s1">    &lt;div class="footer-grid"&gt;</span></p>
-<p class="p1"><span class="s1">      &lt;p&gt;VISIVA® Brand Design Platform&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1">      &lt;div class="footer-links"&gt;</span></p>
-<p class="p1"><span class="s1">        https://instagram.com/visivaInstagram&lt;/a&gt;</span></p>
-<p class="p1"><span class="s1">        https://linkedin.com/company/visivaLinkedIn&lt;/a&gt;</span></p>
-<p class="p1"><span class="s1">        &lt;a href="https://visiva.site target="_blank" rel="noopener"&gt;Website&lt;/a&gt;</span></p>
-<p class="p1"><span class="s1">      &lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">      &lt;p class="footer-copy"&gt;© 2026 VISIVA®. All Rights Reserved.&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1">    &lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">  &lt;/footer&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">  &lt;!-- Core scripts --&gt;</span></p>
-<p class="p1"><span class="s1">  ../assets/js/app.js&lt;/script&gt;</span></p>
-<p class="p1"><span class="s1">  ../assets/js/ui.js&lt;/script&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">  &lt;!-- Three.js XR scene (imports from /vendor/three.module.js inside) --&gt;</span></p>
-<p class="p1"><span class="s1">  ../assets/js/scene-tools-xr.js&lt;/script&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/body&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/html&gt;</span></p>
+
+  <header class="visiva-header">
+    assets/images/visiva/logo.png
+    <h1>VISIVA&reg; Platform</h1>
+    <p>Unified access to governance, knowledge, and brand systems.</p>
+  </header>
+
+  <main>
+    <section class="intro">
+      <h2>Welcome to the VISIVA&reg; System</h2>
+      <p>The platform provides structured access to the Academy, Marketplace, and authenticated Portal, ensuring alignment across all VISIVA&reg; environments.</p>
+    </section>
+
+    <section class="navigation-grid">
+      academy/index.html
+        <h3>VISIVA&reg; Academy</h3>
+        <p>Learn, certify, and deepen your understanding of VISIVA&reg; principles and design governance.</p>
+      </a>
+
+      marketplace/index.html
+        <h3>VISIVA&reg; Marketplace</h3>
+        <p>Explore approved assets, digital resources, and structured brand materials.</p>
+      </a>
+
+      portal/login.html
+        <h3>VISIVA&reg; Portal</h3>
+        <p>Enter the authenticated environment to manage tools, data, and operational systems.</p>
+      </a>
+    </section>
+
+    <section class="system-status">
+      <h2>System Status</h2>
+      <p>Core modules active. Governance signals operational. XR access available on supported devices.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>© VISIVA&reg; — Platform Architecture</p>
+  </footer>
+
+  assets/js/app.js</script>
+  assets/js/ui.js</script>
 </body>
 </html>
