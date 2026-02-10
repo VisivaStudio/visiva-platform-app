@@ -9,7 +9,7 @@ const __dirname = path.dirname(__filename);
 const baseDir = path.join(__dirname, "visiva-platform");
 
 const files = {
-  "index.html": "<!-- index placeholder: inject your VISIVA® HTML here -->",
+  "index.html": "<!-- index placeholder -->",
   "academy/index.html": "<!-- academy placeholder -->",
   "marketplace/index.html": "<!-- marketplace placeholder -->",
   "portal/login.html": "<!-- portal placeholder -->",
