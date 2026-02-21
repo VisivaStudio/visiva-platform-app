@@ -28,6 +28,8 @@ const copyEntries = [
   'platform',
   'partials',
   'assets',
+  'server',
+  '.env.example',
   'LICENSE',
   'README.md',
   'QA_CHECKLIST.md'

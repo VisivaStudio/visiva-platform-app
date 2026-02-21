@@ -1,17 +1,17 @@
 /* VISIVA® Platform — Core Styles */
 
 :root {
-  --visiva-black: #0f0f0f;
-  --visiva-white: #ffffff;
-  --visiva-accent: #6e4dff;
-  --visiva-accent-light: #b7a4ff;
-  --visiva-gray: #dcdcdc;
-  --visiva-bg: #fafafa;
+  --visiva-black: #f5f7ff;
+  --visiva-white: #0b0d12;
+  --visiva-accent: #30a9ff;
+  --visiva-accent-light: #7fccff;
+  --visiva-gray: rgba(255, 255, 255, 0.18);
+  --visiva-bg: #040506;
   --visiva-logo-bg: url("../img/logo.png");
 
   --radius: 12px;
   --transition: 0.25s ease;
-  --font-main: "Inter", Arial, sans-serif;
+  --font-main: "Plus Jakarta Sans", "Avenir Next", "Segoe UI", sans-serif;
 }
 
 * {
@@ -44,10 +44,8 @@ body::before {
 }
 
 header.visiva-header {
-  text-align: center;
-  padding: 3rem 1.5rem;
-  background: var(--visiva-white);
-  border-bottom: 1px solid var(--visiva-gray);
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid rgba(255,255,255,0.12);
 }
 
 header.visiva-header .logo {
@@ -91,7 +89,7 @@ main {
 .module-card,
 .category-card {
   padding: 1.5rem;
-  background: var(--visiva-white);
+  background: #0f1116;
   border-radius: var(--radius);
   border: 1px solid var(--visiva-gray);
   text-decoration: none;
@@ -147,15 +145,183 @@ input:focus {
   border-color: var(--visiva-accent);
 }
 
-footer {
-  text-align: center;
-  padding: 2rem 1rem;
-  color: var(--visiva-accent);
-}
 header.visiva-header,
 main,
 footer.footer,
 footer {
   position: relative;
   z-index: 1;
+}
+
+
+.footer-company {
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.footer-contact {
+  margin-top: 0.75rem;
+  font-size: 0.95rem;
+  color: var(--visiva-black);
+}
+
+.footer-contact p {
+  margin: 0.35rem 0;
+}
+
+.footer-contact a {
+  color: var(--visiva-accent);
+}
+
+
+/* ===========================
+   Readability Fixes
+   =========================== */
+body {
+  color: var(--text-light);
+}
+
+.section,
+.section-title,
+.section-desc,
+.hero-title,
+.hero-subtitle,
+main p,
+main li,
+main label,
+main h1,
+main h2,
+main h3,
+main h4 {
+  color: var(--text-light);
+}
+
+.cin-card,
+.tool-card,
+.module-card,
+.category-card,
+.nav-card {
+  color: var(--text-light);
+}
+
+.cin-card p,
+.tool-card p,
+.module-card p,
+.category-card p,
+.nav-card p,
+.section-desc,
+.timeline-meta {
+  color: var(--text-soft);
+}
+
+footer.footer,
+.footer-grid,
+.footer-company,
+.footer-contact,
+.footer-contact p,
+.footer-copy,
+.footer-links a {
+  color: var(--text-light);
+}
+
+input[type="text"],
+input[type="password"] {
+  color: #0b0d12;
+  background: #ffffff;
+}
+
+
+/* Dark Theme Enforcement */
+main, .section, .hero-section {
+  color: var(--text-light);
+}
+
+.section-title, .hero-title, .hero-subtitle, .section-desc, .cin-card h3, .tool-card h3 {
+  color: var(--text-light);
+}
+
+.cin-card, .tool-card, .module-card, .category-card, .nav-card {
+  background: #0f1116;
+  border-color: rgba(255,255,255,0.12);
+}
+
+.cin-card p, .tool-card p, .module-card p, .category-card p, .nav-card p, .timeline-meta {
+  color: rgba(255,255,255,0.85);
+}
+
+.footer-links a {
+  color: var(--text-light);
+}
+
+.footer-links a:hover {
+  color: var(--gold-base);
+}
+
+.visiva-header .brand,
+.visiva-header .nav-item,
+.visiva-header .dropdown-toggle {
+  color: var(--text-light);
+}
+
+
+.hero-section {
+  background: linear-gradient(180deg, rgba(6,8,12,0.58), rgba(6,8,12,0.9));
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px;
+  margin-top: 1.5rem;
+}
+
+.hero-content {
+  padding: 2.5rem 2rem;
+}
+
+.footer {
+  margin: 2rem auto 0;
+  width: min(100% - 2rem, 1120px);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 14px;
+  background: rgba(8, 10, 14, 0.92);
+  backdrop-filter: blur(6px);
+}
+
+.footer-grid {
+  display: grid;
+  gap: 1rem;
+  padding: 1.2rem 1.4rem;
+}
+
+.footer-links {
+  display: flex;
+  gap: 0.9rem;
+  flex-wrap: wrap;
+}
+
+.footer-links a {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.footer-copy {
+  border-top: 1px solid rgba(255,255,255,0.12);
+  padding-top: 0.8rem;
+  color: rgba(255,255,255,0.8);
+}
+
+@media (max-width: 768px) {
+  .hero-content {
+    padding: 1.8rem 1.1rem;
+  }
+}
+
+
+#authMessage {
+  min-height: 1.2rem;
+  font-size: 0.95rem;
+  margin-top: 0.25rem;
+}
+
+button:disabled,
+.cta-button:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
 }

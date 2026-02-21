@@ -1,99 +1,121 @@
 /* ==========================================================================
    VISIVA® — APP CORE
-   Animations, navigation, UX polish
+   Global interactions and auth integration
    ========================================================================== */
 
-/* ------------------------------------------
-   Fade-up reveal on scroll (safe)
------------------------------------------- */
-document.addEventListener("DOMContentLoaded", () => {
-  const form = document.querySelector(".login-form");
+(function initApp() {
+  document.addEventListener('DOMContentLoaded', () => {
+    const header = document.querySelector('.visiva-header');
+    if (header) {
+      const setHeaderState = () => {
+        header.classList.toggle('scrolled', window.scrollY > 20);
+      };
+      setHeaderState();
+      window.addEventListener('scroll', setHeaderState, { passive: true });
+    }
 
-  if (form) {
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-      console.log("VISIVA® Portal: authentication attempt registered.");
-    });
+    enforceProtectedRoutes();
+    wireSmoothAnchors();
+    wireButtonGlow();
+    wireLoginForm();
+  });
+})();
+
+
+function enforceProtectedRoutes() {
+  const path = window.location.pathname;
+  const isProtected = path.includes('/platform/') && !path.endsWith('/platform/overview.html') ? true : path.includes('/platform/');
+  if (!isProtected) return;
+
+  const token = localStorage.getItem('visiva_auth_token');
+  if (!token) {
+    window.location.href = path.startsWith('/visiva-platform/') ? '../portal/login.html' : '/portal/login.html';
   }
+}
 
-  console.log("VISIVA® Platform initialized.");
-});
-/* ------------------------------------------
-   Sticky header shadow
------------------------------------------- */
-const header = document.querySelector(".visiva-header");
-if (header) {
-  window.addEventListener("scroll", () => {
-    header.classList.toggle("scrolled", window.scrollY > 20);
+function wireSmoothAnchors() {
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener('click', (event) => {
+      const href = anchor.getAttribute('href');
+      if (!href || href === '#') return;
+
+      const target = document.querySelector(href);
+      if (!target) return;
+
+      event.preventDefault();
+
+      const headerOffset = document.querySelector('.visiva-header')?.offsetHeight || 80;
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      window.scrollTo({
+        top: target.getBoundingClientRect().top + window.scrollY - headerOffset,
+        behavior: prefersReducedMotion ? 'auto' : 'smooth'
+      });
+    });
   });
 }
 
-/* ------------------------------------------
-   Smooth anchor scroll (dynamic header height)
------------------------------------------- */
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener("click", e => {
-    const target = document.querySelector(anchor.getAttribute("href"));
-    if (!target) return;
-
-    e.preventDefault();
-
-    const headerOffset =
-      document.querySelector(".visiva-header")?.offsetHeight || 80;
-
-    const prefersReducedMotion =
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    window.scrollTo({
-      top: target.offsetTop - headerOffset,
-      behavior: prefersReducedMotion ? "auto" : "smooth"
-    });
+function wireButtonGlow() {
+  document.querySelectorAll('.btn-gold, .btn-gold-large').forEach((button) => {
+    button.addEventListener('mouseenter', () => button.classList.add('btn-glow'));
+    button.addEventListener('mouseleave', () => button.classList.remove('btn-glow'));
   });
-});
+}
 
-/* ------------------------------------------
-   Mobile menu toggle
------------------------------------------- */
-const menuBtn = document.querySelector(".mobile-menu-btn");
-const navLinks = document.querySelector(".nav-links");
+function wireLoginForm() {
+  const form = document.querySelector('.login-form');
+  if (!form) return;
 
-menuBtn?.addEventListener("click", () => {
-  navLinks?.classList.toggle("open");
-});
+  const identifierInput = document.getElementById('identityToken');
+  const passwordInput = document.getElementById('credentialKey');
+  const submitBtn = form.querySelector('button[type="submit"]');
+  const statusEl = document.getElementById('authMessage');
 
-/* ------------------------------------------
-   Dropdown toggles (mobile-friendly)
------------------------------------------- */
-document.querySelectorAll(".nav-item.has-dropdown > .dropdown-toggle")
-  .forEach(btn => {
-    btn.addEventListener("click", e => {
-      e.preventDefault();
-      btn.closest(".nav-item")?.classList.toggle("open");
-    });
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    const identifier = identifierInput?.value?.trim() || '';
+    const password = passwordInput?.value || '';
+
+    if (!identifier || !password) {
+      setStatus(statusEl, 'Please enter your email/username and password.', true);
+      return;
+    }
+
+    submitBtn.disabled = true;
+    setStatus(statusEl, 'Authenticating...', false);
+
+    try {
+      const response = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ identifier, password })
+      });
+
+      const data = await response.json();
+
+      if (!response.ok || !data.ok) {
+        setStatus(statusEl, data.message || 'Sign-in failed.', true);
+        submitBtn.disabled = false;
+        return;
+      }
+
+      localStorage.setItem('visiva_auth_token', data.token);
+      localStorage.setItem('visiva_auth_user', JSON.stringify(data.user));
+
+      setStatus(statusEl, `Signed in as ${data.user.username}. Redirecting...`, false);
+      window.setTimeout(() => {
+        window.location.href = '../platform/overview.html';
+      }, 600);
+    } catch (_error) {
+      setStatus(statusEl, 'Network error. Please try again.', true);
+      submitBtn.disabled = false;
+    }
   });
+}
 
-/* ------------------------------------------
-   Button gold glow
------------------------------------------- */
-document
-  .querySelectorAll(".btn-gold, .btn-gold-large")
-  .forEach(btn => {
-    btn.addEventListener("mouseenter", () =>
-      btn.classList.add("btn-glow")
-    );
-    btn.addEventListener("mouseleave", () =>
-      btn.classList.remove("btn-glow")
-    );
-  });
-  
-  document.addEventListener("DOMContentLoaded", () => {
-  const form = document.querySelector(".login-form");
-
-  if (form) {
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-      console.log("VISIVA® Portal: authentication attempt registered.");
-    });
-  }
-
-  console.log("VISIVA® Platform initialized.");
+function setStatus(node, message, isError) {
+  if (!node) return;
+  node.textContent = message;
+  node.style.color = isError ? '#ff7a7a' : '#7fccff';
+}

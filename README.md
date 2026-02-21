@@ -59,13 +59,54 @@ yarn build
 
 This generates the full folder structure and a ZIP archive for distribution.
 
-3. Run hardening checks:
+3. Start the local platform server (static pages + auth API):
 
 ```sh
-yarn run check
+yarn serve
 ```
 
+4. Open `http://localhost:4173`.
+
 ---
+
+
+## Real Authentication Backend
+
+This repo now includes a custom **Node/Express + SQLite** auth backend.
+
+### Endpoints
+
+- `POST /api/auth/login`
+- `GET /api/auth/me` (Bearer token required)
+- `GET /api/health`
+
+### Setup
+
+1. Copy environment template:
+
+```sh
+cp .env.example .env
+```
+
+2. Set secure values in `.env`:
+- `JWT_SECRET`
+- `ADMIN_USERNAME`
+- `ADMIN_EMAIL`
+- `ADMIN_PASSWORD`
+
+3. Seed admin account (first run):
+
+```sh
+yarn seed:admin
+```
+
+4. Run backend + static platform:
+
+```sh
+yarn serve
+```
+
+Database file is stored at `data/visiva.db`.
 
 ## 🧩 Core Technologies
 
@@ -98,7 +139,7 @@ The Portal login page includes:
 - Secure JS entry point
 - Gateway into controlled VISIVA® subsystems
 
-Real authentication should be integrated server‑side.
+Real authentication is now available through `server/index.js` and `/api/auth/login`.
 
 ---
 

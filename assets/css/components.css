@@ -49,12 +49,18 @@
    ============================ */
 .visiva-header {
   width: 100%;
-  background: var(--noir-1000);
+  background-color: var(--noir-1000);
+  background-image:
+    linear-gradient(180deg, rgba(0,0,0,0.55), rgba(0,0,0,0.45)),
+    url("../img/AI_Art_1764419313634.jpeg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   padding: var(--space-3) var(--space-4);
   position: sticky;
   top: 0;
   z-index: 999;
-  border-bottom: 1px solid rgba(255,255,255,0.08);
+  border-bottom: 1px solid rgba(255,255,255,0.12);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
 }
@@ -79,6 +85,17 @@
   display: inline-flex; align-items: center; gap: .5rem;
   background: transparent; border: 0; color: var(--text-light);
   font: inherit; cursor: pointer;
+}
+.nav-item > a {
+  color: var(--text-light);
+  opacity: 0.95;
+}
+.nav-item > a:hover,
+.nav-item > a:focus-visible,
+.dropdown-toggle:hover,
+.dropdown-toggle:focus-visible {
+  opacity: 1;
+  color: var(--gold-bright);
 }
 
 /* ============================
@@ -117,6 +134,9 @@
 .nav-item.has-dropdown.open   > .dropdown-menu,
 .nav-item.has-dropdown.active > .dropdown-menu,
 .nav-item.has-dropdown.is-open> .dropdown-menu,
+.nav-item.has-dropdown.open   > .mega-menu,
+.nav-item.has-dropdown.active > .mega-menu,
+.nav-item.has-dropdown.is-open> .mega-menu,
 .menu-item-has-children.open  > .sub-menu,
 .menu-item-has-children.active> .sub-menu,
 .menu-item-has-children.is-open> .sub-menu,
@@ -160,10 +180,16 @@
   .nav-item > .mega-menu,
   .nav-item > .dropdown-menu,
   .menu-item-has-children > .sub-menu {
-    position: static; display: grid; gap: 6px;
+    position: static; display: none;
+    gap: 6px;
     padding: 8px 0 0 8px; border: none; box-shadow: none; background: transparent;
   }
   .nav-item > a, .dropdown-toggle { font-weight: 600; margin-top: 8px; }
+  .nav-item.has-dropdown.open > .mega-menu,
+  .nav-item.has-dropdown.open > .dropdown-menu,
+  .menu-item-has-children.open > .sub-menu {
+    display: grid;
+  }
 }
 
 /* ============================
