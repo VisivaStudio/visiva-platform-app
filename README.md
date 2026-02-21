@@ -1,10 +1,12 @@
-# VISIVA® Platform  
+# VISIVA® Platform
+
 Modernized 2026 Architecture — HTML, ES6+, WebXR, Node Build System
 
-The VISIVA® Platform is a modular web environment designed to distribute 
+The VISIVA® Platform is a modular web environment designed to distribute
 knowledge, assets, and authenticated operations through a unified brand‑governed interface.
 
 This environment includes:
+
 - VISIVA® Platform Home
 - VISIVA® Academy
 - VISIVA® Marketplace
@@ -24,11 +26,11 @@ visiva-platform/
 │ portal/login.html  
 │  
 └─ assets/  
-   ├── css/platform.css  
-   ├── js/app.js  
-   ├── js/ui.js  
-   ├── js/guardian.js  
-   └── js/cinematic.js  
+ ├── css/platform.css  
+ ├── js/app.js  
+ ├── js/ui.js  
+ ├── js/guardian.js  
+ └── js/cinematic.js
 
 build-visiva.js (Node bundler)
 
@@ -38,15 +40,23 @@ build-visiva.js (Node bundler)
 
 1. Install dependencies:
 
-
-npm install archiver
+```sh
+yarn install
+```
 
 2. Run the build script:
 
-
-node build-visiva.js
+```sh
+yarn build
+```
 
 This generates the full folder structure and a ZIP archive for distribution.
+
+3. Run hardening checks:
+
+```sh
+yarn run check
+```
 
 ---
 
@@ -63,10 +73,11 @@ This generates the full folder structure and a ZIP archive for distribution.
 ## 🧠 VISIVA® Philosophy
 
 Every module reinforces:
-- System clarity  
-- Brand consistency  
-- Governance standards  
-- Modern interface patterns  
+
+- System clarity
+- Brand consistency
+- Governance standards
+- Modern interface patterns
 - Immersive capability (XR)
 
 ---
@@ -74,10 +85,11 @@ Every module reinforces:
 ## 🔐 Portal Access
 
 The Portal login page includes:
-- Clean authentication layout  
-- Form validation hooks  
-- Secure JS entry point  
-- Gateway into controlled VISIVA® subsystems  
+
+- Clean authentication layout
+- Form validation hooks
+- Secure JS entry point
+- Gateway into controlled VISIVA® subsystems
 
 Real authentication should be integrated server‑side.
 
@@ -86,10 +98,11 @@ Real authentication should be integrated server‑side.
 ## 🕶 WebXR Integration
 
 `cinematic.js` provides:
-- async session setup  
-- secure‑context validation  
-- animation loop  
-- session lifecycle events  
+
+- async session setup
+- secure‑context validation
+- animation loop
+- session lifecycle events
 
 Extend this file to render 3D content.
 
@@ -98,9 +111,10 @@ Extend this file to render 3D content.
 ## 🛠 UI Behavior (ui.js)
 
 This module handles:
-- Menu toggles  
-- Navigation utilities  
-- Low‑level UI interactions  
+
+- Menu toggles
+- Navigation utilities
+- Low‑level UI interactions
 
 Import additional helpers as needed.
 
@@ -116,21 +130,22 @@ Extend this to enforce approved VISIVA® terminology.
 ## 📦 Build System
 
 `build-visiva.js` automatically:
-- Generates directories  
-- Writes all core files  
-- Produces `visiva-platform.zip`
 
-Update the `files{}` object to include new components.
+- Validates required source files before build
+- Cleans previous build artifacts deterministically
+- Copies platform source content into distribution output
+- Produces `visiva-platform.zip`
 
 ---
 
 ## 🙌 Contributing
 
 All additions must preserve:
-- VISIVA® brand integrity  
-- Modular patterns  
-- Clear copy and UX structure  
-- Accessibility and performance standards  
+
+- VISIVA® brand integrity
+- Modular patterns
+- Clear copy and UX structure
+- Accessibility and performance standards
 
 ---
 
@@ -139,9 +154,10 @@ All additions must preserve:
 ---
 
 Practical, professional guidance for teams maintaining or extending the platform.
+
 # VISIVA® Developer Guidelines
 
-This document outlines standards for extending the VISIVA® Platform across 
+This document outlines standards for extending the VISIVA® Platform across
 UI, logic, governance, and immersive technologies.
 
 ---
@@ -149,12 +165,13 @@ UI, logic, governance, and immersive technologies.
 ## 1. Branding Consistency
 
 All additions must use:
+
 - VISIVA® tone and terminology
 - approved brand palette
 - consistent header/footer structure
 - accessible typography and spacing
 
-Do not introduce new metaphors, naming conventions, or narrative language 
+Do not introduce new metaphors, naming conventions, or narrative language
 without approval.
 
 ---
@@ -191,6 +208,7 @@ without approval.
 ## 5. WebXR (cinematic.js)
 
 When extending XR:
+
 - Only run XR in secure contexts (HTTPS).
 - Gracefully degrade when unsupported.
 - Keep animation loops lean.
@@ -204,6 +222,7 @@ When extending XR:
 VISIVA® requires strict language governance.
 
 Guidelines:
+
 - Validate copy before publishing.
 - Use the governance module to flag disallowed terms.
 - Extend rule sets via JSON for clarity.
@@ -214,6 +233,7 @@ Guidelines:
 ## 7. Portal Integration
 
 Authentication requirements:
+
 - Implement server-side credential validation.
 - Sanitize all inputs before processing.
 - Add lockout / rate limiting once backend is connected.
@@ -247,7 +267,7 @@ Authentication requirements:
 
 ---
 
-These guidelines ensure all VISIVA® modules remain aligned, scalable, consistent, 
+These guidelines ensure all VISIVA® modules remain aligned, scalable, consistent,
 and true to the platform’s architectural intent.
 
 © VISIVA® — Platform Architecture
