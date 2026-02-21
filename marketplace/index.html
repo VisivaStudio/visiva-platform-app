@@ -3,66 +3,68 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>VISIVA&reg; Marketplace</title>
-  ../assets/css/platform.css
+  <title>VISIVA® Marketplace</title>
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <link rel="stylesheet" href="../assets/css/components.css" />
+  <link rel="stylesheet" href="../assets/css/platform.css" />
 </head>
-
 <body>
-
   <header class="visiva-header">
-    ../assets/images/visiva/logo.png
-    <h1>VISIVA&reg; Marketplace</h1>
-    <p>Access curated assets, structured resources, and system‑aligned materials.</p>
+    <div class="nav-wrapper">
+      <a href="../index.html" class="brand" aria-label="VISIVA home">VISIVA®</a>
+      <button class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="primary-nav">☰</button>
+
+      <nav id="primary-nav" class="nav-links" aria-label="Primary">
+        <a href="../platform/overview.html" class="nav-item">Platform</a>
+        <a href="../academy/index.html" class="nav-item">Academy</a>
+        <a href="index.html" class="nav-item" aria-current="page">Marketplace</a>
+        <a href="../portal/login.html" class="nav-item">Portal</a>
+        <a href="https://visiva.ai/" class="nav-item" target="_blank" rel="noopener">Experience App</a>
+      </nav>
+    </div>
   </header>
 
   <main>
-
-    <section class="marketplace-intro">
-      <h2>Explore the VISIVA&reg; Resource Network</h2>
-      <p>The Marketplace offers verified components, design materials, and governed assets that reinforce visual and operational consistency across all VISIVA&reg; environments.</p>
-    </section>
-
-    <section class="asset-categories">
-      <h2>Available Resources</h2>
-
-      <div class="category-grid">
-
-        <div class="category-card">
-          <h3>Identity Assets</h3>
-          <p>Logo sets, brand marks, and essential VISIVA&reg; identity elements.</p>
-        </div>
-
-        <div class="category-card">
-          <h3>Color &amp; Motion Systems</h3>
-          <p>Calibrated palettes, gradients, motion templates, and visual rhythm guidelines.</p>
-        </div>
-
-        <div class="category-card">
-          <h3>3D &amp; Spatial Components</h3>
-          <p>Approved geometric assets designed for XR and spatial interaction layers.</p>
-        </div>
-
-        <div class="category-card">
-          <h3>Documentation Kits</h3>
-          <p>Structured templates for guidelines, frameworks, and implementation mapping.</p>
-        </div>
-
+    <section class="hero-section">
+      <div class="hero-bg"></div>
+      <div class="hero-content">
+        <h1 class="hero-title fade-up">VISIVA® Marketplace</h1>
+        <p class="hero-subtitle fade-up delay-1">Access curated assets, structured resources, and system-aligned materials.</p>
       </div>
     </section>
 
-    <section class="marketplace-access">
-      <h2>Access VISIVA&reg; Extensions</h2>
-      <p>External tools and expanded systems are available through authenticated channels.</p>
-      https://visiva.aiLaunch VISIVA&reg; Access</a>
+    <section class="section">
+      <h2 class="section-title accent-line fade-up">Available Resources</h2>
+      <div class="three-grid fade-up delay-1">
+        <div class="cin-card"><h3>Identity Assets</h3><p>Logo sets, brand marks, and official identity components.</p></div>
+        <div class="cin-card"><h3>Color & Motion Systems</h3><p>Calibrated palettes, gradients, and motion templates.</p></div>
+        <div class="cin-card"><h3>Documentation Kits</h3><p>Structured templates for implementation and governance.</p></div>
+      </div>
     </section>
 
+    <section class="section dark-section">
+      <h2 class="section-title accent-line fade-up">External Access</h2>
+      <p class="section-desc fade-up delay-1">Expanded tools and systems are available through authenticated channels.</p>
+      <div class="three-grid fade-up delay-2">
+        <a class="tool-card" href="https://visiva.ai/" target="_blank" rel="noopener"><h3>Launch VISIVA® Access</h3><p>Open the official external platform experience.</p></a>
+      </div>
+    </section>
   </main>
 
-  <footer>
-    <p>© VISIVA&reg; — Platform Architecture</p>
+  <footer class="footer">
+    <div class="footer-grid">
+      <p>VISIVA® Brand Design Platform</p>
+      <div class="footer-links">
+        <a href="../platform/overview.html">Platform Overview</a>
+        <a href="../academy/index.html">Academy</a>
+        <a href="../portal/login.html">Portal</a>
+        <a href="https://visiva.ai/" target="_blank" rel="noopener">Website</a>
+      </div>
+      <p class="footer-copy">© 2026 VISIVA®. All Rights Reserved.</p>
+    </div>
   </footer>
 
-  ../assets/js/app.js</script>
-  ../assets/js/ui.js</script>
+  <script src="../assets/js/app.js"></script>
+  <script src="../assets/js/ui.js"></script>
 </body>
 </html>

@@ -3,52 +3,62 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>VISIVA&reg; Platform</title>
-  assets/css/platform.css
+  <title>VISIVA® Platform</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/components.css" />
+  <link rel="stylesheet" href="assets/css/platform.css" />
 </head>
-
 <body>
-
   <header class="visiva-header">
-    assets/images/visiva/logo.png
-    <h1>VISIVA&reg; Platform</h1>
-    <p>Unified access to governance, knowledge, and brand systems.</p>
+    <div class="nav-wrapper">
+      <a href="index.html" class="brand" aria-label="VISIVA home">VISIVA®</a>
+      <button class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="primary-nav">☰</button>
+
+      <nav id="primary-nav" class="nav-links" aria-label="Primary">
+        <a href="platform/overview.html" class="nav-item">Platform</a>
+        <a href="academy/index.html" class="nav-item">Academy</a>
+        <a href="marketplace/index.html" class="nav-item">Marketplace</a>
+        <a href="portal/login.html" class="nav-item">Portal</a>
+        <a href="https://visiva.ai/" class="nav-item" target="_blank" rel="noopener">Experience App</a>
+      </nav>
+    </div>
   </header>
 
   <main>
-    <section class="intro">
-      <h2>Welcome to the VISIVA&reg; System</h2>
-      <p>The platform provides structured access to the Academy, Marketplace, and authenticated Portal, ensuring alignment across all VISIVA&reg; environments.</p>
+    <section class="hero-section">
+      <div class="hero-bg"></div>
+      <div class="hero-content">
+        <h1 class="hero-title fade-up">VISIVA® Platform</h1>
+        <p class="hero-subtitle fade-up delay-1">Unified access to governance, knowledge, and brand systems.</p>
+      </div>
     </section>
 
-    <section class="navigation-grid">
-      academy/index.html
-        <h3>VISIVA&reg; Academy</h3>
-        <p>Learn, certify, and deepen your understanding of VISIVA&reg; principles and design governance.</p>
-      </a>
-
-      marketplace/index.html
-        <h3>VISIVA&reg; Marketplace</h3>
-        <p>Explore approved assets, digital resources, and structured brand materials.</p>
-      </a>
-
-      portal/login.html
-        <h3>VISIVA&reg; Portal</h3>
-        <p>Enter the authenticated environment to manage tools, data, and operational systems.</p>
-      </a>
-    </section>
-
-    <section class="system-status">
-      <h2>System Status</h2>
-      <p>Core modules active. Governance signals operational. XR access available on supported devices.</p>
+    <section class="section">
+      <h2 class="section-title accent-line fade-up">Welcome to the VISIVA® System</h2>
+      <p class="section-desc fade-up delay-1">The platform provides structured access to Academy learning, Marketplace resources, and the authenticated Portal.</p>
+      <div class="three-grid fade-up delay-2">
+        <a class="tool-card" href="academy/index.html"><h3>VISIVA® Academy</h3><p>Learn standards, governance, and delivery frameworks.</p></a>
+        <a class="tool-card" href="marketplace/index.html"><h3>VISIVA® Marketplace</h3><p>Access approved assets and structured resources.</p></a>
+        <a class="tool-card" href="portal/login.html"><h3>VISIVA® Portal</h3><p>Sign in to controlled operational environments.</p></a>
+      </div>
     </section>
   </main>
 
-  <footer>
-    <p>© VISIVA&reg; — Platform Architecture</p>
+  <footer class="footer">
+    <div class="footer-grid">
+      <p>VISIVA® Brand Design Platform</p>
+      <div class="footer-links">
+        <a href="platform/overview.html">Platform Overview</a>
+        <a href="academy/index.html">Academy</a>
+        <a href="marketplace/index.html">Marketplace</a>
+        <a href="portal/login.html">Portal</a>
+        <a href="https://visiva.ai/" target="_blank" rel="noopener">Website</a>
+      </div>
+      <p class="footer-copy">© 2026 VISIVA®. All Rights Reserved.</p>
+    </div>
   </footer>
 
-  assets/js/app.js</script>
-  assets/js/ui.js</script>
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/ui.js"></script>
 </body>
 </html>

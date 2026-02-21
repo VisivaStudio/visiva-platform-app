@@ -7,6 +7,7 @@
   --visiva-accent-light: #b7a4ff;
   --visiva-gray: #dcdcdc;
   --visiva-bg: #fafafa;
+  --visiva-logo-bg: url("../img/logo.png");
 
   --radius: 12px;
   --transition: 0.25s ease;
@@ -25,6 +26,21 @@ body {
   color: var(--visiva-black);
   line-height: 1.6;
   padding-bottom: 3rem;
+  position: relative;
+  isolation: isolate;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: var(--visiva-logo-bg);
+  background-repeat: no-repeat;
+  background-position: center 45%;
+  background-size: min(78vw, 860px);
+  opacity: 0.1;
+  pointer-events: none;
+  z-index: -2;
 }
 
 header.visiva-header {
@@ -135,4 +151,11 @@ footer {
   text-align: center;
   padding: 2rem 1rem;
   color: var(--visiva-accent);
+}
+header.visiva-header,
+main,
+footer.footer,
+footer {
+  position: relative;
+  z-index: 1;
 }

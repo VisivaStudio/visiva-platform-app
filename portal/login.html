@@ -3,55 +3,67 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>VISIVA&reg; Portal</title>
-  ../assets/css/platform.css
+  <title>VISIVA® Portal</title>
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <link rel="stylesheet" href="../assets/css/components.css" />
+  <link rel="stylesheet" href="../assets/css/platform.css" />
 </head>
-
 <body>
-
   <header class="visiva-header">
-    ../assets/images/visiva/logo.png
-    <h1>VISIVA&reg; Portal Access</h1>
-    <p>Secure entry point for authenticated VISIVA&reg; operations.</p>
+    <div class="nav-wrapper">
+      <a href="../index.html" class="brand" aria-label="VISIVA home">VISIVA®</a>
+      <button class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="primary-nav">☰</button>
+
+      <nav id="primary-nav" class="nav-links" aria-label="Primary">
+        <a href="../platform/overview.html" class="nav-item">Platform</a>
+        <a href="../academy/index.html" class="nav-item">Academy</a>
+        <a href="../marketplace/index.html" class="nav-item">Marketplace</a>
+        <a href="login.html" class="nav-item" aria-current="page">Portal</a>
+        <a href="https://visiva.ai/" class="nav-item" target="_blank" rel="noopener">Experience App</a>
+      </nav>
+    </div>
   </header>
 
   <main>
-
-    <section class="portal-overview">
-      <h2>Authenticate to Continue</h2>
-      <p>The Portal provides controlled access to protected VISIVA&reg; systems, operational tools, and governed data environments.</p>
+    <section class="hero-section">
+      <div class="hero-bg"></div>
+      <div class="hero-content">
+        <h1 class="hero-title fade-up">VISIVA® Portal Access</h1>
+        <p class="hero-subtitle fade-up delay-1">Secure entry point for authenticated VISIVA® operations.</p>
+      </div>
     </section>
 
-    <section class="login-section">
-      <form class="login-form">
-
+    <section class="section">
+      <h2 class="section-title accent-line fade-up">Authenticate to Continue</h2>
+      <p class="section-desc fade-up delay-1">Only authorized contributors may enter protected VISIVA® systems.</p>
+      <form class="login-form fade-up delay-2">
         <div class="form-field">
           <label for="identityToken">Identity Token</label>
           <input type="text" id="identityToken" name="identityToken" required />
         </div>
-
         <div class="form-field">
           <label for="credentialKey">Credential Key</label>
           <input type="password" id="credentialKey" name="credentialKey" required />
         </div>
-
         <button type="submit" class="cta-button">Sign In</button>
       </form>
     </section>
-
-    <section class="portal-notes">
-      <h2>Access Requirements</h2>
-      <p>Only authorized contributors may enter VISIVA&reg; operational spaces. Ensure your credentials are current and verified.</p>
-    </section>
-
   </main>
 
-  <footer>
-    <p>© VISIVA&reg; — Platform Architecture</p>
+  <footer class="footer">
+    <div class="footer-grid">
+      <p>VISIVA® Brand Design Platform</p>
+      <div class="footer-links">
+        <a href="../platform/overview.html">Platform Overview</a>
+        <a href="../academy/index.html">Academy</a>
+        <a href="../marketplace/index.html">Marketplace</a>
+        <a href="https://visiva.ai/" target="_blank" rel="noopener">Website</a>
+      </div>
+      <p class="footer-copy">© 2026 VISIVA®. All Rights Reserved.</p>
+    </div>
   </footer>
 
-  ../assets/js/app.js</script>
-  ../assets/js/ui.js</script>
+  <script src="../assets/js/app.js"></script>
+  <script src="../assets/js/ui.js"></script>
 </body>
 </html>
-
