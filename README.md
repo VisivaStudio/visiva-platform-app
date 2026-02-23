@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-
-=======
->>>>>>> caa0a343677ecc371e4cd3a7f5d8d09df431dd1e
 >>>>>>>
 # VISIVA® Platform
 
@@ -20,8 +16,6 @@ Unified VISIVA® web platform with:
 - Real authentication backend (Node/Express + SQLite + JWT)
 - Build packaging to `visiva-platform/` and `visiva-platform.zip`
 
-<<<<<<< HEAD
-
 This environment includes:
 
 - VISIVA® Platform Home
@@ -32,8 +26,6 @@ This environment includes:
 - Modern WebXR support (cinematic.js)
 - Automated Node.js build + ZIP packaging
 
-=======
->>>>>>> caa0a343677ecc371e4cd3a7f5d8d09df431dd1e
 >>>>>>>
 ## Live Structure
 
@@ -60,21 +52,12 @@ This environment includes:
 
 ## Platform Standards Applied
 
-<<<<<<< HEAD
-
-=======
->>>>>>> caa0a343677ecc371e4cd3a7f5d8d09df431dd1e
-
 - Dark theme enforced platform-wide
 - Header/navigation present across all HTML pages
 - Footer/contact block present across all HTML pages
 - Correct VISIVA® Experience App URL: `https://visiva.co.za/app`
 - Official VISIVA® contact details used platform-wide
 
-<<<<<<< HEAD
-
-=======
->>>>>>> caa0a343677ecc371e4cd3a7f5d8d09df431dd1e
 >>>>>>>
 ## Authentication Backend (Custom Node/Express + DB)
 
@@ -88,22 +71,10 @@ Implemented in `server/`:
 
 ### Auth Stack
 
-<<<<<<< HEAD
 Install dependencies
 
 npm install archiver
 
-=======
-
-- Express 4
-- SQLite3
-- bcryptjs (password hashing)
-- jsonwebtoken (JWT)
-- express-rate-limit (login protection)
-- helmet + cors + cookie-parser
-- dotenv
-
->>>>>>> caa0a343677ecc371e4cd3a7f5d8d09df431dd1e
 >>>>>>>
 ### API Endpoints
 
@@ -170,15 +141,7 @@ ADMIN_PASSWORD=change-me-now
 
 > This repo uses Yarn 4 via Corepack.
 
-<<<<<<< HEAD
 Every module reinforces
-=======
-
-1. Enable Corepack:
-
->>>>>>> caa0a343677ecc371e4cd3a7f5d8d09df431dd1e
-
-<<<<<<< HEAD
 
 - System clarity  
 - Brand consistency  
@@ -186,16 +149,12 @@ Every module reinforces
 - Modern interface patterns  
 - Immersive capability (XR)
 
-=======
->>>>>>> caa0a343677ecc371e4cd3a7f5d8d09df431dd1e
-
 ```bash
 corepack enable
 ```
 
 1. Install dependencies:
 
-<<<<<<< HEAD
 The Portal login page includes:
 
 - Clean authentication layout  
@@ -205,23 +164,12 @@ The Portal login page includes:
 
 1. Seed initial admin:
 
-=======
-
-```bash
-corepack yarn install
-```
-
-1. Seed initial admin:
-
->>>>>>> caa0a343677ecc371e4cd3a7f5d8d09df431dd1e
-
 ```bash
 yarn seed:admin
 ```
 
 1. Start server:
 
-<<<<<<< HEAD
 `cinematic.js` provides:
 
 - async session setup  
@@ -231,35 +179,17 @@ yarn seed:admin
 
 1. Open:
 
-=======
-
-```bash
-yarn serve
-```
-
-1. Open:
-
->>>>>>> caa0a343677ecc371e4cd3a7f5d8d09df431dd1e
-
 - `http://localhost:4173`
 - `http://localhost:4173/portal/login.html`
 
 ## Build Distribution
 
-<<<<<<< HEAD
 This module handles:
 
 - Menu toggles  
 - Navigation utilities  
 - Low‑level UI interactions  
 
-=======
-
-```bash
-node build.js
-```
-
->>>>>>> caa0a343677ecc371e4cd3a7f5d8d09df431dd1e
 Outputs:
 
 - `visiva-platform/`
@@ -276,7 +206,6 @@ Outputs:
 
 ### Port already in use (`EADDRINUSE: 4173`)
 
-<<<<<<< HEAD
 Find and stop process:
 
 `build-visiva.js` automatically:
@@ -285,14 +214,6 @@ Find and stop process:
 - Writes all core files  
 - Produces `visiva-platform.zip`
 
-=======
-
-```bash
-lsof -nP -iTCP:4173 -sTCP:LISTEN
-kill <PID>
-```
-
->>>>>>> caa0a343677ecc371e4cd3a7f5d8d09df431dd1e
 Or run on a different port:
 
 ```bash
@@ -301,32 +222,19 @@ PORT=4174 yarn serve
 
 ## Security Notes
 
-<<<<<<< HEAD
 All additions must preserve:
 
 - VISIVA® brand integrity  
 - Modular patterns  
 - Clear copy and UX structure  
 - Accessibility and performance standards  
-=======
-- Change `JWT_SECRET` before production
-- Do not commit `.env`
-- Keep DB files ignored (`data/*.db`, `data/*.sqlite`)
-- Use HTTPS + reverse proxy for production
-
->>>>>>> caa0a343677ecc371e4cd3a7f5d8d09df431dd1e
-
-<<<<<<< HEAD
 
 ## Deployment Notes
 
 © VISIVA® — Platform Architecture
 
-=======
->>>>>>> caa0a343677ecc371e4cd3a7f5d8d09df431dd1e
 ---
 
-<<<<<<< HEAD
 Practical, professional guidance for teams maintaining or extending the platform
 
 VISIVA® Developer Guidelines
@@ -445,8 +353,3 @@ These guidelines ensure all VISIVA® modules remain aligned, scalable, consisten
 and true to the platform’s architectural intent.
 
 © VISIVA® — Platform Architecture
-
-=======
-© 2026 VISIVA® Brand Design Studio
-
->>>>>>> caa0a343677ecc371e4cd3a7f5d8d09df431dd1e
