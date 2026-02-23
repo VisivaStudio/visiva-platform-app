@@ -8,3 +8,4 @@ data/*.sqlite
 
 .yarn/
 .yarnrc.yml
+.next/

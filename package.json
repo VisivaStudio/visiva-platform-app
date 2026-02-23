@@ -10,20 +10,15 @@
     "express-rate-limit": "^7.4.1",
     "helmet": "^8.0.0",
     "jsonwebtoken": "^9.0.2",
-    "next": "^16.1.6",
-    "react": "^19.2.4",
-    "react-dom": "^19.2.4",
     "sqlite3": "^5.1.7"
   },
   "scripts": {
-    "dev": "next dev -p 3000",
+    "dev": "node server/index.js",
     "build": "node build.js",
-    "start": "next start -p 3000",
-    "build:web": "next build",
-    "start:web": "next start -p 3000",
-    "dev:web": "next dev -p 3000",
+    "start": "node server/index.js",
     "serve": "node server/index.js",
-    "seed:admin": "node server/seed-admin.js"
+    "seed:admin": "node server/seed-admin.js",
+    "check": "node --check build.js && node --check server/index.js && node --check server/auth.js && node --check server/db.js && node --check server/config.js && node --check server/seed-admin.js"
   },
   "devDependencies": {
     "@types/node": "25.3.0",

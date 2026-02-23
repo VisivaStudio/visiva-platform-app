@@ -15,11 +15,14 @@ const router = express.Router();
 const config = getConfig();
 
 const loginLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 20,
+  windowMs: config.lockWindowMinutes * 60 * 1000,
+  max: config.lockMaxAttempts,
   standardHeaders: true,
   legacyHeaders: false,
-  message: { ok: false, message: 'Too many login attempts. Try again in 15 minutes.' }
+  message: {
+    ok: false,
+    message: `Too many login attempts. Try again in ${config.lockWindowMinutes} minutes.`
+  }
 });
 
 function getClientIp(req) {
@@ -134,8 +137,8 @@ router.post('/login', loginLimiter, async (req, res) => {
         role: user.role
       }
     });
-  } catch (error) {
-    return res.status(500).json({ ok: false, message: 'Login failed.', error: error.message });
+  } catch (_error) {
+    return res.status(500).json({ ok: false, message: 'Login failed.' });
   }
 });
 
