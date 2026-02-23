@@ -24,12 +24,12 @@
 
 function enforceProtectedRoutes() {
   const path = window.location.pathname;
-  const isProtected = path.includes('/platform/') && !path.endsWith('/platform/overview.html') ? true : path.includes('/platform/');
+  const isProtected = path.includes('/platform/');
   if (!isProtected) return;
 
   const token = localStorage.getItem('visiva_auth_token');
   if (!token) {
-    window.location.href = path.startsWith('/visiva-platform/') ? '../portal/login.html' : '/portal/login.html';
+    window.location.href = '/portal/login.html';
   }
 }
 
@@ -88,6 +88,7 @@ function wireLoginForm() {
     try {
       const response = await fetch('/api/auth/login', {
         method: 'POST',
+        credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ identifier, password })
       });

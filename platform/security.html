@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sustainability — VISIVA® Platform</title>
+  <title>Security & Access — VISIVA® Platform</title>
   <link rel="stylesheet" href="../assets/css/style.css" />
   <link rel="stylesheet" href="../assets/css/components.css" />
   <link rel="stylesheet" href="../assets/css/platform.css" />
@@ -27,7 +27,7 @@
             <a href="universe.html" role="menuitem">Brand Universe</a>
             <a href="health-check.html" role="menuitem">Brand Health Check</a>
             <a href="licensing.html" role="menuitem">Licensing</a>
-            <a href="security.html" role="menuitem">Security & Access</a>
+            <a href="security.html" role="menuitem" aria-current="page">Security & Access</a>
             <a href="sustainability.html" role="menuitem">Sustainability</a>
             <a href="vault.html" role="menuitem">Brand Vault</a>
             <a href="timeline.html" role="menuitem">Evolution Timeline</a>
@@ -42,58 +42,42 @@
   </header>
 
   <main>
-<section class="hero-section">
-    <div class="hero-bg"></div>
-    <div class="hero-content">
-      <h1 class="hero-title fade-up">Sustainability & Accessibility</h1>
-      <p class="hero-subtitle fade-up delay-1">
-        Governance for long-term performance, inclusive UX, and maintainable brand systems.
-      </p>
-    </div>
-  </section>
+    <section class="hero-section">
+      <div class="hero-bg"></div>
+      <div class="hero-content">
+        <h1 class="hero-title fade-up">Security & Access Controls</h1>
+        <p class="hero-subtitle fade-up delay-1">Operational security model for VISIVA® authentication, route protection, and governance auditability.</p>
+      </div>
+    </section>
 
-<section class="section dark-section">
-    <h2 class="section-title accent-line fade-up">Sustainability Snapshot — February 2026</h2>
-    <div class="three-grid fade-up delay-1">
-      <div class="cin-card"><h3>Current State</h3><p>Accessibility, performance, and governance quality checks are now part of release readiness.</p></div>
-      <div class="cin-card"><h3>Primary Focus</h3><p>Introduce monthly scorecards for sustainability KPIs and regressions.</p></div>
-      <div class="cin-card"><h3>Cadence</h3><p>Reviewed monthly with release checkpoints and governance sign-off.</p></div>
-    </div>
-  </section>
+    <section class="section">
+      <h2 class="section-title accent-line fade-up">Authentication Model</h2>
+      <div class="three-grid fade-up delay-1">
+        <div class="cin-card"><h3>Credential Validation</h3><p>Username/email and password are verified against a hashed credential store in SQLite.</p></div>
+        <div class="cin-card"><h3>Session Token</h3><p>JWT is issued on success and stored in an HttpOnly cookie for protected route access.</p></div>
+        <div class="cin-card"><h3>Failure Controls</h3><p>Rate limiting and lockout thresholds reduce brute-force and credential stuffing risk.</p></div>
+      </div>
+    </section>
 
+    <section class="section dark-section">
+      <h2 class="section-title accent-line fade-up">Audit & Governance</h2>
+      <div class="three-grid fade-up delay-1">
+        <div class="cin-card"><h3>Login Attempt Ledger</h3><p>Successful and failed attempts are recorded with identifier and source IP metadata.</p></div>
+        <div class="cin-card"><h3>Security Events</h3><p>Login success/failure, temporary lockouts, and logout actions are captured in audit events.</p></div>
+        <div class="cin-card"><h3>Admin Visibility</h3><p>Authenticated admin users can access recent audit records through protected API endpoints.</p></div>
+      </div>
+    </section>
 
-<section class="section">
-    <h2 class="section-title accent-line fade-up">What This Module Covers</h2>
-    <p class="section-desc fade-up delay-1">
-      The Sustainability module tracks platform durability across accessibility, performance,
-      content quality, and operational governance.
-    </p>
-    <div class="three-grid fade-up delay-2">
-      <div class="cin-card"><h3>Accessibility</h3><p>WCAG checks, contrast policy, semantic structure, and keyboard support.</p></div>
-      <div class="cin-card"><h3>Performance</h3><p>Runtime budgets, asset optimization, and predictable page behavior.</p></div>
-      <div class="cin-card"><h3>Governance</h3><p>Auditable updates, ownership, and continuity across releases.</p></div>
-    </div>
-  </section>
-
-<section class="section dark-section">
-    <h2 class="section-title accent-line fade-up">Current Priorities</h2>
-    <div class="three-grid fade-up delay-1">
-      <div class="cin-card"><h3>Link Integrity</h3><p>Keep navigation and module references valid across all static pages.</p></div>
-      <div class="cin-card"><h3>Content Freshness</h3><p>Review release notes, module status, and legal references quarterly.</p></div>
-      <div class="cin-card"><h3>Quality Gates</h3><p>Run lint, format checks, and build packaging on every release.</p></div>
-    </div>
-  </section>
-
-<section class="section">
-    <h2 class="section-title accent-line fade-up">Next Steps</h2>
-    <p class="section-desc fade-up delay-1">Use these linked modules to enforce sustained platform quality.</p>
-    <div class="three-grid fade-up delay-2">
-      <a class="tool-card" href="health-check.html"><h3>Run Brand Health Check</h3><p>Measure consistency and identify regressions.</p></a>
-      <a class="tool-card" href="guardian-ai.html"><h3>Apply Guardian Rules</h3><p>Enforce standards during creation and review.</p></a>
-      <a class="tool-card" href="timeline.html"><h3>Record Timeline Events</h3><p>Track improvements and governance milestones.</p></a>
-    </div>
-  </section>
+    <section class="section">
+      <h2 class="section-title accent-line fade-up">Operational Checklist</h2>
+      <div class="three-grid fade-up delay-1">
+        <div class="tool-card"><h3>Rotate Secrets</h3><p>Set and periodically rotate `JWT_SECRET` in production environments.</p></div>
+        <div class="tool-card"><h3>HTTPS Enforcement</h3><p>Use TLS termination and secure cookie transport in deployed infrastructure.</p></div>
+        <div class="tool-card"><h3>Retention Policy</h3><p>Archive and rotate authentication logs according to governance requirements.</p></div>
+      </div>
+    </section>
   </main>
+
   <footer class="footer">
     <div class="footer-grid">
       <p class="footer-company">VISIVA® Brand Design Studio</p>

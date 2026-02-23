@@ -31,6 +31,7 @@ const RAW_RUNTIME_STATE =
           ["@types/node", "npm:25.3.0"],\
           ["@types/react", "npm:19.2.14"],\
           ["bcryptjs", "npm:2.4.3"],\
+          ["cookie-parser", "npm:1.4.7"],\
           ["cors", "npm:2.8.6"],\
           ["dotenv", "npm:16.6.1"],\
           ["express", "npm:4.22.1"],\
@@ -903,7 +904,25 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["cookie-parser", [\
+      ["npm:1.4.7", {\
+        "packageLocation": "../.yarn/berry/cache/cookie-parser-npm-1.4.7-970a70a2fd-10c0.zip/node_modules/cookie-parser/",\
+        "packageDependencies": [\
+          ["cookie", "npm:0.7.2"],\
+          ["cookie-parser", "npm:1.4.7"],\
+          ["cookie-signature", "npm:1.0.6"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["cookie-signature", [\
+      ["npm:1.0.6", {\
+        "packageLocation": "../.yarn/berry/cache/cookie-signature-npm-1.0.6-93f325f7f0-10c0.zip/node_modules/cookie-signature/",\
+        "packageDependencies": [\
+          ["cookie-signature", "npm:1.0.6"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
       ["npm:1.0.7", {\
         "packageLocation": "../.yarn/berry/cache/cookie-signature-npm-1.0.7-a115603de6-10c0.zip/node_modules/cookie-signature/",\
         "packageDependencies": [\
@@ -3226,6 +3245,7 @@ const RAW_RUNTIME_STATE =
           ["@types/node", "npm:25.3.0"],\
           ["@types/react", "npm:19.2.14"],\
           ["bcryptjs", "npm:2.4.3"],\
+          ["cookie-parser", "npm:1.4.7"],\
           ["cors", "npm:2.8.6"],\
           ["dotenv", "npm:16.6.1"],\
           ["express", "npm:4.22.1"],\

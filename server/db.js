@@ -30,6 +30,15 @@ function get(sql, params = []) {
   });
 }
 
+function all(sql, params = []) {
+  return new Promise((resolve, reject) => {
+    db.all(sql, params, (err, rows) => {
+      if (err) return reject(err);
+      resolve(rows);
+    });
+  });
+}
+
 async function initDb() {
   await run(`
     CREATE TABLE IF NOT EXISTS users (
@@ -39,6 +48,27 @@ async function initDb() {
       password_hash TEXT NOT NULL,
       role TEXT NOT NULL DEFAULT 'contributor',
       active INTEGER NOT NULL DEFAULT 1,
+      created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+    )
+  `);
+
+  await run(`
+    CREATE TABLE IF NOT EXISTS login_attempts (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      identifier TEXT NOT NULL,
+      ip TEXT NOT NULL,
+      success INTEGER NOT NULL,
+      created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+    )
+  `);
+
+  await run(`
+    CREATE TABLE IF NOT EXISTS audit_events (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      user_id INTEGER,
+      event_type TEXT NOT NULL,
+      event_data TEXT,
+      ip TEXT,
       created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
     )
   `);
@@ -77,11 +107,49 @@ async function createAdminUser({ username, email, password }) {
   );
 }
 
+async function insertLoginAttempt({ identifier, ip, success }) {
+  return run(
+    'INSERT INTO login_attempts (identifier, ip, success) VALUES (?, ?, ?)',
+    [identifier, ip, success ? 1 : 0]
+  );
+}
+
+async function countRecentFailedAttempts({ identifier, ip, windowMinutes }) {
+  const row = await get(
+    `SELECT COUNT(*) as total
+     FROM login_attempts
+     WHERE success = 0
+       AND (identifier = ? OR ip = ?)
+       AND datetime(created_at) >= datetime('now', ?)` ,
+    [identifier, ip, `-${windowMinutes} minutes`]
+  );
+  return row?.total || 0;
+}
+
+async function insertAuditEvent({ userId = null, eventType, eventData = null, ip = null }) {
+  return run(
+    'INSERT INTO audit_events (user_id, event_type, event_data, ip) VALUES (?, ?, ?, ?)',
+    [userId, eventType, eventData ? JSON.stringify(eventData) : null, ip]
+  );
+}
+
+async function getRecentAuditEvents(limit = 20) {
+  return all(
+    'SELECT id, user_id, event_type, event_data, ip, created_at FROM audit_events ORDER BY id DESC LIMIT ?',
+    [limit]
+  );
+}
+
 module.exports = {
   db,
   initDb,
   findUserByIdentifier,
   createAdminUser,
+  insertLoginAttempt,
+  countRecentFailedAttempts,
+  insertAuditEvent,
+  getRecentAuditEvents,
   get,
-  run
+  run,
+  all
 };
